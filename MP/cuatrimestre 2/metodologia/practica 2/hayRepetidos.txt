@@ -1,0 +1,25 @@
+algoritmo hayRepetidos (E f: tpFichero) devuelve booleano
+--
+--Pre: modo(f)=Lec AND numLeidos=0
+--Post: exito=(EX alfa EN {1..numDatos(f)}.(EX beta EN {1..numDatos(f)}.dato(f,alfa)=dato(f,beta)))
+--
+  exito: booleano;
+  contador: entero;
+  comparador: entero;
+  dato: entero;
+principio
+  exito:=falso;
+  contador:=1;
+  mientrasQue not(contador=numDatos(f) OR exito=cierto) hacer
+    dato:=dato(f,contador);
+    para i en contador+1 hasta numDatos(f) hacer
+      comparador:=dato(f,i)
+      si comparador=dato ent
+        exito:=cierto;
+      fSi;
+    fPara
+    contador:=contador+1;
+  fMq
+fin hayRepetidos
+  
+
