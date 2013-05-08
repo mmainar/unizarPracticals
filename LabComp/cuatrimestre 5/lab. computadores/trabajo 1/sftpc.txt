@@ -1,0 +1,404 @@
+/* -------------------------------------------------------------------------
+AUTORES: Ismael Saad Garcia y Marcos Mainar Lalmolda.
+ASIGNATURA: Laboratorio de Computadores, 5º cuatrimestre Ing. Informatica
+FECHA DE LA ULTIMA REVISION: 30-OCT-07
+VERSION: 1.0
+DESCRIPCION: Cliente de TFTP
+---------------------------------------------------------------------------*/
+
+
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <sys/time.h>
+#include <sys/fcntl.h>
+#include <netinet/in.h>
+#include <netdb.h>
+#include <fcntl.h>
+#include <errno.h>
+#include <stdio.h>
+#include <unistd.h>
+#include <math.h>
+#include "sftp.h"
+#include <string.h>
+#include <strings.h>
+
+
+#define ERRORSTRING ((errno < sys_nerr) ? sys_errlist[errno] : "unknown error")
+
+/* Variables globales */
+
+struct sockaddr_in servidor; /* Datos del servidor */
+int verbose = 0; /* Si esta a 0 -v no ha aparecido
+                   y si esta a 1, -v ha aparecido */
+int retval; /* Numero de byes leidos por la llamada recvfrom() */
+
+/* Alusiones */
+
+int                     errno;
+extern int              sys_nerr;
+extern char             *sys_errlist[];
+int                     iniciar_socket();
+void                    rellenar_paquete();
+void                    enviar_peticion();
+void                    recibir_respuesta();
+void                    escribe_respuesta();
+void                    escribe_peticion();
+int                     validar_paquete();
+u_short                 xsum();
+void                    iniciar_argumentos();
+
+
+/**************************************************************************/
+/* MAIN                                                                   */
+/**************************************************************************/
+
+main(int argc, char *argv[]) {
+
+ register int socket_fd;
+ struct request peticion;
+ struct answer respuesta;
+ int puerto, fd, retval;
+ int offset = 0;
+ char nombre_servidor[MAXNAMELEN];
+ char nombre_fichero[MAXNAMELEN]; /* fichero remoto que vamos
+                                     a solicitar al servidor */
+ char nombre_local[MAXNAMELEN]; /* nombre con el que se guardara el fichero
+                                   solicitado en la maquina del cliente */
+ int longitud = sizeof servidor;
+
+ struct answer *lala;
+
+
+ iniciar_argumentos(argc, argv, nombre_fichero,nombre_local,
+                     nombre_servidor, &puerto);
+ socket_fd = iniciar_socket(&nombre_servidor[0], puerto);
+ rellenar_paquete(&peticion, &nombre_fichero[0], offset);
+ enviar_peticion(socket_fd, &peticion);
+ recibir_respuesta(socket_fd, &respuesta, &peticion);
+
+ if ((fd = creat(nombre_local,0700)) == -1)
+ {
+   fprintf(stderr,"creat: %s\n",ERRORSTRING);
+   exit(1);
+ }
+
+ while (validar_paquete(&peticion, &respuesta) == 0)
+ {
+   rellenar_paquete(&peticion, &nombre_fichero[0], offset);
+   enviar_peticion(socket_fd, &peticion);
+   recibir_respuesta(socket_fd, &respuesta, &peticion);
+ }
+
+ write(fd, respuesta.a_buffer,(size_t) respuesta.a_len);
+
+ while(respuesta.a_len > 0)
+ {
+   offset = offset + respuesta.a_len;
+   rellenar_paquete(&peticion, &nombre_fichero[0], offset);
+   enviar_peticion(socket_fd, &peticion);
+   recibir_respuesta(socket_fd, &respuesta, &peticion);
+   while (!validar_paquete(&peticion, &respuesta))
+   {
+     rellenar_paquete(&peticion, &nombre_fichero[0], offset);
+     enviar_peticion(socket_fd, &peticion);
+     recibir_respuesta(socket_fd, &respuesta, &peticion);
+   }
+   write(fd ,respuesta.a_buffer, (size_t) respuesta.a_len);
+ }
+
+}
+
+
+
+void iniciar_argumentos (int argc, char *argv[], char *nombre_fichero,
+                        char *nombre_local, char *nombre_servidor, int *puerto)
+{
+
+ int contador = 1;
+ char *p;
+
+ if ((strcmp(argv[contador],"-v")) == 0)
+ {
+   verbose = 1;
+   contador++;
+   /* -v da informacion por pantalla sobre los paquetes recibidos/enviados */
+ }
+
+ if ((strcmp(argv[contador],"get")) == 0)
+ {
+   contador++;
+   p = strtok(argv[contador], "@");
+   *puerto = atoi(p);
+   p = strtok('\0'," ");
+   strcpy(nombre_servidor, p);
+   contador++;
+   strcpy(nombre_fichero, argv[contador]);
+   contador++;
+   if (argv[contador] != NULL)
+   {
+     strcpy(nombre_local ,argv[contador]);
+   }
+   else
+     /* El fichero se guarda en la maquina local con el
+        mismo nombre que el fichero remoto */
+     { strcpy(nombre_local, nombre_fichero); }
+ }
+ else
+ {
+   fprintf(stderr,"usage: %s [-v] get 1024@hendrix.cps.unizar.es fich_remoto [fich_local]\n",argv[0]);
+   exit(-1);
+ }
+}
+
+
+int validar_paquete (struct request *peticion, struct answer *resp)
+/* Indica si el paquete tiene algun tipo de error */
+/* Devuelve 0 si el paquete es invalido y 1 si es valido */
+{
+
+ int alen;
+ u_short suma;
+
+ if (retval != (sizeof(*resp) - (BUFLEN - resp->a_len)))
+   return(0);
+
+ if (resp->a_version != 1)
+   return(0);
+
+ if (resp->a_opcode != OP_READ_REPLY)
+   return(0);
+
+ if (resp->a_fid != peticion->r_fid)
+   return(0);
+
+ if (resp->a_offset != peticion->r_offset)
+   return(0);
+
+ if (resp->a_code > 0x8000)
+   return(0);
+ else
+ {
+   if ( (resp->a_code < 0x8000) && ((resp->a_code) != 0))
+   {  if (resp->a_code == ENOENT)
+      {
+         fprintf(stderr,"El fichero remoto solicitado no existe\n");
+         exit(-1);
+      }
+      return(0);
+   }
+ }
+
+ suma = resp->a_sum;
+ resp->a_sum = 0;
+ alen = ntohs(resp->a_len) + sizeof(*resp) - BUFLEN;
+
+ if (suma != xsum((char *)resp, alen))
+   return(0);
+ else return(1);
+}
+
+
+int iniciar_socket(char *nombre_servidor, int puerto)
+/* Crea un socket y guarda los datos de conexion con el servidor.
+  Devuelve el descriptor del socket creado */
+{
+
+ struct hostent *he;
+ register int s;
+ int rcvsize = 528;
+ int err;
+
+
+ if((s = socket(AF_INET,SOCK_DGRAM,0)) <0 )
+ {
+   fprintf(stderr, "socket: %s\n", ERRORSTRING);
+   return(-1);
+ }
+
+ memset((char *)&servidor, 0, sizeof(servidor));
+ servidor.sin_family = AF_INET;
+ servidor.sin_port = htons(puerto);
+
+ if ((he = gethostbyname(nombre_servidor)) == NULL) {
+   fprintf(stderr, "gethostbyname");
+   return(-1);
+ }
+
+ servidor.sin_addr = *((struct in_addr *)he->h_addr);
+ memset(&(servidor.sin_zero),'\0',8); // Poner a cero el resto de la estructura
+ printf("sftp client connected to host name %s on port %d\n", he->h_name, ntohs(servidor.sin_port));
+ fflush(stdout);
+
+ return (s);
+
+}
+
+
+void rellenar_paquete (struct request *paquete, char *nombre_fichero, int offset)
+/* Rellena los campos del paquete a enviar al servidor */
+{
+
+ memset( (char *)paquete, 0, sizeof(*paquete)); // poner a 0 toda la estructura
+ paquete->r_version = SFTP_VERSION;
+ paquete->r_opcode = OP_READ;
+ paquete->r_fid = 15;
+ paquete->r_offset = offset;
+ strcpy(paquete -> r_filename, nombre_fichero);
+ paquete->r_sum = 0;
+ paquete->r_sum = xsum( (char *)paquete, sizeof(*paquete));
+
+}
+
+
+void enviar_peticion (int s, struct request *paquete)
+/* Envia al servidor un paquete con la peticion del cliente */
+{
+ if(sendto(s,(char *)paquete,sizeof(struct request),0,
+     (struct sockaddr *)&servidor,sizeof(servidor))!=
+       sizeof(struct request))
+       {
+         fprintf(stderr,"sendto(%s[%d]): %s\n",
+                  inet_ntoa(servidor.sin_addr),ntohs(servidor.sin_port),
+                  ERRORSTRING);
+       }
+ if (verbose) escribe_peticion(paquete);
+}
+
+
+void recibir_respuesta(int s, struct answer *paquete, struct request *peticion)
+/* Espera la respuesta del servidor programando los timeouts */
+{
+  int longitud, max_fd;
+
+
+  if ((esperar_paquete(s,paquete,1)) != 1)
+  {
+    enviar_peticion(s,peticion);
+    if ((esperar_paquete(s,paquete,4)) != 1)
+    {
+      enviar_peticion(s,peticion);
+      if ((esperar_paquete(s,paquete,10)) != 1)
+      {
+        printf("La transferencia del fichero fallo\n");
+        exit(1);
+      }
+    }
+  }
+}
+
+
+int esperar_paquete (int s, struct answer *paquete, int tiempo)
+/* Devuelve 0 si expira el timeout de tiempo segundos
+  Devuelve 1 si el paquete es recibido correctamente y
+  se almacena en paquete.
+  Devuelve <0 si el recvfrom() falla */
+
+{
+  fd_set               myset, ready_set;
+  struct timeval       timeout;
+  int                  max_fd = s;
+  int                  longitud = sizeof servidor;
+
+  /* Prepara los parametros del select() */
+
+  FD_ZERO(&myset);
+  FD_SET(s,&myset);
+  timeout.tv_sec = tiempo;
+  timeout.tv_usec = 0;
+  memcpy(&ready_set,&myset,sizeof(myset));
+
+  select(max_fd+1,&ready_set,NULL,NULL,&timeout);
+
+  if (FD_ISSET(s,&ready_set)) {
+
+    retval = recvfrom(s,(char *)paquete,sizeof(struct answer),0,
+                     (struct sockaddr *)&servidor,&longitud);
+
+    if (retval <= 0)
+    {
+     fprintf(stderr,"recvfrom: %s\n",ERRORSTRING);
+     return(-1);
+    }
+    else
+    {
+      if (verbose) escribe_respuesta(paquete);
+      return(1);
+
+    }
+  }
+  else /* Ha expirado el timeout de tiempo segundos */
+  {  return(0); }
+}
+
+
+void escribe_respuesta(struct answer *resp)
+/* Muestra por pantalla los diferentes campos del paquete con
+  respuesta del servidor */
+{
+ printf("\nPaquete recibido\n");
+ printf("\tOp: [%d] Version: [%d]\n", resp->a_opcode, resp->a_version);
+ printf("\tOffset:[%d]\n", ntohl(resp->a_offset));
+ printf("\tFile ID:[0x%x]\n", ntohl(resp->a_fid));
+ printf("\tsum:[0x%x]\n\n", ntohs(resp->a_sum));
+}
+
+
+void escribe_peticion(struct request *pet)
+/* Muestra por pantalla los diferentes campos del paquete que
+  enviamos al servidor */
+{
+ printf("\nPaquete enviado\n");
+ printf("\tName:[%s]\n", pet->r_filename);
+ printf("\tOp: [%d] Version: [%d]\n", pet->r_opcode, pet->r_version);
+ printf("\tOffset:[%d]\n", ntohl(pet->r_offset));
+ printf("\tFile ID:[0x%x]\n", ntohl(pet->r_fid));
+ printf("\tsum:[0x%x]\n\n", ntohs(pet->r_sum));
+}
+
+
+u_short xsum(char *buf, int len)
+{
+ register u_short      *sp;
+ register              slen;
+ register u_long       sum;            /* >= 32-bit space to keep sum */
+ union { u_short s; u_char c[2]; }
+                       xun;
+ int                   unaligned;
+
+ sum = 0;
+
+ unaligned = ((unsigned long)buf) & 0x1;
+ /* If buffer isn't short aligned, need to get fisst byte */
+ if (unaligned != 0) {
+   xun.s = 0;
+   xun.c[1] = buf[0];
+   sum = xun.s;
+   buf++; len--;
+ }
+ slen = len/2;                 /* length in shorts */
+
+ /* LINT NOTE: next line has possible ptr alignment message, even
+    though we've made sure that buf is aligned */
+ for(sp = (u_short *)buf; slen > 0; slen--,sp++) {
+   sum += *sp;
+ }
+
+ /* is there a trailing odd byte? */
+ if ((len & 0x1) != 0) {
+#ifdef DEBUG
+  printf("xsum extra: 0x%X (sum: 0x%X, len %d.)\n", buf[len-1], sum, len);
+#endif
+  xun.s = 0; xun.c[0] = buf[len - 1];
+  sum += xun.s;
+ }
+
+ /* Fold in all the carries to get a single 16 bit value */
+  sum = (sum & 0xFFFF) + (((unsigned long)(sum & 0xFFFF0000))>>16);
+  if (sum > 0xFFFF)
+    { sum = (sum & 0xFFFF) + 1; }
+
+  if (unaligned != 0)          /* byteswap */
+    { sum = ((sum & 0xFF)<<8) + ((sum & 0xFF00)>>8); }
+  return (sum);
+}
+
