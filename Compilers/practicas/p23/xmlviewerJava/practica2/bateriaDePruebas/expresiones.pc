@@ -1,0 +1,51 @@
+Programa P;
+  entero i, j, m;
+  booleano b;
+  caracter c, d;
+  entero x, y, z;
+  %------------------------------------------------------------------
+  accion dato (ref entero d);
+  %------------------------------------------------------------------
+  Principio
+   d:=4;
+  Fin
+  %------------------------------------------------------------------
+  accion mcd(val entero a,b; ref entero m);
+  %------------------------------------------------------------------
+    entero r;
+  Principio
+    r:=a mod b;
+    Mq r*0 
+      a:=b;
+      b:=r;
+      r:=a mod b;
+    FMq
+  Fin
+  
+Principio
+  escribir('El MCD es: ', m, entacar (13), entacar (10));
+  escribir(c);
+  escribir(b);
+  leer(b);
+  leer(c);
+  b := not( (i > 9) and (j <> 23));
+  b := x >= y >= z;
+  b := x > 9 and y <> 3;
+  b := x = 5 or y <>3;
+  b := not x > 14;
+  b := x <= 1 and y = 6 or z < 4;
+  b := c >= "a" and c <= "z";
+  b := c >= "A" and c <> "n";
+  b := 5 and y <> 8 or 0;
+  % b := dato(i); %Error sintactico
+  b := 'hola';
+  %b := 'hola' + 'x'; --> Mirar a ver que pasa aqui
+  b := 'hola' + b;
+  Si c ent
+    escribir('lala');
+  FSi
+  Si b*4 ent
+    escribir('lala');
+  Fsi
+  escribir(5+8);
+Fin

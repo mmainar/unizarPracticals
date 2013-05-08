@@ -1,0 +1,102 @@
+Programa P;
+  entero i,j ;
+  vector[4..10] de entero v1;
+  vector[8..14] de entero v2;
+  vector[8..15] de booleano v3;
+  vector[1..8] de booleano v4;
+  vector[5..9] de caracter v5;
+  vector[1..5] de caracter v6;
+  
+  accion inicializarVectorEnteros;
+    entero i;
+  principio
+    i := 4;
+    Mq i <= 10
+      v1[i] := i; 
+      i := i + 1;
+    Fmq
+  fin
+  
+  accion inicializarVectorCaracteres;
+    entero i;
+    caracter c;
+  principio
+    i := 5;
+    c := entacar(65);
+    Mq i <= 9
+      v5[i] := c;
+      c := entacar(caraent(c) + 1);
+      i := i + 1;
+    FMq
+  fin
+  
+  accion inicializarVectorBooleanos;
+  principio
+    i := 8;
+    Mq i <= 15 
+      v3[i] := i > 12;
+      i := i + 1;
+    FMq
+  fin
+  
+  accion mostrarVectores;
+    entero i;
+  principio
+    escribir('Mostrando vector v1: ', entacar(13), entacar(10));
+    i := 4;
+    Mq i <= 10 
+      escribir('El elemento ', i, ' es: ', v1[i], entacar(13), entacar(10));
+      i := i + 1;
+    FMq  
+    escribir('Mostrando vector v2: ', entacar(13), entacar(10));
+    i := 8;
+    Mq i <= 14 
+      escribir('El elemento ', i, ' es: ', v2[i], entacar(13), entacar(10));
+      i := i + 1;
+    FMq  
+    escribir('Mostrando vector v3: ', entacar(13), entacar(10));
+    i := 8;
+    Mq i <= 15 
+      si (v3[i] = TRUE) ent
+        escribir('El elemento ', i, ' es: true', entacar(13), entacar(10));
+      si_no
+        escribir('El elemento ', i, ' es: false', entacar(13), entacar(10));	
+      fsi	 
+      i := i + 1;
+    FMq  
+    escribir('Mostrando vector v4: ', entacar(13), entacar(10));
+    i := 1;
+    Mq i <= 8 
+      si (v4[i] = TRUE) ent
+        escribir('El elemento ', i, ' es: true', entacar(13), entacar(10));
+      si_no
+        escribir('El elemento ', i, ' es: false', entacar(13), entacar(10));	
+      fsi	 
+      i := i + 1;
+    FMq 
+    escribir('Mostrando vector v5: ', entacar(13), entacar(10));
+    i := 5;
+    Mq i <= 9 
+      escribir('El elemento ', i, ' es: ', v5[i], entacar(13), entacar(10));
+      i := i + 1;
+    FMq  
+    escribir('Mostrando vector v6: ', entacar(13), entacar(10));
+    i := 1;
+    Mq i <= 5 
+      escribir('El elemento ', i, ' es: ', v6[i], entacar(13), entacar(10));
+      i := i + 1;
+    FMq   
+  fin
+  
+  
+  
+Principio
+ inicializarVectorEnteros;
+ v2 := v1;
+ inicializarVectorBooleanos; 
+ v4 := v3;
+ inicializarVectorCaracteres;
+ v6 := v5;
+ mostrarVectores;
+Fin
+

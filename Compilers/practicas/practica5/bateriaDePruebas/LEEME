@@ -1,0 +1,20 @@
+LEEME
+--------------
+
+acciones.pc: Muestra como tanto los parametros por valor como los parametros
+             por referencia pueden ser asignados en una accion, sin embargo,
+	     el valor nuevo solo se ve desde fuera si son parametros por
+	     referencia.
+	     
+bloques.pc, bloques2.pc: Programas con varios niveles de bloques. 
+                         No son correctos en ejecucion, son para ver que el
+			 codigo generado es correcto.
+
+vectores.pc: Prueba asignacion simple de vectores y asignacion directa.
+
+vectoresErroneo.pc: Accede a indice de vector erroneo con lo que se salta a la
+                    rutina de error mostrando un mensaje por pantalla y
+		    abortando la ejecucion.
+		    
+
+factorial.pc: Se queda esperando un numero por pantalla y devuelve su factorial.

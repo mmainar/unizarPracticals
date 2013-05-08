@@ -1,0 +1,5 @@
+programa p;
+
+principio
+  escribir ('Abortando');  
+fin

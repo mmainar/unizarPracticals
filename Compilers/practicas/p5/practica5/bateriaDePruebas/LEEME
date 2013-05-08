@@ -1,0 +1,9 @@
+LEEME
+
+acciones.pc: Muestra como tanto los parametros por valor como los parametros
+             por referencia pueden ser asignados en una accion, sin embargo,
+	     el valor nuevo solo se ve desde fuera si son parametros por
+	     referencia.
+	     
+
+

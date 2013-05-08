@@ -1,0 +1,5 @@
+programa p;
+
+principio
+  escribir ('Abortando la ejecucion, indice del vector fuera de rango');  
+fin

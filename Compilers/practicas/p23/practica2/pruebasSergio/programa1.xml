@@ -1,0 +1,50 @@
+<Programa name="PROGRAMA1">
+	<declaracion_variables>
+		<var nombre="I" tipo="entero" />
+		<var nombre="J" tipo="entero" />
+		<var nombre="K" tipo="entero" />
+		<var nombre="T" tipo="booleano" />
+		<var nombre="F" tipo="booleano" />
+		<var nombre="C" tipo="caracter" />
+	</declaracion_variables>
+	<declaracion_acciones>
+		<accion nombre="NIVEL_0">
+			<declaracion_variables>
+				<var nombre="C" tipo="booleano" />
+			</declaracion_variables>
+			<accion nombre="NIVEL_1">
+				<parametro nombre="B" tipo="booleano" paso="ref" />
+				<parametro nombre="J" tipo="entero" paso="ref" />
+				<parametro nombre="C" tipo="caracter" paso="val" />
+				<declaracion_variables>
+					<var nombre="K" tipo="caracter" />
+				</declaracion_variables>
+				<accion nombre="NIVEL_2">
+					<declaracion_variables>
+						<var nombre="E" tipo="entero" />
+						<var nombre="G" tipo="caracter" />
+					</declaracion_variables>
+				</accion>
+			</accion>
+		</accion>
+		<accion nombre="NIVEL_0B">
+			<declaracion_variables>
+					<var nombre="V1" tipo="vector" tipo_componentes="entero" indice inferior="10" indice superior ="18" />
+				<var nombre="IND" tipo="entero" />
+			</declaracion_variables>
+			<accion nombre="NIVEL_1B">
+				<declaracion_variables>
+				</declaracion_variables>
+				<accion nombre="NIVEL_2B">
+					<declaracion_variables>
+					</declaracion_variables>
+					<accion nombre="NIVEL_3B">
+						<declaracion_variables>
+								<var nombre="V2" tipo="vector" tipo_componentes="entero" indice inferior="2" indice superior ="10" />
+						</declaracion_variables>
+					</accion>
+				</accion>
+			</accion>
+		</accion>
+	</declaracion_acciones>
+</Programa>

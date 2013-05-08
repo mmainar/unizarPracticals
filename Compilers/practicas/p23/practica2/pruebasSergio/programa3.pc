@@ -1,0 +1,116 @@
+%-------------------------
+programa programa3;
+%-------------------------
+
+entero e1, e2, e1;  	% error, la variable e1 ya esta definida
+booleano e2;  		%error, la variable e2 ya esta definida
+caracter acc;
+booleano b;
+
+vector [9..7] de entero v;  		%error, indices en mal orden
+vector [1..10] de caracter vc;
+vector [1..10] de entero ve, ve2;
+vector [11..22] de entero vebis;
+
+  accion unaAccion (val entero unaAccion);
+
+  entero a;
+  
+    accion otraAccion (ref booleano dato; val entero dato; ref entero valor); %error, parametros repetidos
+  
+    principio
+   
+      si (e1) ent  % error, el tipo de la expresion debe ser un booleano
+        escribir('hola');
+      si_no
+        escribir('hola');
+      fsi  
+      
+      leer(valor);
+      %leer(ve[3]);
+      %leer(e1[5]);
+      %leer(e1,ve[7+4]);
+      %leer(ve[7+3]);
+    
+    fin
+    
+  accion otraAccion; %error, accion ya declarada
+  
+    booleano e2;
+  
+    principio
+      e1 := e1 + "a"; 		%error, el 2º elemento de la operacion debe ser un entero
+      e2 := e1 - 9; 		%error, los tipos de la asignacion son diferentes
+      e2 := lala * 3 + 7; 	%error, variable no definida
+      lala := e2;  		%error, la variable de la izquierda no esta definida
+      otraAccion := e2;  	%error, en la parte izda debe haber una variable o un parametro
+      
+      si (e1) ent %error, el tipo de la expresion debe ser un booleano
+        si (4 > caraent("l")) ent
+	  mq e2 
+	    escribir('hola');
+	  fmq
+	fsi
+	
+	escribir(e2, ve);  %error, no se pueden escribir booleanos, ni vectores
+	leer(e2, ve);  %error, no se pueden leer booleanos ni vectores
+	leer(otraAccion);  %error, solo se pueden leer variables o parametros
+	leer(lololo);  %error, la variable no esta declarada
+	
+      fsi
+    fin
+  
+  principio % de unaAccion
+    unaAcion(8);	% error, en este nivel unaAccion se corresponde con un parametro
+    programa3;		% error, programa3 no se corresponde con una accion
+  fin
+  
+  accion acc;  %error, el identificador de la accion ya existe
+
+  principio
+    escribir('hola');
+  fin
+
+  accion acc1 (val entero parametroAcc1);
+  
+    entero varAcc1;
+    
+    accion acc2 (ref booleano parametroAcc2);
+    
+      booleano varAcc2;
+      
+      accion acc3 (val caracter parametroAcc3);
+      
+        caracter varAcc3;
+      
+      principio 
+        escribir('hola');
+      fin
+      
+    principio
+      escribir('hola');
+    fin
+  
+  principio % de acc1
+    escribir('hola');
+  fin
+    
+
+principio
+
+  acc1(parametroAcc1);		% error, variable no definida (parametro)
+  parametroAcc1 := 1;		% error, la variable no es visible
+  
+  acc2(b);			% error, la accion no es visible
+  acc3(c);			% error, la accion no es visible
+  
+  parametroAcc2 := b;		% error, el parametro no es visible
+  parametroAcc3 := "D";		% error, el parametro no es visible
+  
+  ve[15] := 3;  %warning, el indice del vector esta fuera de rango
+  ve[7*2-8+10] := 5; %warning, el indice del vector esta fuera de rango
+  e1 := ve[19 mod 10 + 100]; %warning, el indice del vector esta fuera de rango
+ 
+  e1 := 'hola' + 'ba';  %error, operandos deben ser enteros
+
+fin

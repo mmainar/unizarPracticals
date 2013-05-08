@@ -1,0 +1,27 @@
+<Programa name="CALENDARIO">
+	<declaracion_variables>
+		<var nombre="MES" tipo="entero" />
+		<var nombre="ANHO" tipo="entero" />
+		<var nombre="DIA1ANHO" tipo="entero" />
+		<var nombre="DIA1MES" tipo="entero" />
+		<var nombre="ANHADE" tipo="entero" />
+		<var nombre="LN" tipo="caracter" />
+	</declaracion_variables>
+	<declaracion_acciones>
+		<accion nombre="PRIMER_DIA_ANHO">
+			<declaracion_variables>
+				<var nombre="BISIESTOS" tipo="entero" />
+				<var nombre="BISIESTOS_VALIDOS" tipo="booleano" />
+				<var nombre="CIEN" tipo="booleano" />
+				<var nombre="CUATRO" tipo="booleano" />
+			</declaracion_variables>
+		</accion>
+		<accion nombre="PRIMER_DIA_MES">
+			<declaracion_variables>
+				<var nombre="BISIESTOS_VALIDOS" tipo="booleano" />
+				<var nombre="CIEN" tipo="booleano" />
+				<var nombre="CUATRO" tipo="booleano" />
+			</declaracion_variables>
+		</accion>
+	</declaracion_acciones>
+</Programa>

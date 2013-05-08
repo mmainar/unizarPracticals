@@ -1,0 +1,5 @@
+Programa P;
+  
+Principio
+  nula;
+Fin

@@ -1,0 +1,85 @@
+programa programa3;
+
+entero e1, e2, e1;  % error, la variable ya esta definida
+booleano e2;  %error, la variable ya esta definida
+caracter acc;
+
+vector [9..7] de entero v;  %error, indices en mal orden
+vector [1..10] de caracter vc;
+vector [1..10] de entero ve, ve2;
+vector [11..22] de entero vebis;
+
+accion unaAccion (val entero unaAccion);
+
+  entero a;
+  
+  accion otraAccion (ref booleano dato; val entero dato; ref entero valor); %error, parametros repetidos
+  
+    principio
+   
+      si (e1) ent  escribir('sergio'); % error, debe ser un booleano
+      si_no 
+        escribir('sergio');
+      fsi  %se permiten bloques de instrucciones vacios
+      
+      leer(valor);
+    
+    fin
+    
+  accion otraAccion; %error, accion ya declarada
+  
+    booleano e2;
+  
+    principio
+      e1 := e1 + "a"; %error, el 2º elemento de la operacion debe ser un entero
+      e2 := e1 - 9; %error, los tipos de la asignacion son diferentes
+      e2 := lala * 3 + 7; %error, variable no definida
+      lala := e2;  %error, la variable de la izquierda no esta definida
+      otraAccion := e2;  %error, en la parte izda debe haber una variable o un parametro
+      
+      si (e1) ent %error, debe ser un booleano
+        si (4 > caraent("l")) ent
+	  mq e2 
+	    escribir('hola');
+	  fmq  %se permiten bloques de instrucciones vacios
+	fsi
+        escribir(entacar('hola'),entacar(true),entacar("a"), entacar(ve));  
+	  %error, los argumentos de entacar debe ser enteros
+	escribir(caraent('adios'),caraent(false), caraent(4), caraent(vc));
+	  %error, los argumentos de caraent debe ser caracteres
+	escribir(entacar(caraent("d")));
+	
+	escribir(e2, ve);  %error, no se pueden escribir booleanos, ni vectores
+	leer(e2, ve);  %error, no se pueden leer booleanos ni vectores
+	leer(otraAccion);  %error, solo se pueden leer variables o parametros
+	leer(lololo);  %error, la variable no esta declarada
+	
+      fsi
+    fin
+  
+  principio % de unaAccion
+
+  fin
+  
+accion acc;  %error, el identificador de la accion ya existe
+
+  principio
+  
+  fin
+
+principio
+
+  ve := ve2;
+  ve := vebis; %error, tienen distinto tamanyo del vector
+  ve := vc;  %error, vectores de distintos tipos
+  ve := e1;  %error, no se puede hacer una asignacion entre una variable y un vector
+  
+  ve[15] := 3;  %error, el indice del vector esta fuera de rango
+  ve[7*2-8+10] := 5; %error, el indice del vector esta fuera de rango
+  e1 := ve[19 mod 10 + 100]; %error, el indice del vector esta fuera de rango
+  
+  % comprobar fuera de rango de los vectores
+  e1 := 'hola' + 'b';  %error, suma de elementos que no son enteros, caracteres desconocidos ()
+   
+
+fin

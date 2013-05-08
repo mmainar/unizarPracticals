@@ -1,0 +1,53 @@
+
+  <max>
+  <programa /> 
+  <p>ENP L0</p> 
+  <i>
+  <variable /> 
+  <entero /> 
+  <dir>3</dir> 
+  </i>
+  <j>
+  <variable /> 
+  <entero /> 
+  <dir>4</dir> 
+  </j>
+  <cuerpo>
+  <leer>
+  <p>SRF 0 3</p> 
+  <p>RD 1</p> 
+  </leer>
+  <leer>
+  <p>SRF 0 4</p> 
+  <p>RD 1</p> 
+  </leer>
+  <seleccion>
+  <condicion>
+  <p>SRF 0 3</p> 
+  <p>DRF</p> 
+  <p>SRF 0 4</p> 
+  <p>DRF</p> 
+  <p>GT</p> 
+  </condicion>
+  <p>JMF L1</p> 
+  <entonces>
+  <escribir>
+  <p>SRF 0 3</p> 
+  <p>DRF</p> 
+  <p>WRT 1</p> 
+  </escribir>
+  </entonces>
+  <p>JMP L2</p> 
+  <l>L1:</l> 
+  <sino>
+  <escribir>
+  <p>SRF 0 4</p> 
+  <p>DRF</p> 
+  <p>WRT 1</p> 
+  </escribir>
+  </sino>
+  <l>L2:</l> 
+  </seleccion>
+  </cuerpo>
+  <p>LVP</p> 
+  </max>

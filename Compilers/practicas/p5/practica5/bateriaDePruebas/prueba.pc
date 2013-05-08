@@ -1,0 +1,25 @@
+programa P;
+
+  entero a,b;
+  caracter c, d;
+  
+principio
+  a := 5;
+  a := b+4;
+  b := b + 1;
+  a := b * a;
+  escribir('abcde');
+  escribir(b);
+  leer(a);
+  leer(c);
+  escribir(8);
+  escribir(8+5*4);
+  c := d;
+  Mq a > 0 
+    escribir('ab');
+    a := a - 1;
+  Fmq
+  Si a > 0 ent
+    escribir(a);
+  Fsi
+fin 

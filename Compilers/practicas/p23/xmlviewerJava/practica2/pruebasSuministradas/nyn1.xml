@@ -1,0 +1,10 @@
+<Programa name="NOVENTA_Y_NUEVE">
+	<declaracion_variables>
+		<var nombre="X" tipo="entero" />
+		<var nombre="Y" tipo="entero" />
+		<var nombre="N" tipo="entero" />
+		<var nombre="M" tipo="entero" />
+	</declaracion_variables>
+	<declaracion_acciones>
+	</declaracion_acciones>
+</Programa>

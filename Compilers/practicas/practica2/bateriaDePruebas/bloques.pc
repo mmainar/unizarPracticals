@@ -1,0 +1,74 @@
+Programa p; % nivel 0
+  entero x1,y1,z1,v1,w1; 
+  %--------------------------------------------------  
+  accion a (val entero a1; ref entero a2);
+  %--------------------------------------------------
+    entero x2,y2,u2,v2; % nivel 1
+    %------------------------------------------------
+    accion b (val entero b1; ref entero b2);
+    %------------------------------------------------
+      entero y3,z3,v3; % nivel 2
+      %----------------------------------------------
+      accion c (ref entero c1);
+      %----------------------------------------------
+        entero y4,z4; % nivel 3
+      Principio
+        z4 := 1;
+        x1 := y3+z1+w1+y4;
+	x2 := y2 + 1;
+	b(8, x1); 
+	b(8 mod 4, c1);
+	b(c1, c1+1); % Error, argumento 2 debe ser variable o parametro por referencia
+	c(z3);
+	d; % Error, d no existe aun
+	a(8, y4);
+      Fin
+      
+      %----------------------------------------------  
+      accion d;
+      %----------------------------------------------
+        entero x5,y5; % nivel 3
+      Principio
+        x5 := z1+u2;
+        c(x5);
+	b(x5,y3);
+	d;
+	a(8, y2);
+      Fin
+    
+    Principio % de accion b (en nivel 2)
+      y3 := x1+u2+w1;
+      c(y3);
+      d;
+      b(8, y3); 
+      p; % Error, p es el programa principal, no una accion.
+      a(4, z1);
+    Fin
+    
+  Principio % de accion a 
+    z1 := 2;
+    u2 := z1+w1;
+    y4 := 1; % Error, y4 no es visible
+    b(z1,u2);
+    c(z1); % Error, c no es visible
+    d; % Error, d no es visible
+    a(7, y3); % Error, y3 no visible (no declarado), es por ref.
+    a(7, z1); 
+  Fin
+Principio % programa principal p
+  x1 := 1; 
+  y1 := 2; 
+  z1 := 3; 
+  v1 := 4; 
+  w1 := 5;
+  x1 := v1+w1;
+  a(x1,y1);
+  b(x1,y1); % Error, b no es visible
+  c(x1); % Error, c no es visible
+  d; % Error, d no es visible
+  escribir(x1, y1, z1, v1, w1);
+  x2 := 1; % Error, x2 no es visible (no declarados)
+  y3 := 1; % Error, y3 no es visible
+  y4 := 1; % Error, y4 no es visible
+  x5 := 1; % Error, x5 no es visible
+Fin

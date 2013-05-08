@@ -1,0 +1,73 @@
+Programa P;
+  entero i,j;
+  booleano k;
+  caracter h;
+  
+  accion p1 (REF entero b; VAL booleano a; REF caracter c);
+    entero d;
+  Principio
+    d := 4*8+3;
+    b := d;
+    a := d = 0;
+    c := entacar(d);
+    p1(b, a, c);
+    p1(caraent(c), 7*2+1-4 mod 8 div 7 > 0, entacar(d)); % Error, argumentos 1 y 3 deben ser variables o parametros por referencia.
+    p1(caraent(c), 7*2+1-4 mod 8 div 7 > 0, entacar(b)); % Error, argumentos 1 y 3 deben ser variables o parametros por referencia.
+  Fin
+  
+  accion p2 (VAL entero a; REF entero b; VAL booleano c,d; VAL caracter e,f);
+    entero u;
+  Principio
+    u := 8;
+  Fin
+  
+  accion p3;
+  Principio
+    escribe('holaaaaa'); % Error, es escribir, no escribe
+    lee(i); % Error, es leer, no lee
+  Fin
+  
+  accion p4 (VAL entero p4; REF entero p4); % Error, parametro p4 duplicado
+  Principio
+    escribir('lalala');
+  Fin
+  
+  accion noRecursiva (VAL entero noRecursiva);
+  Principio
+    noRecursiva(8); % Error, en este nivel esta el parametro, no la accion
+  Fin
+  
+  accion p4 (VAL entero parametroHuerfano1; REF entero parametroHuefano2); % Error, p4 ya definida
+  Principio
+    parametroHuerfano1 := 8;
+  Fin
+
+Principio
+ i := j + 1;
+ m := m + 1; % 2 errores, identificador m no declarado
+ p1; % Error, faltan 3 argumentos
+ p1(8); % Error, faltan 2 argumentos y el 1o debe ser variable o parametro por referencia.
+ p1(i, j); % Error, tipo 2o argumento incorrecto y falta 1 argumento .
+ p1(i, 8); % Error, tipo 2o argumento incorrecto y falta 1 argumento .
+ p1(i, 8, 9); % Error, tipos del 2o y 3er argumento son incorrectos.
+              % Ademas el 3er argumento debe ser variable o parametro por referencia.
+ p1(i, 8, j); % Error, tipos del 2o y 3er argumento son incorrectos.
+ p1(i, i, i, j); % Error, tipos args 2 y 3 no coinciden y sobra un argumento.
+ p1(j, j, j); %  Error, tipos args 2 y 3 no coinciden.
+ p1(i*2+1, i, i); % Error, tipos args 2 y 3 no coinciden y el argumento 1 debe ser variable o parametro por referencia.
+ p1(i*2+1, 8 > 0, entacar(i)); % Error, argumentos 1 y 3 deben ser variables o parametros por referencia.
+ p1(i*2+1, j >= 0, h); % Error, argumento 1 debe ser variable o parametro por referencia.
+ p1(caraent(h), j < 0, h); % Error, argumento 1 debe ser variable o parametro por referencia.
+ p1(i, j < 0, entacar(i)); % Error, argumento 3 debe ser variable o parametro por referencia.
+ p1(i+1, j < 0, h); % Error, argumento 1 debe ser variable o parametro por referencia.
+ p1(i*1+4-5 div 6 mod 4, j < 0, h); % Error, argumento 1 debe ser variable o parametro por referencia.
+ p2(i,i, 7 < 0, 8 <= 5, h, h); 
+ p2(i,7, 7 < 0, 9 > 4 + 9*2 mod 8 div 4, entacar(i), entacar(i)); %Error, argumento 2 debe ser variable o parametro por referencia.
+ p2(i,j, 7 < 0, 9 > 4 + 9*2 mod 8 div 4, entacar(i), entacar(i));
+ p2; % Error, faltan 6 argumentos
+ p3;
+ p3(8,4,7); % Error, sobran 3 argumentos
+ p3(i,j); % Error, sobran 2 argumentos
+ p3(i); % Error, sobran 1 argumentos
+ p5; % Error, la accion no existe
+Fin % Warning, variable k no referenciada en este bloque

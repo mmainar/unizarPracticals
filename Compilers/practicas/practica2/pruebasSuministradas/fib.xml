@@ -1,0 +1,30 @@
+<Programa name="FIBBONACI">
+	<declaracion_variables>
+		<var nombre="N" tipo="entero" />
+		<var nombre="R" tipo="entero" />
+	</declaracion_variables>
+	<declaracion_acciones>
+		<accion nombre="CAMBIAR_DE_LINEA">
+			<declaracion_variables>
+			</declaracion_variables>
+		</accion>
+		<accion nombre="DATO">
+			<parametro nombre="DATO" tipo="entero" paso="ref" />
+			<declaracion_variables>
+				<var nombre="CORRECTO" tipo="booleano" />
+			</declaracion_variables>
+			<accion nombre="PEDIR_DATO">
+				<declaracion_variables>
+				</declaracion_variables>
+			</accion>
+		</accion>
+		<accion nombre="FIB">
+			<parametro nombre="N" tipo="entero" paso="val" />
+			<parametro nombre="R" tipo="entero" paso="ref" />
+			<declaracion_variables>
+				<var nombre="R1" tipo="entero" />
+				<var nombre="R2" tipo="entero" />
+			</declaracion_variables>
+		</accion>
+	</declaracion_acciones>
+</Programa>

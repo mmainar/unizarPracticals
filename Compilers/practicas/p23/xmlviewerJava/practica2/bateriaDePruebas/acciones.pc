@@ -1,0 +1,66 @@
+Programa P;
+  entero i,j;
+  booleano k;
+  caracter h;
+  
+  accion p1 (REF entero b; VAL booleano a; REF caracter c);
+    entero d;
+  Principio
+    d := 4*8+3;
+    b := d;
+    a := d = 0;
+    c := entacar(d);
+  Fin
+  
+  accion p2 (VAL entero a; REF entero b; VAL booleano c,d; VAL caracter e,f);
+    entero u;
+  Principio
+    u := 8;
+  Fin
+  
+  accion p3;
+  Principio
+    escribe('holaaaaa'); % Error, es escribir, no escribe
+  Fin
+  
+  accion p4 (VAL entero p4);
+  Principio
+    escribir('lalala');
+  Fin
+  
+  accion noRecursiva (VAL entero noRecursiva);
+  Principio
+    noRecursiva(8); % Error, en este nivel esta el parametro, no la accion
+  Fin
+  
+  accion p4 (VAL entero parametroHuerfano1; REF entero parametroHuefano2); % Error, ya definida
+  Principio
+    parametroHuerfano := 8;
+  Fin
+
+Principio
+ i := j +1;
+ p1; % Error, faltan argumentos
+ p1(8); % Error, faltan argumentos y el 1o debe ser variable. 
+ p1(i, j); % Error, falta argumento y tipo 2o par incorrecto.
+ p1(i, 8); % Error, falta parametro y tipo 2o par incorrecto.
+ p1(i, 8, 9); % Error, el 3er parametro es por REF luego debe ser variable
+              % Y tipos del 2o y 3er argumento son incorrectos.
+ p1(i, 8, j); % Error, el 2o par debe ser booleano y el 3o caracter.
+ p1(i, i, i, j); % Error, sobra un parametro y tipos args 2 y 3 no coinciden
+ p1(j, j, j); % Error, el 2o parametro debe ser booleano y el 3o caracter.
+ p1(i*2+1, i, i); % Error, tipos args 2 y 3 no coinciden.
+ p1(i*2+1, 8 > 0, entacar(i)); % Error, arg 3 debe ser variable
+ p1(i*2+1, j >= 0, h);
+ p1(caraent(h), j < 0, h);
+ p2(i,i, 7 < 0, 8 <= 5, h, h); 
+ p2(i,7, 7 < 0, 9 > 4 + 9*2 mod 8 div 4, entacar(i), entacar(i)); % Arg 2
+ %debe ser variable
+ p2(i,j, 7 < 0, 9 > 4 + 9*2 mod 8 div 4, entacar(i), entacar(i));
+ p2; % Error, faltan argumentos
+ p3;
+ p3(8,4,7); % Error, p3 no tiene parametros
+ p3(i,j); % Error, p3 no tiene parametros
+ p3(i); % Error, p3 no tiene parametros
+ p5; % Error, la accion no existe
+Fin

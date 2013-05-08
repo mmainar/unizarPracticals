@@ -1,0 +1,22 @@
+<Programa name="P">
+	<declaracion_variables>
+		<var nombre="I" tipo="entero" />
+		<var nombre="J" tipo="entero" />
+		<var nombre="M" tipo="entero" />
+	</declaracion_variables>
+	<declaracion_acciones>
+		<accion nombre="DATO">
+			<parametro nombre="D" tipo="entero" paso="ref" />
+			<declaracion_variables>
+			</declaracion_variables>
+		</accion>
+		<accion nombre="MCD">
+			<parametro nombre="A" tipo="entero" paso="val" />
+			<parametro nombre="B" tipo="entero" paso="val" />
+			<parametro nombre="M" tipo="entero" paso="ref" />
+			<declaracion_variables>
+				<var nombre="R" tipo="entero" />
+			</declaracion_variables>
+		</accion>
+	</declaracion_acciones>
+</Programa>

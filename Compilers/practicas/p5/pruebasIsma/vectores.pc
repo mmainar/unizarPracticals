@@ -1,0 +1,49 @@
+programa p;
+
+  vector[1..10] de entero v, v2;
+  entero i;
+  
+  accion cambiar_de_linea ;
+  Principio
+    escribir (entacar (13), entacar (10));
+  Fin
+  
+  
+  accion inicializarNumero (ref entero num; val entero valor);
+  principio
+    num := valor;    
+  fin
+  
+  accion mostrarElemento (val entero indice; ref entero num);
+  principio
+    escribir('El elemento ',indice,' es: ',num);
+    cambiar_de_linea;
+  fin
+  
+  
+principio
+  i := 1;
+  mq i <= 10
+    inicializarNumero(v[i],i);
+    i := i + 1;
+  fmq 
+ 
+  escribir('Muestro v'); cambiar_de_linea;
+  i := 1;
+  mq i <= 10
+    mostrarElemento(i,v[i]);
+    i := i + 1;
+  fmq
+  
+  escribir('Hago v2 := v'); cambiar_de_linea;
+  v2 := v;
+  escribir('Muestro v2'); cambiar_de_linea;
+  i := 1;
+  mq i <= 10
+    mostrarElemento(i,v2[i]);
+    i := i + 1;
+  fmq
+  
+fin
+
+

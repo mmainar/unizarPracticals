@@ -1,0 +1,19 @@
+<Programa name="MAXIMO_COMUN_DIVISOR">
+	<declaracion_variables>
+		<var nombre="M" tipo="entero" />
+		<var nombre="D" tipo="entero" />
+		<var nombre="A" tipo="entero" />
+		<var nombre="B" tipo="entero" />
+	</declaracion_variables>
+	<declaracion_acciones>
+		<accion nombre="DATO">
+			<declaracion_variables>
+			</declaracion_variables>
+		</accion>
+		<accion nombre="MCD">
+			<declaracion_variables>
+				<var nombre="R" tipo="entero" />
+			</declaracion_variables>
+		</accion>
+	</declaracion_acciones>
+</Programa>

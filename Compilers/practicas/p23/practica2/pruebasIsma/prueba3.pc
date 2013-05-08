@@ -1,0 +1,61 @@
+programa prueba;
+
+  caracter car;
+  entero num;
+  booleano bool;
+  vector [1..100] de caracter vectorCar;
+  vector [1..100] de entero vectorEnt;
+  vector [1..100] de booleano vectorBool;
+
+principio
+  leer(car,num,bool);		% ERROR, NO SE PUEDEN LEER BOOLEANOS
+  leer(vectorEnt);		% ERROR, NO SE PUEDEN LEER VECTORES
+  
+  car := "a";
+  num := 2;
+  bool := true;
+  
+  car := 2;			% ERROR TIPOS INCOMPATIBLES
+  car := true;			% ERROR TIPOS INCOMPATIBLES
+  
+  num := "a";			% ERROR TIPOS INCOMPATIBLES
+  num := true;			% ERROR TIPOS INCOMPATIBLES
+  
+  bool := "a";			% ERROR TIPOS INCOMPATIBLES
+  bool := 2;			% ERROR TIPOS INCOMPATIBLES
+  
+  vectorCar := vectorEnt;	% ERROR VECTORES CONTIENEN TIPOS DE DATOS DISTINTOS
+  vectorCar := vectorBool;	% ERROR VECTORES CONTIENEN TIPOS DE DATOS DISTINTOS
+  vectorEnt := vectorCar;	% ERROR VECTORES CONTIENEN TIPOS DE DATOS DISTINTOS
+  vectorEnt := vectorBool;	% ERROR VECTORES CONTIENEN TIPOS DE DATOS DISTINTOS
+  vectorBool := vectorCar;	% ERROR VECTORES CONTIENEN TIPOS DE DATOS DISTINTOS
+  vectorBool := vectorEnt;	% ERROR VECTORES CONTIENEN TIPOS DE DATOS DISTINTOS
+  vectorCar := vectorCar;	
+  vectorEnt := vectorEnt;	
+  vectorBool := vectorBool;
+  
+  num := 'hola' + 'hola' + 'hola' + 'hola'; % ERROR, no se puede operar con cadenas
+
+ 
+  vectorCar[1] := "a";
+  vectorEnt[1] := 2;
+  vectorBool[1] := true;  
+  
+ 
+  vectorCar := "a";			% ERROR TIPOS INCOMPATIBLES
+  vectorEnt := 2;			% ERROR TIPOS INCOMPATIBLES
+  vectorBool := true;			% ERROR TIPOS INCOMPATIBLES
+  
+  vectorCar := 2;			% ERROR TIPOS INCOMPATIBLES
+  vectorCar := true;			% ERROR TIPOS INCOMPATIBLES
+  
+  vectorEnt := "a";			% ERROR TIPOS INCOMPATIBLES
+  vectorEnt := true;			% ERROR TIPOS INCOMPATIBLES
+  
+  vectorBool := "a";			% ERROR TIPOS INCOMPATIBLES
+  vectorBool := 2;			% ERROR TIPOS INCOMPATIBLES
+  
+  a1 := a1;  				% 2 ERRORES, VARIABLE NO DECLARADA (EXPRESION) Y VARIABLE NO DECLARADA (IDENTIFICADOR)
+  car := "a" + "a";                     % ERROR
+  
+fin

@@ -1,0 +1,99 @@
+Programa P;
+  entero i,j ;
+  vector[4..10] de entero v1, v2;
+  vector[8..40] de booleano v3, v4;
+  vector[5..9] de caracter v5, v6;
+  vector[50..80] de entero v7;
+  vector[4..10] de entero v8;
+  vector[0..50] de booleano v9;
+  vector[8..40] de caracter v10;
+  vector[-1..50] de booleano v11; 
+  vector[-50..-51] de booleano v12; % Error, indices incorrectos
+  vector[8..7] de booleano v13; % Error, indices incorrectos
+  vector[8..-7] de booleano v14; % Error, indices incorrectos
+  vector[-40..-30] de booleano v15;
+  vector[1..1] de entero v16; % Warning, vector de una componente
+  entero v8;   % Error, identificador duplicado
+  caracter v7; % Error, identificador duplicado
+  entero lala, lolo, lele; % Warning, no referenciadas, mas adelante se da
+  
+  accion a1 (val entero v1);
+  Principio
+    leer(v1); 
+  Fin  
+  
+  accion a2 (ref entero v1);
+  Principio
+    leer(v1); 
+  Fin  
+  
+  
+Principio
+ a1(v1[4]);
+ a1(v3[8]); % Error, tipos del parametro y argumento no coinciden
+ a1(v5[5]); % Error, tipos del parametro y argumento no coinciden
+ a2(v1[4]);
+ a2(v3[8]); % Error, tipos del parametro y argumento no coinciden
+ a2(v5[5]); % Error, tipos del parametro y argumento no coinciden
+ a2(v1); % Error, argumento incorrecto
+ a2(v3); % Error, argumento incorrecto
+ a2(v5); % Error, argumento incorrecto
+ a1(v1); % Error, argumento incorrecto
+ a1(v3); % Error, argumento incorrecto
+ a1(v5); % Error, argumento incorrecto
+ v1[caraent("a")] := 8; % Warning, indice de v1 no existe
+ v1[caraent(entacar(65))] := 8; % Warning, indice de v1 no existe
+ v1[entacar(8)] := 8; % Warning, indice del vector v1 debe ser entero
+ v1[caraent("A")] := 8; % Warning, indice de v1 no existe
+ v1[caraent("m")] := 8; % Warning, indice de v1 no existe
+ v1[caraent(entacar(8))] := 8; 
+ v1[caraent(entacar(3))] := 8; % Warning, indice 3 de v1 no existe
+ v1[4+7*2+9] := 8; % Warning, indice de v1 no existe
+ i := v1[caraent("a")]; % Warning, indice de v1 no existe
+ i := v1[caraent(entacar(65))]; % Warning, indice de v1 no existe
+ i := v1[entacar(8)]; % Error, indice del vector v1 debe ser entero
+ i := v1[caraent("A")]; % Warning, indice de v1 no existe
+ i := v1[caraent("m")]; % Warning, indice de v1 no existe
+ i := v1[caraent(entacar(8))];
+ i := v1[caraent(entacar(3))]; % Warning, indice de v1 no existe
+ i := j +1;
+ v2[8] := 4*2*v1[80-5*2]; % Warning, indice de v1 no existe
+ v2 := v7; % Error, vectores de diferente dimension
+ v1 := v8; 
+ v9 := v11; % Error, vectores de diferente dimension
+ v3 := v10; % Error, vectores de diferente tipo
+ v3 := v1; % Error, vectores de diferente dimension y tipo
+ v1 := v9; % Error, vectores de diferente dimension y tipo
+ v3 := v4;
+ v6 := v5;
+ v3[4] := v3; % Error, tipos incompatibles
+ v3 := v3[4]; % Error, tipos incompatibles
+ v3[3] := v9[0]; % Warning, el indice 3 de v3 no existe
+ v1[4] := v2[(i*3)+j]; % Warning, indice de v2 puede no existir
+ v3[j] := v4[i]; % Warning, indices de v3 y v4 pueden no existir
+ v3[8] := v4[j]; % Warning, indice de v4 puede no existir
+ v3[8] := 3; % Error, tipos incompatibles
+ v1[8] := true; % Error, tipos incompatibles
+ v1[8] := "a"; % Error, tipos incompatibles
+ v1[8] := 9;
+ v3[8] := "b"; % Error, tipos incompatibles
+ v3[8] := true;
+ v10[9] := "b";
+ v10[9] := true; % Error, tipos incompatibles
+ v10[9] := 8; % Error, tipos incompatibles
+ a1(v2); % Error, los vectores no se pasan como argumentos
+ a1(v3); % Idem
+ a1(v1[4]);
+ a1(v1[-4]); % Warning, no existe la componente -4 de v1
+ a1(v3[8]); % Error, tipo del argumento incorrecto
+ escribir(v1); % Error, los vectores no se escriben
+ leer(v1);  % Error, los vectores no se leen
+ % leer(v1[4]);  Error sintactico
+ v1 := v1+v2; % Error, operandos 1 y 2 deben ser enteros y tipos incompatibles en la asignacion
+ v1 := v1;
+ v2 := v2 + 1; % Error, tipos incompatibles en la asignacion
+ v1[0] := 4; % Warning, indice 0 de v1 no existe
+ v1[1 div 0] := 8; % Warning, division por 0
+ v1[2 - (6-8 div 2)] := 7; %Warning, indice no existe
+ v1[2 div (8-8*4 div 4)] := 7; % Warning, division por 0
+Fin

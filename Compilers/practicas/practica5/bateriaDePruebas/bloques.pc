@@ -1,0 +1,59 @@
+Programa p; % nivel 0
+  entero x1,y1,z1,v1,w1; 
+  %--------------------------------------------------  
+  accion a (val entero a1; ref entero a2);
+  %--------------------------------------------------
+    entero x2,y2,u2,v2; % nivel 1
+    %------------------------------------------------
+    accion b (val entero b1; ref entero b2);
+    %------------------------------------------------
+      entero y3,z3,v3; % nivel 2
+      %----------------------------------------------
+      accion c (ref entero c1);
+      %----------------------------------------------
+        entero y4,z4; % nivel 3
+      Principio
+        z4 := 1;
+        x1 := y3+z1+w1+y4;
+	x2 := y2 + 1;
+	b(8, x1); 
+	b(8 mod 4, c1);	
+	c(z3);
+	a(8, y4);
+      Fin
+      
+      %----------------------------------------------  
+      accion d;
+      %----------------------------------------------
+        entero x5,y5; % nivel 3
+      Principio
+        x5 := z1+u2;
+        c(x5);
+	b(x5,y3);
+	d;
+	a(8, y2);
+      Fin
+    
+    Principio % de accion b (en nivel 2)
+      y3 := x1+u2+w1;
+      c(y3);
+      d;
+      b(8, y3); 
+      a(4, z1);
+    Fin
+    
+  Principio % de accion a 
+    z1 := 2;
+    u2 := z1+w1;
+    b(z1,u2);
+    a(7, z1); 
+  Fin
+Principio % programa principal p
+  x1 := 1; 
+  y1 := 2; 
+  z1 := 3; 
+  v1 := 4; 
+  w1 := 5;
+  x1 := v1+w1;
+  a(x1,y1);
+Fin

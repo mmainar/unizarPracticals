@@ -1,0 +1,100 @@
+%-----------------------
+programa programa5;
+%-----------------------
+
+
+  accion acc1 (val entero en; ref booleano bool);
+  
+    entero e1, e2, e3, e4, e5;
+    booleano b1, b2, b3, b4, b5;
+    caracter c1, c2, c3, c4, c5;
+    vector [0..2] de caracter vc;
+    
+    principio
+      e1 := 4 * 6;
+      e1 := e1 + e2 - e3 * e5;
+      e1 := caraent("f");
+      
+      e1 := b1;		% error, tipos incompatibles
+      b1 := c1;		% error, tipos incompatibles
+      
+      e4 := caraent(c4);
+      e5 := caraent(entacar(c3)); % error
+       
+      e4 := caraent(b1);	% error, argumento de caraent incorrecto
+      e4 := caraent(5 < 10);	% error, argumento de caraent incorrecto
+      
+      b4 := true <= false;	% error, operadores incorrectos
+      b4 := e4 > c4;		% error, tipos incompatibles en la comparacion
+      b4 := not(e4 > 10 div 4);
+      b4 := false or (c3 < entacar(7 mod e4));
+      
+      c := vc[0];		% error, variable no definida
+      c1 := vc[1];
+      
+      b2 := vc[1];		% error, tipos incompatibles
+      e2 := vc[2];		% error, tipos incompatibles
+      
+      c3 := c4 + c5;		% error, operadores no permitidos en la suma
+      c3 := c4 div c5;		% error, operadores no permitidos en la division
+      
+      c5 := l;		% error, variable no definida
+      e5 := ve[b1];	% error, variable no definida y tipo indice incorrecto
+      
+      en := 6;		% PARA MI NO error, no se puede asignar un valor a un parametro por valor
+      bool := true or false;
+      
+    fin
+    
+  accion acc2 (val entero en; ref caracter car; ref booleano bool);
+  
+    entero e;
+    booleano b;
+    caracter c;
+    vector [1..2] de entero ve;
+    vector [1..2] de caracter vc;
+    vector [1..2] de booleano vb;
+  
+    principio
+%%%%%%leer(3);			% ERROR SINTACTICO, no se puede realizar la lectura
+%%%%%%leer(4*9, true, "c");	% ERROR SINTACTICO, no se puede realizar la lectura
+      leer(b);			% error, no se puede leer booleanos
+%%%%%%leer(c + 4);		% ERROR SINTACTICO, operacion incorrecta y lectura incorrecta
+%%%%%%leer(e > true);		% erERROR SINTACTICOror, operacion incorrecta y lectura incorrecta
+      %leer(vb[1]);		% error, no se puede leer un booleano
+      %leer(ve[5+3]);		% warning, indice fuera de rango
+%%%%%%leer('hola');		% ERROR SINTACTICO, no se puede realizar la lectura
+      leer(ve, vc, vb);		% error, no se puede leer vectores
+      leer(acc2, acc1);		% error, no se puede leer acciones
+      leer(programa5);		% error, no se puede leer programas
+      leer(f);			% error, variable no definida
+      leer(en);			% error, no se puede leer parametros por valor
+      leer(bool);		% error, no se puede leer booleanos
+%%%%%%leer(entacar(4));		% ERROR SINTACTICO, no se puede realizar la lectura
+%%%%%%leer(caraent("a"));	% ERROR SINTACTICO, no se puede realizar la lectura
+      leer(e, c, en, car);
+      
+      escribir(true);		% error, no se puede escribir booleanos
+      escribir(3 > 5);		% error, no se puede escribir booleanos
+      escribir('hola' + "a");	% error, operacion no permitida
+      escribir('adios' + true); % error, operacion no permitida
+      escribir(b, bool);	% error, no se pueden escribir booleanos
+      escribir(vb[1]);		% error, no se pueden escribir booleanos
+      escribir(f);		% error, variable no definida
+      escribir(ve, vb, vc);	% error, no se puede escribir vectores
+      escribir(acc1, acc2);	% error, no se puede escribir acciones
+      escribir(programa5);	% error, no se puede escribir programas
+      
+        %error, los argumentos de entacar debe ser enteros
+      escribir(entacar('hola'),entacar(true),entacar("a"), entacar(ve));
+        %error, los argumentos de caraent debe ser caracteres
+      escribir(caraent('adios'),caraent(false), caraent(4), caraent(vc));
+      
+      escribir(entacar(caraent("d")));
+      escribir(en, car, 'adios', 3 * 5);
+      escribir(ve[1], vc[1]);
+    fin
+    
+principio
+  escribir('hola');
+fin

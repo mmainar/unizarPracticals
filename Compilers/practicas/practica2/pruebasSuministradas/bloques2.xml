@@ -1,0 +1,27 @@
+<Programa name="NIVELES">
+	<declaracion_variables>
+		<var nombre="I" tipo="entero" />
+	</declaracion_variables>
+	<declaracion_acciones>
+		<accion nombre="O">
+			<declaracion_variables>
+				<var nombre="J" tipo="entero" />
+			</declaracion_variables>
+			<accion nombre="P">
+				<declaracion_variables>
+					<var nombre="K" tipo="entero" />
+				</declaracion_variables>
+				<accion nombre="Q">
+					<declaracion_variables>
+						<var nombre="L" tipo="entero" />
+					</declaracion_variables>
+					<accion nombre="R">
+						<declaracion_variables>
+							<var nombre="M" tipo="entero" />
+						</declaracion_variables>
+					</accion>
+				</accion>
+			</accion>
+		</accion>
+	</declaracion_acciones>
+</Programa>

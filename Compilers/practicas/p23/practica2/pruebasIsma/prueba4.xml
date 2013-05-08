@@ -1,0 +1,11 @@
+<Programa name="PRUEBA">
+	<declaracion_variables>
+			<var nombre="V" tipo="vector" tipo_componentes="entero" indice inferior="-10" indice superior ="20" />
+		<var nombre="NUM" tipo="entero" />
+			<var nombre="V2" tipo="vector" tipo_componentes="entero" indice inferior="-1" indice superior ="20" />
+		<var nombre="A" tipo="entero" />
+		<var nombre="C" tipo="caracter" />
+	</declaracion_variables>
+	<declaracion_acciones>
+	</declaracion_acciones>
+</Programa>

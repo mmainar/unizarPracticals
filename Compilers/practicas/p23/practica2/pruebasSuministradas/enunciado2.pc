@@ -1,0 +1,32 @@
+Programa P;
+  entero i, j, m;
+  %------------------------------------------------------------------
+  accion dato (ref entero d);
+  %------------------------------------------------------------------
+  Principio
+   d:=4;
+  Fin
+  %------------------------------------------------------------------
+  accion mcd(val entero a,b; ref entero m);
+  %------------------------------------------------------------------
+    entero r;
+  Principio
+    r:=a mod b;
+    Mq r<> 0 
+      a:=b;
+      b:=r;
+      r:=a mod b;
+    FMq
+    mcd(r,r,a); % Error, argumento 3 debe ser variable o parametro por referencia
+    mcd(r,r,m);
+  Fin
+  
+Principio
+  mcd; % Error, faltan 3 argumentos
+  mcd(j); % Error, faltan 2 argumentos
+  mcd(j,i, 8); % Error, argumento 3 debe ser variable o parametro por referencia 
+  dato(9); % Error, argumento 1 debe ser variable o parametro por referencia
+  j; % Error, no es una accion
+  escribir('El MCD es: ', m, entacar (13), entacar (10));
+  j := 'hola' + 'hola' + 'hola'; % Error, no se pueden sumar cadenas
+Fin

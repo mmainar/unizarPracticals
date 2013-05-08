@@ -1,0 +1,13 @@
+programa P;
+
+  vector [3..5] de entero v1;
+  vector [4..6] de entero v2;
+  entero i;
+  
+principio 
+  i := v1[8]; % Error, indice del vector fuera de rango
+  v2[4] := 17;
+  v2[5] := 27;
+  v2[6] := 69;
+  v1 := v2;
+fin 

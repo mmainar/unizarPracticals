@@ -1,0 +1,25 @@
+<Programa name="ADIVINAR">
+	<declaracion_variables>
+		<var nombre="RESPUESTA" tipo="caracter" />
+		<var nombre="LETRA" tipo="caracter" />
+		<var nombre="MIN" tipo="caracter" />
+		<var nombre="MAX" tipo="caracter" />
+		<var nombre="HEADIVINADO" tipo="booleano" />
+		<var nombre="C" tipo="caracter" />
+		<var nombre="D" tipo="caracter" />
+	</declaracion_variables>
+	<declaracion_acciones>
+		<accion nombre="SIONO">
+			<declaracion_variables>
+				<var nombre="C" tipo="caracter" />
+				<var nombre="LN" tipo="caracter" />
+			</declaracion_variables>
+		</accion>
+		<accion nombre="PEDIRLETRA">
+			<declaracion_variables>
+				<var nombre="C" tipo="caracter" />
+				<var nombre="LN" tipo="caracter" />
+			</declaracion_variables>
+		</accion>
+	</declaracion_acciones>
+</Programa>

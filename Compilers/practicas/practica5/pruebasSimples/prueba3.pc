@@ -1,0 +1,13 @@
+programa P;
+
+  entero i, dimension, indiceInf1, indiceInf2;
+  vector [3..5] de entero v1;
+  vector [4..6] de entero v2;
+  
+principio
+  indiceInf1 := 3; indiceInf2 := 4;
+  Mq i < dimension 
+    v1[indiceInf1 + i] := v2[indiceInf2 + i ];
+    i := i + 1;
+  FMq
+fin 

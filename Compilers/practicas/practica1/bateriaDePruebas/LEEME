@@ -1,0 +1,49 @@
+LEEME
+-------------------------------------------------------------------------------------
+
+Ficheros de la bateria de prueba entregados y su funcion
+
+todas.cp
+--------
+
+En este fichero se prueban todas las instrucciones
+de codigo P.
+No genera ningun tipo de error.
+
+Traza de la ejecucion: 
+
+merlin_$ interprete pruebasMias/todas
+a -> Escrito por el usuario
+A -> Escrito por el programa
+2Fin de ejecucion. (el 2 lo escribe el programa y el Fin de ejecucion el interprete)
+
+
+Del resto de ficheros no se muestran trazas de ejecucion dado que no son 
+correctos y por tanto no se llega a generar el fichero binario.
+
+error1.cp
+---------
+
+En este fichero se declaran etiquetas 2 veces en el programa.
+
+
+error2.cp
+---------
+
+En este fichero se intentan realizar diferentes saltos erroneos: saltos a la
+instruccion 0, saltos a direcciones negativas y saltos a direcciones
+mas altas de la ultima existente en el programa.
+
+
+error3.cp
+---------
+
+En este fichero se intentan almacenar constantes de numeros fuera del
+rango de numeros permitidos, tanto negativos como positivos.
+
+
+error4.cp
+---------
+
+En este fichero se intenta realizar un salto a una etiqueta no existente
+en el programa.

@@ -1,0 +1,73 @@
+%-------------------------
+programa programa4;
+%-------------------------
+
+entero i;
+booleano b;
+caracter c;
+
+vector [1..-2] de entero v1;		% error, los indices no son correctos
+vector [-2..-6] de caracter v2;		% error, los indices no son correctos
+vector [1..2] de booleano v3, v4;	
+vector [-1..1] de entero v5;		
+vector [0..1] de entero v6;		
+vector [10..100] de caracter v7;	
+vector [1..1] de entero v11;	
+vector [3..6] de booleano v12;	
+vector [1..2] de entero v13;	
+vector [1..2] de booleano v14;
+vector [1..3] de caracter v15;	
+
+
+vector [1..4] de entero v8; 
+vector [1..3] de caracter v9;
+vector [1..6] de booleano v10;
+vector [1..10] de entero ve1;
+vector [-10..-1] de entero ve2;
+vector [-5..4] de entero ve3;
+vector [1..10] de booleano vb;
+vector [2..200] de booleano vb2;
+vector [1..10] de caracter vc;
+
+
+principio
+  ve1 := ve2;
+  ve2 := ve3;
+  ve3 := ve1;
+  
+  ve1[3+3*2] := i;
+  ve1[5+3*2] := 3 + 5;	% warning, indice fuera de rango
+  ve1[0] := i;		% warning, indice fuera de rango
+  
+  ve1[true] := 1;	% error, tipo del indice del vector incorrecto
+  ve1[4 >= 6] := 1;	% error, tipo del indice del vector incorrecto
+  ve1[4 < not 6] := 1;	% error, operador de not debe ser un booleano y tipo del indice incorrecto
+  ve1[c] := 1;		% error, tipo del indice del vector incorrecto
+  ve1[vc[10]] := 1;	% error, tipo del indice del vector incorrecto
+  ve1[ve2[0]] := 1;	% warning, indice del vector ve2 fuera de rango
+  ve1[ve2[0-1]] := 1;	
+  
+  ve2[-7] := ve1[5];
+  
+  ve2[7 div 0] := 7 * 35;	% warning, division por 0
+  
+  ve1 := vb;	% error, tipos incompatibles
+  ve3[0] := vb[9-0*8];	% error, tipos incompatibles
+  
+  vb2[caraent("A")] := not (true or false);
+  vb[caraent(entacar(9-5))] := b;
+  
+  vb[caraent(entacar(100))] := true;	% warning, indice fuera de rango
+  vb[caraent("Z")] := false;		% warning, indice fuera de rango
+  
+  vb := b;	% error, asignacion incorrecta
+  b := vb;	% error, asignacion incorrecta
+  
+  vb := u;	% error, variable no definida
+  u := vc;	% error, variable no definida
+  
+  ve1 := ve1 + ve2;	% error, no se permiten operaciones entre vectores
+  
+  
+  
+fin

@@ -1,0 +1,30 @@
+Programa P;
+  entero i, j, m;
+  %------------------------------------------------------------------
+  accion dato (ref entero d);
+  %------------------------------------------------------------------
+  Principio
+   d:=4;
+  Fin
+  %------------------------------------------------------------------
+  accion mcd(val entero a,b; ref entero m);
+  %------------------------------------------------------------------
+    entero r;
+  Principio
+    r:=a mod b;
+    Mq r<> 0 
+      a:=b;
+      b:=r;
+      r:=a mod b;
+    FMq
+  Fin
+  
+Principio
+  mcd;
+  mcd(j);
+  mcd(j,i, 8);
+  dato(9);
+  j;
+  escribir('El MCD es: ', m, entacar (13), entacar (10));
+  j := 'hola' + 'hola' + 'hola';
+Fin

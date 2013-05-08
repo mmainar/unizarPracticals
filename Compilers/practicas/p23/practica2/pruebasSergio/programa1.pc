@@ -1,0 +1,101 @@
+%--------------------------
+programa programa1;
+%--------------------------
+
+  entero i, j, k;
+  booleano t, f;
+  caracter c;
+
+  %--------------------------
+  accion nivel_0;
+  %--------------------------
+  
+  booleano c;
+
+    %--------------------------
+    accion nivel_1 (ref booleano b; ref entero j; val caracter c);
+    %--------------------------
+    
+    caracter k;
+    
+      %----------------------------------
+      accion nivel_2;
+      %----------------------------------
+      
+      entero e;
+      caracter g;
+      
+      %--- de nivel_2
+      principio
+        escribir(entacar(21), 'lalala:');
+	leer(g);
+	e := caraent("*");
+      fin
+    
+    %--- de nivel_1
+    principio
+      j := 2+4+8*10;
+      k := c;
+      k := entacar(j);
+      si (b) ent
+	  b := false;
+	  nivel_2;
+      fsi
+    fin
+    
+  %--- de nivel_0
+  principio
+    c := true;
+    nivel_1(c, i, "a");
+  fin    
+  
+  %-------------------------
+  accion nivel_0b;
+  %-------------------------
+  
+  vector [10..18] de entero v1;
+  entero ind;
+  
+    %-------------------------
+    accion nivel_1b;
+    %-------------------------
+      
+      %-------------------------
+      accion nivel_2b;
+      %-------------------------
+      
+        %-------------------------
+	accion nivel_3b;
+	%-------------------------
+	
+	vector [2..10] de entero v2;
+	
+	%--- de nivel_3b
+	principio
+	  v2 := v1;
+	fin
+	
+      %--- de nivel_2b
+      principio
+        nivel_3b;
+      fin
+    
+    %--- de nivel_1b
+    principio
+      nivel_2b;
+    fin
+    
+  %--- de nivel_0b
+  principio
+    ind :=10;
+    mq (ind <= 18)
+      v1[ind] := ind;
+      ind := ind + 1;
+    fmq
+    nivel_1b;
+  fin
+  
+principio
+  nivel_0;
+  nivel_0b;
+fin

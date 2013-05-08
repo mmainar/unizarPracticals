@@ -1,0 +1,67 @@
+LEEME
+------------
+
+Para ejecutar las pruebas lanzar el script con: sh pruebas.sh
+Se puede ir comprobando que dan los siguientes resultados:
+
+todas.x: Prueba todas las instrucciones del repertorio.
+          Cuando se queda esperando es porque espera una entrada tras ejecutar
+	  la instruccion RD.
+
+prueba1.x: Muestra como se truncan constantes fuera del rango de los short
+            en STC (lo hace el ensamblador realmente) y como al sumar 2 
+	    2 operandos cuyo resultado esta fuera del rango origina MATH
+	    Overflow.
+
+prueba2.x: MATH Overflow con NGI.
+
+prueba3.x: MATH Overflow con PLUS.
+
+prueba4.x: MATH Overflow con SBT.
+
+prueba5.x: MATH Overflow con TMS.
+
+prueba6.x: Error de modulo por 0 (MOD).
+
+prueba7.x: Error de division por 0 (DIV).
+
+prueba8.x, prueba9.x, prueba10.x: Saltos incondicionales (JMP) incorrectos:
+                                  a instruccion mas alla del final del programa,
+				  a instrucciones negativas y a la instruccion
+				  0.
+				  
+prueba11.x: Salto incondicional (JMP) a la propia instruccion generando bucle
+            infinito.
+	    
+prueba12.x, prueba13.x, prueba14.x: Saltos condicionales falsos (JMF)
+                                    incorrectos: a instruccion mas alla del 
+				    final del programa, a instrucciones negativas
+				    y a la instruccion 0.			  
+                                  
+prueba15.x, prueba16.x, prueba17.x: Saltos condicionales ciertos (JMT)
+                                    incorrectos: a instruccion mas alla del 
+				    final del programa, a instrucciones negativas
+				    y a la instruccion 0.
+				    
+prueba18.x, prueba19.x, prueba20.x: Argumentos de ENP incorrectos: instruccion 
+                                    mas alla del final del programa, instruccion negativa
+				    e instruccion 0.				
+
+prueba21.x, prueba22.x: Argumentos de SRF erroneos.
+
+prueba23.x, prueba24.x, prueba25.x, prueba26.x: Argumentos de OSF erroneos.
+
+prueba27.x, prueba28.x: ASGI sobre direcciones erroneas.
+
+prueba29.x, prueba30.x: ASG sobre direcciones erroneas.
+
+prueba31.x, prueba32.x: DRF sobre direcciones erroneas.
+
+prueba33.x, prueba34.x: STACK Overflow y Underflow.
+
+prueba35.x, prueba36.x: FRAMES Overflow y Underflow.
+
+prueba37.x, prueba38.x: DISPLAY Overflow y Underflow.
+
+prueba39.x: CODE Overflow, el programa no cabe en el vector de codigo.
+

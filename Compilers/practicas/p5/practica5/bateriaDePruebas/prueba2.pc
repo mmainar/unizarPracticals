@@ -1,0 +1,10 @@
+programa P;
+
+  entero c, b, a;
+  
+principio
+  a := 5;
+  b := b + 1;
+  a := b * c;
+  
+fin 

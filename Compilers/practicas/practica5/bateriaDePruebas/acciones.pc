@@ -1,0 +1,54 @@
+Programa P;
+  entero i,j;
+  booleano k;
+  caracter h;
+  
+  accion p1 (REF entero b; VAL booleano a; REF caracter c);
+    entero d;
+  Principio
+    d := 4*8+3;
+    b := d;
+    a := d = 0;
+    c := entacar(d);
+    p1(b, a, c);
+  Fin
+  
+  accion p2 (VAL entero a; REF entero b; VAL booleano c,d; VAL caracter e,f);
+    entero u;
+  Principio
+    u := 8;
+    escribir('a vale: ', a, entacar(13), entacar(10));
+    a := 40;
+    escribir('a vale: ', a, entacar(13), entacar(10));
+    escribir('b vale: ', b, entacar(13), entacar(10));
+    b := 8;
+    escribir('b vale: ', b, entacar(13), entacar(10));
+    escribir('e vale: ', e, entacar(13), entacar(10));
+    e := "b";
+    escribir('e vale: ', e, entacar(13), entacar(10));
+    escribir('f vale: ', f, entacar(13), entacar(10));
+    f := "c";
+    escribir('f vale: ', f, entacar(13), entacar(10));
+  Fin
+  
+  accion p3;
+  Principio
+    escribir('holaaaaa', entacar(13), entacar(10)); 
+  Fin
+  
+
+Principio
+ % Para ver como se modifican solo las variables que se pasan a parametros
+ % por referencia y no las de por valor.
+ h := "a";
+ j := 5;
+ i := j + 1;
+ escribir('i vale: ', i, entacar(13), entacar(10));
+ escribir('j vale: ', j, entacar(13), entacar(10));
+ escribir('h vale: ', h, entacar(13), entacar(10));
+ p2(i,j, 7 < 0, 8 <= 5, h, h); 
+ escribir('i vale: ', i, entacar(13), entacar(10));
+ escribir('j vale: ', j, entacar(13), entacar(10));
+ escribir('h vale: ', h, entacar(13), entacar(10));
+ p3;
+Fin % Warning, variable k no referenciada en este bloque

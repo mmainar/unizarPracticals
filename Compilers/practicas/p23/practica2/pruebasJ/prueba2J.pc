@@ -1,0 +1,9 @@
+Programa p;
+  vector [0..5] de entero ve;
+  vector[0..4] de entero ve1;
+principio
+    ve[0]:= ve1; % Error, tipos incompatibles
+    ve:= ve1[2]; % Error, tipos incompatibles 
+Fin
+
+

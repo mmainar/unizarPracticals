@@ -1,0 +1,140 @@
+programa principal;
+
+  booleano salir;
+  entero opcion;
+
+
+accion fibonacci (VAL entero num; REF entero resul);
+  entero aux1, aux2;
+principio
+  si (num = 0) ent
+    resul := 0;
+  si_no si (num = 1) ent
+    resul := 1;
+  si_no
+    fibonacci(num-1,aux1);
+    fibonacci(num-2,aux2);
+    resul := aux1 + aux2;
+  fsi
+  fsi
+Fin
+
+
+accion cambiar_de_linea;
+Principio
+  escribir (entacar (13), entacar (10));
+Fin
+
+
+
+accion esPrimo (VAL entero n; REF booleano resul);
+  entero d;
+  booleano loEs;
+principio
+  si (n <= 1) ent
+    resul := false;
+  si_no
+      loEs := (n = 2) or (n mod 2 > 0); 
+      d := 3;
+      mq ((d*d <= n) and loEs)  					% OJOOOO
+        loEs := n mod d > 0;
+        d := d + 2;
+      fmq
+    fsi
+    resul := loEs;
+Fin
+
+
+accion mcd (VAL entero a, b; REF entero resul);
+  entero uno, otro, resto;
+principio
+  uno := a; otro := b;
+  mq (not (otro = 0)) 
+    resto := uno mod otro;
+    uno := otro;
+    otro := resto;
+  fmq
+  resul := uno;
+fin
+
+
+accion esCapicua (VAL entero n; REF booleano resul);
+  entero img, num;
+principio
+  img := n mod 10;
+  num := n div 10;
+  mq (num > 0)
+    img := 10 * img + num mod 10;
+    num := num div 10;
+  fmq
+  resul := (n = img);
+fin
+
+
+accion elegirOpcion (REF entero resul);
+  entero opcion;
+principio
+  escribir('Elige una opcion'); cambiar_de_linea;
+  escribir('    1 - Calcular fibonacci'); cambiar_de_linea;
+  escribir('    2 - Calcular si un numero es primo'); cambiar_de_linea;
+  escribir('    3 - Calcular el maximo comun divisor de dos numeros'); cambiar_de_linea;
+  escribir('    4 - Calcular si un numero es capicua'); cambiar_de_linea;
+  escribir('    0 - Salir'); cambiar_de_linea;
+  escribir('Elige tu opcion: ');
+  leer(opcion);
+  resul := opcion;
+fin
+
+
+accion tratarOpcion (VAL entero opcion);
+  entero num, a, b, resul;
+  booleano bresul;
+principio
+  si (opcion = 1) ent
+    escribir('Introduce el numero: ');
+    leer(num);
+    fibonacci(num,resul);
+    escribir('El fibonacci de ',num,' es: ',resul); cambiar_de_linea;
+ si_no si (opcion = 2) ent
+    escribir('Introduce el numero: '); 
+    leer(num);
+    esPrimo(num,bresul);
+    si bresul ent
+      escribir('El numero es primo'); cambiar_de_linea;
+    si_no
+      escribir('El numero no es primo'); cambiar_de_linea;
+    fsi
+ si_no si (opcion = 3) ent
+    escribir('Introduce el primer numero: '); leer(a);
+    escribir('Introduce el segundo numero: '); leer(b);
+    mcd(a,b,resul);
+    escribir('El mcd de ambos numeros es: ',resul); cambiar_de_linea;
+ si_no si (opcion = 4) ent
+    escribir('Introduce el numero: '); 
+    leer(num);
+    esCapicua(num,bresul);
+    si (bresul) ent
+      escribir('El numero es capicua'); cambiar_de_linea;
+    si_no
+      escribir('El numero no es capicua'); cambiar_de_linea;
+    fsi
+  si_no escribir('Opcion incorrecta'); cambiar_de_linea;
+  fsi
+  fsi
+  fsi
+  fsi
+fin
+
+
+principio
+  salir := false;
+  mq (not salir) 
+    elegirOpcion(opcion);
+    salir := (opcion = 0);
+    si (not salir) ent
+      tratarOpcion(opcion);
+    fsi
+  fmq
+fin
+
+

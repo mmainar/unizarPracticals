@@ -1,0 +1,5 @@
+Programa P;
+  
+Principio
+  escribir('El MCD es:');
+Fin

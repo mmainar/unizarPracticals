@@ -1,0 +1,36 @@
+LEEME
+-----------------------------------
+
+Utilidad de los programas de prueba realizados:
+
+  - bloques.pc: Comprueba bloques/ambitos/niveles y la visibilidad.
+                Comprueba declaracion y utilizacion de variables globales
+		y locales, asignaciones, etc. Da diferentes tipos de errores
+		al comprobar todo lo anterior.
+		
+  - bloques2.pc: Comprueba bloques/ambitos/niveles y la visibilidad.
+                 Comprueba declaracion y utilizacion de variables globales
+		 y locales, asignaciones, etc. Sin embargo, este, a diferencia
+		 del anterior, es correcto. De esta forma podemos ver el
+		 fichero XML generado correctamente con sus diferentes
+		 niveles de declaracion de variables, acciones, etc.
+		 Este programa aparece en la transparencia numero 45 del tema
+		 4 de las transparencias de clase.
+
+  - acciones.pc: Comprueba diferentes declaraciones de acciones e 
+                 invocaciones erroneas de acciones. Por ejemplo,
+		 con numero de parametros incorrecto, tipo de los
+		 parametros incorrecto, clase incorrecta, etc.
+  
+  - vectores.pc: Comprueba operaciones con vectores, por ejemplo,
+                 la asignacion directa de vectores, asignacion entre
+		 componentes de vectores, asignacion entre comopnente
+		 de vector y variable simple y vicerversa, etc. 
+		 Tambien comprueba las funciones entacar y caraent, usandolas
+		 para indexar vectores.
+  
+  - expresiones.pc: Comprueba todo tipo de expresiones, precedencia
+                    y asociatividad de los operadores, uso de expresiones.
+		    Sentencias leer y escribir. Funciones entacar y caraent.
+		    Expresiones erroneas en la seleccion y mientras que.
+ 

@@ -1,0 +1,54 @@
+programa prueba;
+
+  
+  
+   %-----------------------------------------------------
+   accion a;           
+   %-----------------------------------------------------
+     entero a;
+     
+   principio
+     a;									% ERROR: AL HABER UN ENTERO LLAMADO A NO SE PUEDE HACER LLAMADA RECURSIVA
+     escribir('hola');
+   fin
+   
+   
+   %-----------------------------------------------------
+   accion b (val entero n1);
+   %-----------------------------------------------------
+     entero b;
+   principio
+     escribir(n1);	
+   fin
+
+
+   %-----------------------------------------------------
+   accion b (val entero n, k);						% ERROR: ACCION YA DECLARADA
+   %-----------------------------------------------------
+     entero b;
+   principio
+     escribir(n,k);	
+     escribir(n1);							% ERROR: VARIABLE NO DECLARADA
+   fin
+
+  
+   %-----------------------------------------------------
+   accion z (val entero n1,n2,n3,n4,n5,n6);
+   %-----------------------------------------------------
+     entero b;
+   principio
+     escribir(n1);	
+   fin   
+
+
+principio
+   escribir('adios');
+   a;
+   a(9,8,7);  								% ERROR: PARAMETROS DE MAS
+   b;									% ERROR: PARAMETROS INSUFICIENTES
+   b(2);	
+   b(2,3);								% ERROR: PARAMETROS DE MAS
+   b(2,3,4,5,6,7,7);							% ERROR: PARAMETROS DE MAS
+   z(2,3,4);								% ERROR: PARAMETROS DE MENOS
+   
+ fin

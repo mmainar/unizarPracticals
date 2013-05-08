@@ -1,0 +1,25 @@
+programa p;
+
+  entero j;
+  booleano f;
+
+  accion q (val entero i; ref booleano t);
+
+    entero j;
+    booleano f;
+
+    accion r (ref entero j);
+      entero i;
+    principio
+      q (i, t);
+      r (j);
+    fin
+
+  principio
+    q (j, f);
+    r (j);
+  fin
+  
+principio
+  q ( j, f);
+fin

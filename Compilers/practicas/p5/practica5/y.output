@@ -1,0 +1,2590 @@
+
+Grammar
+rule 1    @1 ->		/* empty */
+rule 2    programa -> tPROGRAMA tIDENTIFICADOR ';' @1 declaracion_variables declaracion_acciones2 bloque_instrucciones
+rule 3    declaracion_acciones2 ->		/* empty */
+rule 4    declaracion_acciones2 -> declaracion_acciones
+rule 5    declaracion_variables ->		/* empty */
+rule 6    declaracion_variables -> lista_declaraciones ';'
+rule 7    lista_declaraciones -> lista_declaraciones ';' declaracion
+rule 8    lista_declaraciones -> declaracion
+rule 9    declaracion -> tipo_variables identificadores
+rule 10   declaracion -> tipo_variable_vector identificadores_vector
+rule 11   tipo_variables -> tENTERO
+rule 12   tipo_variables -> tCARACTER
+rule 13   tipo_variables -> tBOOLEANO
+rule 14   tipo_variable_vector -> tVECTOR '[' tCONSTENTERA '.' '.' tCONSTENTERA ']' tDE tipo_variables
+rule 15   tipo_variable_vector -> tVECTOR '[' '-' tCONSTENTERA '.' '.' tCONSTENTERA ']' tDE tipo_variables
+rule 16   tipo_variable_vector -> tVECTOR '[' tCONSTENTERA '.' '.' '-' tCONSTENTERA ']' tDE tipo_variables
+rule 17   tipo_variable_vector -> tVECTOR '[' '-' tCONSTENTERA '.' '.' '-' tCONSTENTERA ']' tDE tipo_variables
+rule 18   identificadores -> tIDENTIFICADOR
+rule 19   identificadores -> identificadores ',' tIDENTIFICADOR
+rule 20   identificadores_vector -> tIDENTIFICADOR
+rule 21   identificadores_vector -> identificadores_vector ',' tIDENTIFICADOR
+rule 22   declaracion_acciones -> declaracion_accion
+rule 23   declaracion_acciones -> declaracion_acciones declaracion_accion
+rule 24   declaracion_accion -> cabecera_accion ';' declaracion_variables declaracion_acciones2 bloque_instrucciones
+rule 25   @2 ->		/* empty */
+rule 26   cabecera_accion -> tACCION tIDENTIFICADOR @2 parametros_formales
+rule 27   parametros_formales ->		/* empty */
+rule 28   parametros_formales -> '(' lista_parametros ')'
+rule 29   lista_parametros -> lista_parametros ';' parametros
+rule 30   lista_parametros -> parametros
+rule 31   parametros -> clase_parametros declaracion_parametros
+rule 32   declaracion_parametros -> tipo_variables listaIDs_parametros
+rule 33   listaIDs_parametros -> tIDENTIFICADOR
+rule 34   listaIDs_parametros -> listaIDs_parametros ',' tIDENTIFICADOR
+rule 35   clase_parametros -> tVAL
+rule 36   clase_parametros -> tREF
+rule 37   bloque_instrucciones -> tPRINCIPIO lista_instrucciones tFIN
+rule 38   bloque_instrucciones -> tPRINCIPIO tFIN
+rule 39   lista_instrucciones -> instruccion
+rule 40   lista_instrucciones -> lista_instrucciones instruccion
+rule 41   instruccion -> leer
+rule 42   instruccion -> escribir
+rule 43   instruccion -> asignacion
+rule 44   instruccion -> asignacion_vector
+rule 45   instruccion -> seleccion
+rule 46   instruccion -> mientras_que
+rule 47   instruccion -> invocacion_accion
+rule 48   instruccion -> nula
+rule 49   nula -> tNULA ';'
+rule 50   leer -> tLEER '(' lista_asignables ')' ';'
+rule 51   lista_asignables -> tIDENTIFICADOR
+rule 52   lista_asignables -> lista_asignables ',' tIDENTIFICADOR
+rule 53   escribir -> tESCRIBIR '(' lista_escribibles ')' ';'
+rule 54   lista_escribibles -> lista_escribibles ',' expresion
+rule 55   lista_escribibles -> expresion
+rule 56   @3 ->		/* empty */
+rule 57   @4 ->		/* empty */
+rule 58   asignacion -> tIDENTIFICADOR @3 tOPAS expresion @4 ';'
+rule 59   @5 ->		/* empty */
+rule 60   @6 ->		/* empty */
+rule 61   @7 ->		/* empty */
+rule 62   asignacion_vector -> tIDENTIFICADOR @5 '[' expresion ']' @6 tOPAS expresion @7 ';'
+rule 63   @8 ->		/* empty */
+rule 64   mientras_que -> tMQ expresion @8 lista_instrucciones tFMQ
+rule 65   @9 ->		/* empty */
+rule 66   seleccion -> tSI expresion @9 tENT lista_instrucciones resto_seleccion tFSI
+rule 67   resto_seleccion ->		/* empty */
+rule 68   resto_seleccion -> tSI_NO lista_instrucciones
+rule 69   @10 ->		/* empty */
+rule 70   @11 ->		/* empty */
+rule 71   invocacion_accion -> tIDENTIFICADOR @10 argumentos @11 ';'
+rule 72   @12 ->		/* empty */
+rule 73   invocacion_accion -> tIDENTIFICADOR @12 ';'
+rule 74   argumentos -> '(' lista_expresiones ')'
+rule 75   lista_expresiones -> lista_expresiones ',' expresion
+rule 76   lista_expresiones -> expresion
+rule 77   expresion -> expresion_simple
+rule 78   expresion -> expresion operador_relacional expresion_simple
+rule 79   operador_relacional -> '='
+rule 80   operador_relacional -> '<'
+rule 81   operador_relacional -> '>'
+rule 82   operador_relacional -> tMEI
+rule 83   operador_relacional -> tMAI
+rule 84   operador_relacional -> tNI
+rule 85   expresion_simple -> termino
+rule 86   expresion_simple -> expresion_simple operador_aditivo termino
+rule 87   operador_aditivo -> '+'
+rule 88   operador_aditivo -> '-'
+rule 89   operador_aditivo -> tOR
+rule 90   termino -> factor
+rule 91   termino -> termino operador_multiplicativo factor
+rule 92   operador_multiplicativo -> '*'
+rule 93   operador_multiplicativo -> tDIV
+rule 94   operador_multiplicativo -> tMOD
+rule 95   operador_multiplicativo -> tAND
+rule 96   factor -> '-' factor
+rule 97   factor -> tNOT factor
+rule 98   factor -> '(' expresion ')'
+rule 99   factor -> tENTACAR '(' expresion ')'
+rule 100  factor -> tCARAENT '(' expresion ')'
+rule 101  factor -> tIDENTIFICADOR
+rule 102  factor -> tIDENTIFICADOR '[' expresion ']'
+rule 103  factor -> tCONSTENTERA
+rule 104  factor -> tCONSTCHAR
+rule 105  factor -> tCONSTCAD
+rule 106  factor -> tTRUE
+rule 107  factor -> tFALSE
+
+Terminals, with rules where they appear
+
+$ (-1)
+'(' (40) 28 50 53 74 98 99 100
+')' (41) 28 50 53 74 98 99 100
+'*' (42) 92
+'+' (43) 87
+',' (44) 19 21 34 52 54 75
+'-' (45) 15 16 17 88 96
+'.' (46) 14 15 16 17
+';' (59) 2 6 7 24 29 49 50 53 58 62 71 73
+'<' (60) 80
+'=' (61) 79
+'>' (62) 81
+'[' (91) 14 15 16 17 62 102
+']' (93) 14 15 16 17 62 102
+error (256)
+tPROGRAMA (257) 2
+tACCION (258) 26
+tCONSTENTERA (259) 14 15 16 17 103
+tCONSTCHAR (260) 104
+tCONSTCAD (261) 105
+tTRUE (262) 106
+tFALSE (263) 107
+tENTACAR (264) 99
+tCARAENT (265) 100
+tIDENTIFICADOR (266) 2 18 19 20 21 26 33 34 51 52 58 62 71 73 101 102
+tENTERO (267) 11
+tCARACTER (268) 12
+tBOOLEANO (269) 13
+tESCRIBIR (270) 53
+tLEER (271) 50
+tOPAS (272) 58 62
+tPRINCIPIO (273) 37 38
+tFIN (274) 37 38
+tNULA (275) 49
+tVECTOR (276) 14 15 16 17
+tDE (277) 14 15 16 17
+tAND (278) 95
+tOR (279) 89
+tNOT (280) 97
+tMQ (281) 64
+tFMQ (282) 64
+tMEI (283) 82
+tMAI (284) 83
+tNI (285) 84
+tMOD (286) 94
+tDIV (287) 93
+tSI (288) 66
+tENT (289) 66
+tSI_NO (290) 68
+tFSI (291) 66
+tVAL (292) 35
+tREF (293) 36
+MENOSU (294)
+
+Nonterminals, with rules where they appear
+
+programa (54)
+    on left: 2
+@1 (55)
+    on left: 1, on right: 2
+declaracion_acciones2 (56)
+    on left: 3 4, on right: 2 24
+declaracion_variables (57)
+    on left: 5 6, on right: 2 24
+lista_declaraciones (58)
+    on left: 7 8, on right: 6 7
+declaracion (59)
+    on left: 9 10, on right: 7 8
+tipo_variables (60)
+    on left: 11 12 13, on right: 9 14 15 16 17 32
+tipo_variable_vector (61)
+    on left: 14 15 16 17, on right: 10
+identificadores (62)
+    on left: 18 19, on right: 9 19
+identificadores_vector (63)
+    on left: 20 21, on right: 10 21
+declaracion_acciones (64)
+    on left: 22 23, on right: 4 23
+declaracion_accion (65)
+    on left: 24, on right: 22 23
+cabecera_accion (66)
+    on left: 26, on right: 24
+@2 (67)
+    on left: 25, on right: 26
+parametros_formales (68)
+    on left: 27 28, on right: 26
+lista_parametros (69)
+    on left: 29 30, on right: 28 29
+parametros (70)
+    on left: 31, on right: 29 30
+declaracion_parametros (71)
+    on left: 32, on right: 31
+listaIDs_parametros (72)
+    on left: 33 34, on right: 32 34
+clase_parametros (73)
+    on left: 35 36, on right: 31
+bloque_instrucciones (74)
+    on left: 37 38, on right: 2 24
+lista_instrucciones (75)
+    on left: 39 40, on right: 37 40 64 66 68
+instruccion (76)
+    on left: 41 42 43 44 45 46 47 48, on right: 39 40
+nula (77)
+    on left: 49, on right: 48
+leer (78)
+    on left: 50, on right: 41
+lista_asignables (79)
+    on left: 51 52, on right: 50 52
+escribir (80)
+    on left: 53, on right: 42
+lista_escribibles (81)
+    on left: 54 55, on right: 53 54
+asignacion (82)
+    on left: 58, on right: 43
+@3 (83)
+    on left: 56, on right: 58
+@4 (84)
+    on left: 57, on right: 58
+asignacion_vector (85)
+    on left: 62, on right: 44
+@5 (86)
+    on left: 59, on right: 62
+@6 (87)
+    on left: 60, on right: 62
+@7 (88)
+    on left: 61, on right: 62
+mientras_que (89)
+    on left: 64, on right: 46
+@8 (90)
+    on left: 63, on right: 64
+seleccion (91)
+    on left: 66, on right: 45
+@9 (92)
+    on left: 65, on right: 66
+resto_seleccion (93)
+    on left: 67 68, on right: 66
+invocacion_accion (94)
+    on left: 71 73, on right: 47
+@10 (95)
+    on left: 69, on right: 71
+@11 (96)
+    on left: 70, on right: 71
+@12 (97)
+    on left: 72, on right: 73
+argumentos (98)
+    on left: 74, on right: 71
+lista_expresiones (99)
+    on left: 75 76, on right: 74 75
+expresion (100)
+    on left: 77 78, on right: 54 55 58 62 64 66 75 76 78 98 99 100
+    102
+operador_relacional (101)
+    on left: 79 80 81 82 83 84, on right: 78
+expresion_simple (102)
+    on left: 85 86, on right: 77 78 86
+operador_aditivo (103)
+    on left: 87 88 89, on right: 86
+termino (104)
+    on left: 90 91, on right: 85 86 91
+operador_multiplicativo (105)
+    on left: 92 93 94 95, on right: 91
+factor (106)
+    on left: 96 97 98 99 100 101 102 103 104 105 106 107,
+    on right: 90 91 96 97
+
+
+state 0
+
+    tPROGRAMA	shift, and go to state 1
+
+    programa	go to state 198
+
+
+
+state 1
+
+    programa  ->  tPROGRAMA . tIDENTIFICADOR ';' @1 declaracion_variables declaracion_acciones2 bloque_instrucciones   (rule 2)
+
+    tIDENTIFICADOR	shift, and go to state 2
+
+
+
+state 2
+
+    programa  ->  tPROGRAMA tIDENTIFICADOR . ';' @1 declaracion_variables declaracion_acciones2 bloque_instrucciones   (rule 2)
+
+    ';' 	shift, and go to state 3
+
+
+
+state 3
+
+    programa  ->  tPROGRAMA tIDENTIFICADOR ';' . @1 declaracion_variables declaracion_acciones2 bloque_instrucciones   (rule 2)
+
+    $default	reduce using rule 1 (@1)
+
+    @1  	go to state 4
+
+
+
+state 4
+
+    programa  ->  tPROGRAMA tIDENTIFICADOR ';' @1 . declaracion_variables declaracion_acciones2 bloque_instrucciones   (rule 2)
+
+    tENTERO	shift, and go to state 5
+    tCARACTER	shift, and go to state 6
+    tBOOLEANO	shift, and go to state 7
+    tVECTOR	shift, and go to state 8
+
+    $default	reduce using rule 5 (declaracion_variables)
+
+    declaracion_variables	go to state 9
+    lista_declaraciones	go to state 10
+    declaracion	go to state 11
+    tipo_variables	go to state 12
+    tipo_variable_vector	go to state 13
+
+
+
+state 5
+
+    tipo_variables  ->  tENTERO .   (rule 11)
+
+    $default	reduce using rule 11 (tipo_variables)
+
+
+
+state 6
+
+    tipo_variables  ->  tCARACTER .   (rule 12)
+
+    $default	reduce using rule 12 (tipo_variables)
+
+
+
+state 7
+
+    tipo_variables  ->  tBOOLEANO .   (rule 13)
+
+    $default	reduce using rule 13 (tipo_variables)
+
+
+
+state 8
+
+    tipo_variable_vector  ->  tVECTOR . '[' tCONSTENTERA '.' '.' tCONSTENTERA ']' tDE tipo_variables   (rule 14)
+    tipo_variable_vector  ->  tVECTOR . '[' '-' tCONSTENTERA '.' '.' tCONSTENTERA ']' tDE tipo_variables   (rule 15)
+    tipo_variable_vector  ->  tVECTOR . '[' tCONSTENTERA '.' '.' '-' tCONSTENTERA ']' tDE tipo_variables   (rule 16)
+    tipo_variable_vector  ->  tVECTOR . '[' '-' tCONSTENTERA '.' '.' '-' tCONSTENTERA ']' tDE tipo_variables   (rule 17)
+
+    '[' 	shift, and go to state 14
+
+
+
+state 9
+
+    programa  ->  tPROGRAMA tIDENTIFICADOR ';' @1 declaracion_variables . declaracion_acciones2 bloque_instrucciones   (rule 2)
+
+    tACCION	shift, and go to state 15
+
+    $default	reduce using rule 3 (declaracion_acciones2)
+
+    declaracion_acciones2	go to state 16
+    declaracion_acciones	go to state 17
+    declaracion_accion	go to state 18
+    cabecera_accion	go to state 19
+
+
+
+state 10
+
+    declaracion_variables  ->  lista_declaraciones . ';'   (rule 6)
+    lista_declaraciones  ->  lista_declaraciones . ';' declaracion   (rule 7)
+
+    ';' 	shift, and go to state 20
+
+
+
+state 11
+
+    lista_declaraciones  ->  declaracion .   (rule 8)
+
+    $default	reduce using rule 8 (lista_declaraciones)
+
+
+
+state 12
+
+    declaracion  ->  tipo_variables . identificadores   (rule 9)
+
+    tIDENTIFICADOR	shift, and go to state 21
+
+    identificadores	go to state 22
+
+
+
+state 13
+
+    declaracion  ->  tipo_variable_vector . identificadores_vector   (rule 10)
+
+    tIDENTIFICADOR	shift, and go to state 23
+
+    identificadores_vector	go to state 24
+
+
+
+state 14
+
+    tipo_variable_vector  ->  tVECTOR '[' . tCONSTENTERA '.' '.' tCONSTENTERA ']' tDE tipo_variables   (rule 14)
+    tipo_variable_vector  ->  tVECTOR '[' . '-' tCONSTENTERA '.' '.' tCONSTENTERA ']' tDE tipo_variables   (rule 15)
+    tipo_variable_vector  ->  tVECTOR '[' . tCONSTENTERA '.' '.' '-' tCONSTENTERA ']' tDE tipo_variables   (rule 16)
+    tipo_variable_vector  ->  tVECTOR '[' . '-' tCONSTENTERA '.' '.' '-' tCONSTENTERA ']' tDE tipo_variables   (rule 17)
+
+    tCONSTENTERA	shift, and go to state 25
+    '-' 	shift, and go to state 26
+
+
+
+state 15
+
+    cabecera_accion  ->  tACCION . tIDENTIFICADOR @2 parametros_formales   (rule 26)
+
+    tIDENTIFICADOR	shift, and go to state 27
+
+
+
+state 16
+
+    programa  ->  tPROGRAMA tIDENTIFICADOR ';' @1 declaracion_variables declaracion_acciones2 . bloque_instrucciones   (rule 2)
+
+    tPRINCIPIO	shift, and go to state 28
+
+    bloque_instrucciones	go to state 29
+
+
+
+state 17
+
+    declaracion_acciones2  ->  declaracion_acciones .   (rule 4)
+    declaracion_acciones  ->  declaracion_acciones . declaracion_accion   (rule 23)
+
+    tACCION	shift, and go to state 15
+
+    $default	reduce using rule 4 (declaracion_acciones2)
+
+    declaracion_accion	go to state 30
+    cabecera_accion	go to state 19
+
+
+
+state 18
+
+    declaracion_acciones  ->  declaracion_accion .   (rule 22)
+
+    $default	reduce using rule 22 (declaracion_acciones)
+
+
+
+state 19
+
+    declaracion_accion  ->  cabecera_accion . ';' declaracion_variables declaracion_acciones2 bloque_instrucciones   (rule 24)
+
+    ';' 	shift, and go to state 31
+
+
+
+state 20
+
+    declaracion_variables  ->  lista_declaraciones ';' .   (rule 6)
+    lista_declaraciones  ->  lista_declaraciones ';' . declaracion   (rule 7)
+
+    tENTERO	shift, and go to state 5
+    tCARACTER	shift, and go to state 6
+    tBOOLEANO	shift, and go to state 7
+    tVECTOR	shift, and go to state 8
+
+    $default	reduce using rule 6 (declaracion_variables)
+
+    declaracion	go to state 32
+    tipo_variables	go to state 12
+    tipo_variable_vector	go to state 13
+
+
+
+state 21
+
+    identificadores  ->  tIDENTIFICADOR .   (rule 18)
+
+    $default	reduce using rule 18 (identificadores)
+
+
+
+state 22
+
+    declaracion  ->  tipo_variables identificadores .   (rule 9)
+    identificadores  ->  identificadores . ',' tIDENTIFICADOR   (rule 19)
+
+    ',' 	shift, and go to state 33
+
+    $default	reduce using rule 9 (declaracion)
+
+
+
+state 23
+
+    identificadores_vector  ->  tIDENTIFICADOR .   (rule 20)
+
+    $default	reduce using rule 20 (identificadores_vector)
+
+
+
+state 24
+
+    declaracion  ->  tipo_variable_vector identificadores_vector .   (rule 10)
+    identificadores_vector  ->  identificadores_vector . ',' tIDENTIFICADOR   (rule 21)
+
+    ',' 	shift, and go to state 34
+
+    $default	reduce using rule 10 (declaracion)
+
+
+
+state 25
+
+    tipo_variable_vector  ->  tVECTOR '[' tCONSTENTERA . '.' '.' tCONSTENTERA ']' tDE tipo_variables   (rule 14)
+    tipo_variable_vector  ->  tVECTOR '[' tCONSTENTERA . '.' '.' '-' tCONSTENTERA ']' tDE tipo_variables   (rule 16)
+
+    '.' 	shift, and go to state 35
+
+
+
+state 26
+
+    tipo_variable_vector  ->  tVECTOR '[' '-' . tCONSTENTERA '.' '.' tCONSTENTERA ']' tDE tipo_variables   (rule 15)
+    tipo_variable_vector  ->  tVECTOR '[' '-' . tCONSTENTERA '.' '.' '-' tCONSTENTERA ']' tDE tipo_variables   (rule 17)
+
+    tCONSTENTERA	shift, and go to state 36
+
+
+
+state 27
+
+    cabecera_accion  ->  tACCION tIDENTIFICADOR . @2 parametros_formales   (rule 26)
+
+    $default	reduce using rule 25 (@2)
+
+    @2  	go to state 37
+
+
+
+state 28
+
+    bloque_instrucciones  ->  tPRINCIPIO . lista_instrucciones tFIN   (rule 37)
+    bloque_instrucciones  ->  tPRINCIPIO . tFIN   (rule 38)
+
+    tIDENTIFICADOR	shift, and go to state 38
+    tESCRIBIR	shift, and go to state 39
+    tLEER	shift, and go to state 40
+    tFIN	shift, and go to state 41
+    tNULA	shift, and go to state 42
+    tMQ 	shift, and go to state 43
+    tSI 	shift, and go to state 44
+
+    lista_instrucciones	go to state 45
+    instruccion	go to state 46
+    nula	go to state 47
+    leer	go to state 48
+    escribir	go to state 49
+    asignacion	go to state 50
+    asignacion_vector	go to state 51
+    mientras_que	go to state 52
+    seleccion	go to state 53
+    invocacion_accion	go to state 54
+
+
+
+state 29
+
+    programa  ->  tPROGRAMA tIDENTIFICADOR ';' @1 declaracion_variables declaracion_acciones2 bloque_instrucciones .   (rule 2)
+
+    $default	reduce using rule 2 (programa)
+
+
+
+state 30
+
+    declaracion_acciones  ->  declaracion_acciones declaracion_accion .   (rule 23)
+
+    $default	reduce using rule 23 (declaracion_acciones)
+
+
+
+state 31
+
+    declaracion_accion  ->  cabecera_accion ';' . declaracion_variables declaracion_acciones2 bloque_instrucciones   (rule 24)
+
+    tENTERO	shift, and go to state 5
+    tCARACTER	shift, and go to state 6
+    tBOOLEANO	shift, and go to state 7
+    tVECTOR	shift, and go to state 8
+
+    $default	reduce using rule 5 (declaracion_variables)
+
+    declaracion_variables	go to state 55
+    lista_declaraciones	go to state 10
+    declaracion	go to state 11
+    tipo_variables	go to state 12
+    tipo_variable_vector	go to state 13
+
+
+
+state 32
+
+    lista_declaraciones  ->  lista_declaraciones ';' declaracion .   (rule 7)
+
+    $default	reduce using rule 7 (lista_declaraciones)
+
+
+
+state 33
+
+    identificadores  ->  identificadores ',' . tIDENTIFICADOR   (rule 19)
+
+    tIDENTIFICADOR	shift, and go to state 56
+
+
+
+state 34
+
+    identificadores_vector  ->  identificadores_vector ',' . tIDENTIFICADOR   (rule 21)
+
+    tIDENTIFICADOR	shift, and go to state 57
+
+
+
+state 35
+
+    tipo_variable_vector  ->  tVECTOR '[' tCONSTENTERA '.' . '.' tCONSTENTERA ']' tDE tipo_variables   (rule 14)
+    tipo_variable_vector  ->  tVECTOR '[' tCONSTENTERA '.' . '.' '-' tCONSTENTERA ']' tDE tipo_variables   (rule 16)
+
+    '.' 	shift, and go to state 58
+
+
+
+state 36
+
+    tipo_variable_vector  ->  tVECTOR '[' '-' tCONSTENTERA . '.' '.' tCONSTENTERA ']' tDE tipo_variables   (rule 15)
+    tipo_variable_vector  ->  tVECTOR '[' '-' tCONSTENTERA . '.' '.' '-' tCONSTENTERA ']' tDE tipo_variables   (rule 17)
+
+    '.' 	shift, and go to state 59
+
+
+
+state 37
+
+    cabecera_accion  ->  tACCION tIDENTIFICADOR @2 . parametros_formales   (rule 26)
+
+    '(' 	shift, and go to state 60
+
+    $default	reduce using rule 27 (parametros_formales)
+
+    parametros_formales	go to state 61
+
+
+
+state 38
+
+    asignacion  ->  tIDENTIFICADOR . @3 tOPAS expresion @4 ';'   (rule 58)
+    asignacion_vector  ->  tIDENTIFICADOR . @5 '[' expresion ']' @6 tOPAS expresion @7 ';'   (rule 62)
+    invocacion_accion  ->  tIDENTIFICADOR . @10 argumentos @11 ';'   (rule 71)
+    invocacion_accion  ->  tIDENTIFICADOR . @12 ';'   (rule 73)
+
+    ';' 	reduce using rule 72 (@12)
+    '[' 	reduce using rule 59 (@5)
+    '(' 	reduce using rule 69 (@10)
+    $default	reduce using rule 56 (@3)
+
+    @3  	go to state 62
+    @5  	go to state 63
+    @10 	go to state 64
+    @12 	go to state 65
+
+
+
+state 39
+
+    escribir  ->  tESCRIBIR . '(' lista_escribibles ')' ';'   (rule 53)
+
+    '(' 	shift, and go to state 66
+
+
+
+state 40
+
+    leer  ->  tLEER . '(' lista_asignables ')' ';'   (rule 50)
+
+    '(' 	shift, and go to state 67
+
+
+
+state 41
+
+    bloque_instrucciones  ->  tPRINCIPIO tFIN .   (rule 38)
+
+    $default	reduce using rule 38 (bloque_instrucciones)
+
+
+
+state 42
+
+    nula  ->  tNULA . ';'   (rule 49)
+
+    ';' 	shift, and go to state 68
+
+
+
+state 43
+
+    mientras_que  ->  tMQ . expresion @8 lista_instrucciones tFMQ   (rule 64)
+
+    tCONSTENTERA	shift, and go to state 69
+    tCONSTCHAR	shift, and go to state 70
+    tCONSTCAD	shift, and go to state 71
+    tTRUE	shift, and go to state 72
+    tFALSE	shift, and go to state 73
+    tENTACAR	shift, and go to state 74
+    tCARAENT	shift, and go to state 75
+    tIDENTIFICADOR	shift, and go to state 76
+    tNOT	shift, and go to state 77
+    '-' 	shift, and go to state 78
+    '(' 	shift, and go to state 79
+
+    expresion	go to state 80
+    expresion_simple	go to state 81
+    termino	go to state 82
+    factor	go to state 83
+
+
+
+state 44
+
+    seleccion  ->  tSI . expresion @9 tENT lista_instrucciones resto_seleccion tFSI   (rule 66)
+
+    tCONSTENTERA	shift, and go to state 69
+    tCONSTCHAR	shift, and go to state 70
+    tCONSTCAD	shift, and go to state 71
+    tTRUE	shift, and go to state 72
+    tFALSE	shift, and go to state 73
+    tENTACAR	shift, and go to state 74
+    tCARAENT	shift, and go to state 75
+    tIDENTIFICADOR	shift, and go to state 76
+    tNOT	shift, and go to state 77
+    '-' 	shift, and go to state 78
+    '(' 	shift, and go to state 79
+
+    expresion	go to state 84
+    expresion_simple	go to state 81
+    termino	go to state 82
+    factor	go to state 83
+
+
+
+state 45
+
+    bloque_instrucciones  ->  tPRINCIPIO lista_instrucciones . tFIN   (rule 37)
+    lista_instrucciones  ->  lista_instrucciones . instruccion   (rule 40)
+
+    tIDENTIFICADOR	shift, and go to state 38
+    tESCRIBIR	shift, and go to state 39
+    tLEER	shift, and go to state 40
+    tFIN	shift, and go to state 85
+    tNULA	shift, and go to state 42
+    tMQ 	shift, and go to state 43
+    tSI 	shift, and go to state 44
+
+    instruccion	go to state 86
+    nula	go to state 47
+    leer	go to state 48
+    escribir	go to state 49
+    asignacion	go to state 50
+    asignacion_vector	go to state 51
+    mientras_que	go to state 52
+    seleccion	go to state 53
+    invocacion_accion	go to state 54
+
+
+
+state 46
+
+    lista_instrucciones  ->  instruccion .   (rule 39)
+
+    $default	reduce using rule 39 (lista_instrucciones)
+
+
+
+state 47
+
+    instruccion  ->  nula .   (rule 48)
+
+    $default	reduce using rule 48 (instruccion)
+
+
+
+state 48
+
+    instruccion  ->  leer .   (rule 41)
+
+    $default	reduce using rule 41 (instruccion)
+
+
+
+state 49
+
+    instruccion  ->  escribir .   (rule 42)
+
+    $default	reduce using rule 42 (instruccion)
+
+
+
+state 50
+
+    instruccion  ->  asignacion .   (rule 43)
+
+    $default	reduce using rule 43 (instruccion)
+
+
+
+state 51
+
+    instruccion  ->  asignacion_vector .   (rule 44)
+
+    $default	reduce using rule 44 (instruccion)
+
+
+
+state 52
+
+    instruccion  ->  mientras_que .   (rule 46)
+
+    $default	reduce using rule 46 (instruccion)
+
+
+
+state 53
+
+    instruccion  ->  seleccion .   (rule 45)
+
+    $default	reduce using rule 45 (instruccion)
+
+
+
+state 54
+
+    instruccion  ->  invocacion_accion .   (rule 47)
+
+    $default	reduce using rule 47 (instruccion)
+
+
+
+state 55
+
+    declaracion_accion  ->  cabecera_accion ';' declaracion_variables . declaracion_acciones2 bloque_instrucciones   (rule 24)
+
+    tACCION	shift, and go to state 15
+
+    $default	reduce using rule 3 (declaracion_acciones2)
+
+    declaracion_acciones2	go to state 87
+    declaracion_acciones	go to state 17
+    declaracion_accion	go to state 18
+    cabecera_accion	go to state 19
+
+
+
+state 56
+
+    identificadores  ->  identificadores ',' tIDENTIFICADOR .   (rule 19)
+
+    $default	reduce using rule 19 (identificadores)
+
+
+
+state 57
+
+    identificadores_vector  ->  identificadores_vector ',' tIDENTIFICADOR .   (rule 21)
+
+    $default	reduce using rule 21 (identificadores_vector)
+
+
+
+state 58
+
+    tipo_variable_vector  ->  tVECTOR '[' tCONSTENTERA '.' '.' . tCONSTENTERA ']' tDE tipo_variables   (rule 14)
+    tipo_variable_vector  ->  tVECTOR '[' tCONSTENTERA '.' '.' . '-' tCONSTENTERA ']' tDE tipo_variables   (rule 16)
+
+    tCONSTENTERA	shift, and go to state 88
+    '-' 	shift, and go to state 89
+
+
+
+state 59
+
+    tipo_variable_vector  ->  tVECTOR '[' '-' tCONSTENTERA '.' . '.' tCONSTENTERA ']' tDE tipo_variables   (rule 15)
+    tipo_variable_vector  ->  tVECTOR '[' '-' tCONSTENTERA '.' . '.' '-' tCONSTENTERA ']' tDE tipo_variables   (rule 17)
+
+    '.' 	shift, and go to state 90
+
+
+
+state 60
+
+    parametros_formales  ->  '(' . lista_parametros ')'   (rule 28)
+
+    tVAL	shift, and go to state 91
+    tREF	shift, and go to state 92
+
+    lista_parametros	go to state 93
+    parametros	go to state 94
+    clase_parametros	go to state 95
+
+
+
+state 61
+
+    cabecera_accion  ->  tACCION tIDENTIFICADOR @2 parametros_formales .   (rule 26)
+
+    $default	reduce using rule 26 (cabecera_accion)
+
+
+
+state 62
+
+    asignacion  ->  tIDENTIFICADOR @3 . tOPAS expresion @4 ';'   (rule 58)
+
+    tOPAS	shift, and go to state 96
+
+
+
+state 63
+
+    asignacion_vector  ->  tIDENTIFICADOR @5 . '[' expresion ']' @6 tOPAS expresion @7 ';'   (rule 62)
+
+    '[' 	shift, and go to state 97
+
+
+
+state 64
+
+    invocacion_accion  ->  tIDENTIFICADOR @10 . argumentos @11 ';'   (rule 71)
+
+    '(' 	shift, and go to state 98
+
+    argumentos	go to state 99
+
+
+
+state 65
+
+    invocacion_accion  ->  tIDENTIFICADOR @12 . ';'   (rule 73)
+
+    ';' 	shift, and go to state 100
+
+
+
+state 66
+
+    escribir  ->  tESCRIBIR '(' . lista_escribibles ')' ';'   (rule 53)
+
+    tCONSTENTERA	shift, and go to state 69
+    tCONSTCHAR	shift, and go to state 70
+    tCONSTCAD	shift, and go to state 71
+    tTRUE	shift, and go to state 72
+    tFALSE	shift, and go to state 73
+    tENTACAR	shift, and go to state 74
+    tCARAENT	shift, and go to state 75
+    tIDENTIFICADOR	shift, and go to state 76
+    tNOT	shift, and go to state 77
+    '-' 	shift, and go to state 78
+    '(' 	shift, and go to state 79
+
+    lista_escribibles	go to state 101
+    expresion	go to state 102
+    expresion_simple	go to state 81
+    termino	go to state 82
+    factor	go to state 83
+
+
+
+state 67
+
+    leer  ->  tLEER '(' . lista_asignables ')' ';'   (rule 50)
+
+    tIDENTIFICADOR	shift, and go to state 103
+
+    lista_asignables	go to state 104
+
+
+
+state 68
+
+    nula  ->  tNULA ';' .   (rule 49)
+
+    $default	reduce using rule 49 (nula)
+
+
+
+state 69
+
+    factor  ->  tCONSTENTERA .   (rule 103)
+
+    $default	reduce using rule 103 (factor)
+
+
+
+state 70
+
+    factor  ->  tCONSTCHAR .   (rule 104)
+
+    $default	reduce using rule 104 (factor)
+
+
+
+state 71
+
+    factor  ->  tCONSTCAD .   (rule 105)
+
+    $default	reduce using rule 105 (factor)
+
+
+
+state 72
+
+    factor  ->  tTRUE .   (rule 106)
+
+    $default	reduce using rule 106 (factor)
+
+
+
+state 73
+
+    factor  ->  tFALSE .   (rule 107)
+
+    $default	reduce using rule 107 (factor)
+
+
+
+state 74
+
+    factor  ->  tENTACAR . '(' expresion ')'   (rule 99)
+
+    '(' 	shift, and go to state 105
+
+
+
+state 75
+
+    factor  ->  tCARAENT . '(' expresion ')'   (rule 100)
+
+    '(' 	shift, and go to state 106
+
+
+
+state 76
+
+    factor  ->  tIDENTIFICADOR .   (rule 101)
+    factor  ->  tIDENTIFICADOR . '[' expresion ']'   (rule 102)
+
+    '[' 	shift, and go to state 107
+
+    $default	reduce using rule 101 (factor)
+
+
+
+state 77
+
+    factor  ->  tNOT . factor   (rule 97)
+
+    tCONSTENTERA	shift, and go to state 69
+    tCONSTCHAR	shift, and go to state 70
+    tCONSTCAD	shift, and go to state 71
+    tTRUE	shift, and go to state 72
+    tFALSE	shift, and go to state 73
+    tENTACAR	shift, and go to state 74
+    tCARAENT	shift, and go to state 75
+    tIDENTIFICADOR	shift, and go to state 76
+    tNOT	shift, and go to state 77
+    '-' 	shift, and go to state 78
+    '(' 	shift, and go to state 79
+
+    factor	go to state 108
+
+
+
+state 78
+
+    factor  ->  '-' . factor   (rule 96)
+
+    tCONSTENTERA	shift, and go to state 69
+    tCONSTCHAR	shift, and go to state 70
+    tCONSTCAD	shift, and go to state 71
+    tTRUE	shift, and go to state 72
+    tFALSE	shift, and go to state 73
+    tENTACAR	shift, and go to state 74
+    tCARAENT	shift, and go to state 75
+    tIDENTIFICADOR	shift, and go to state 76
+    tNOT	shift, and go to state 77
+    '-' 	shift, and go to state 78
+    '(' 	shift, and go to state 79
+
+    factor	go to state 109
+
+
+
+state 79
+
+    factor  ->  '(' . expresion ')'   (rule 98)
+
+    tCONSTENTERA	shift, and go to state 69
+    tCONSTCHAR	shift, and go to state 70
+    tCONSTCAD	shift, and go to state 71
+    tTRUE	shift, and go to state 72
+    tFALSE	shift, and go to state 73
+    tENTACAR	shift, and go to state 74
+    tCARAENT	shift, and go to state 75
+    tIDENTIFICADOR	shift, and go to state 76
+    tNOT	shift, and go to state 77
+    '-' 	shift, and go to state 78
+    '(' 	shift, and go to state 79
+
+    expresion	go to state 110
+    expresion_simple	go to state 81
+    termino	go to state 82
+    factor	go to state 83
+
+
+
+state 80
+
+    mientras_que  ->  tMQ expresion . @8 lista_instrucciones tFMQ   (rule 64)
+    expresion  ->  expresion . operador_relacional expresion_simple   (rule 78)
+
+    tMEI	shift, and go to state 111
+    tMAI	shift, and go to state 112
+    tNI 	shift, and go to state 113
+    '=' 	shift, and go to state 114
+    '>' 	shift, and go to state 115
+    '<' 	shift, and go to state 116
+
+    $default	reduce using rule 63 (@8)
+
+    @8  	go to state 117
+    operador_relacional	go to state 118
+
+
+
+state 81
+
+    expresion  ->  expresion_simple .   (rule 77)
+    expresion_simple  ->  expresion_simple . operador_aditivo termino   (rule 86)
+
+    tOR 	shift, and go to state 119
+    '+' 	shift, and go to state 120
+    '-' 	shift, and go to state 121
+
+    $default	reduce using rule 77 (expresion)
+
+    operador_aditivo	go to state 122
+
+
+
+state 82
+
+    expresion_simple  ->  termino .   (rule 85)
+    termino  ->  termino . operador_multiplicativo factor   (rule 91)
+
+    tAND	shift, and go to state 123
+    tMOD	shift, and go to state 124
+    tDIV	shift, and go to state 125
+    '*' 	shift, and go to state 126
+
+    $default	reduce using rule 85 (expresion_simple)
+
+    operador_multiplicativo	go to state 127
+
+
+
+state 83
+
+    termino  ->  factor .   (rule 90)
+
+    $default	reduce using rule 90 (termino)
+
+
+
+state 84
+
+    seleccion  ->  tSI expresion . @9 tENT lista_instrucciones resto_seleccion tFSI   (rule 66)
+    expresion  ->  expresion . operador_relacional expresion_simple   (rule 78)
+
+    tMEI	shift, and go to state 111
+    tMAI	shift, and go to state 112
+    tNI 	shift, and go to state 113
+    '=' 	shift, and go to state 114
+    '>' 	shift, and go to state 115
+    '<' 	shift, and go to state 116
+
+    $default	reduce using rule 65 (@9)
+
+    @9  	go to state 128
+    operador_relacional	go to state 118
+
+
+
+state 85
+
+    bloque_instrucciones  ->  tPRINCIPIO lista_instrucciones tFIN .   (rule 37)
+
+    $default	reduce using rule 37 (bloque_instrucciones)
+
+
+
+state 86
+
+    lista_instrucciones  ->  lista_instrucciones instruccion .   (rule 40)
+
+    $default	reduce using rule 40 (lista_instrucciones)
+
+
+
+state 87
+
+    declaracion_accion  ->  cabecera_accion ';' declaracion_variables declaracion_acciones2 . bloque_instrucciones   (rule 24)
+
+    tPRINCIPIO	shift, and go to state 28
+
+    bloque_instrucciones	go to state 129
+
+
+
+state 88
+
+    tipo_variable_vector  ->  tVECTOR '[' tCONSTENTERA '.' '.' tCONSTENTERA . ']' tDE tipo_variables   (rule 14)
+
+    ']' 	shift, and go to state 130
+
+
+
+state 89
+
+    tipo_variable_vector  ->  tVECTOR '[' tCONSTENTERA '.' '.' '-' . tCONSTENTERA ']' tDE tipo_variables   (rule 16)
+
+    tCONSTENTERA	shift, and go to state 131
+
+
+
+state 90
+
+    tipo_variable_vector  ->  tVECTOR '[' '-' tCONSTENTERA '.' '.' . tCONSTENTERA ']' tDE tipo_variables   (rule 15)
+    tipo_variable_vector  ->  tVECTOR '[' '-' tCONSTENTERA '.' '.' . '-' tCONSTENTERA ']' tDE tipo_variables   (rule 17)
+
+    tCONSTENTERA	shift, and go to state 132
+    '-' 	shift, and go to state 133
+
+
+
+state 91
+
+    clase_parametros  ->  tVAL .   (rule 35)
+
+    $default	reduce using rule 35 (clase_parametros)
+
+
+
+state 92
+
+    clase_parametros  ->  tREF .   (rule 36)
+
+    $default	reduce using rule 36 (clase_parametros)
+
+
+
+state 93
+
+    parametros_formales  ->  '(' lista_parametros . ')'   (rule 28)
+    lista_parametros  ->  lista_parametros . ';' parametros   (rule 29)
+
+    ';' 	shift, and go to state 134
+    ')' 	shift, and go to state 135
+
+
+
+state 94
+
+    lista_parametros  ->  parametros .   (rule 30)
+
+    $default	reduce using rule 30 (lista_parametros)
+
+
+
+state 95
+
+    parametros  ->  clase_parametros . declaracion_parametros   (rule 31)
+
+    tENTERO	shift, and go to state 5
+    tCARACTER	shift, and go to state 6
+    tBOOLEANO	shift, and go to state 7
+
+    tipo_variables	go to state 136
+    declaracion_parametros	go to state 137
+
+
+
+state 96
+
+    asignacion  ->  tIDENTIFICADOR @3 tOPAS . expresion @4 ';'   (rule 58)
+
+    tCONSTENTERA	shift, and go to state 69
+    tCONSTCHAR	shift, and go to state 70
+    tCONSTCAD	shift, and go to state 71
+    tTRUE	shift, and go to state 72
+    tFALSE	shift, and go to state 73
+    tENTACAR	shift, and go to state 74
+    tCARAENT	shift, and go to state 75
+    tIDENTIFICADOR	shift, and go to state 76
+    tNOT	shift, and go to state 77
+    '-' 	shift, and go to state 78
+    '(' 	shift, and go to state 79
+
+    expresion	go to state 138
+    expresion_simple	go to state 81
+    termino	go to state 82
+    factor	go to state 83
+
+
+
+state 97
+
+    asignacion_vector  ->  tIDENTIFICADOR @5 '[' . expresion ']' @6 tOPAS expresion @7 ';'   (rule 62)
+
+    tCONSTENTERA	shift, and go to state 69
+    tCONSTCHAR	shift, and go to state 70
+    tCONSTCAD	shift, and go to state 71
+    tTRUE	shift, and go to state 72
+    tFALSE	shift, and go to state 73
+    tENTACAR	shift, and go to state 74
+    tCARAENT	shift, and go to state 75
+    tIDENTIFICADOR	shift, and go to state 76
+    tNOT	shift, and go to state 77
+    '-' 	shift, and go to state 78
+    '(' 	shift, and go to state 79
+
+    expresion	go to state 139
+    expresion_simple	go to state 81
+    termino	go to state 82
+    factor	go to state 83
+
+
+
+state 98
+
+    argumentos  ->  '(' . lista_expresiones ')'   (rule 74)
+
+    tCONSTENTERA	shift, and go to state 69
+    tCONSTCHAR	shift, and go to state 70
+    tCONSTCAD	shift, and go to state 71
+    tTRUE	shift, and go to state 72
+    tFALSE	shift, and go to state 73
+    tENTACAR	shift, and go to state 74
+    tCARAENT	shift, and go to state 75
+    tIDENTIFICADOR	shift, and go to state 76
+    tNOT	shift, and go to state 77
+    '-' 	shift, and go to state 78
+    '(' 	shift, and go to state 79
+
+    lista_expresiones	go to state 140
+    expresion	go to state 141
+    expresion_simple	go to state 81
+    termino	go to state 82
+    factor	go to state 83
+
+
+
+state 99
+
+    invocacion_accion  ->  tIDENTIFICADOR @10 argumentos . @11 ';'   (rule 71)
+
+    $default	reduce using rule 70 (@11)
+
+    @11 	go to state 142
+
+
+
+state 100
+
+    invocacion_accion  ->  tIDENTIFICADOR @12 ';' .   (rule 73)
+
+    $default	reduce using rule 73 (invocacion_accion)
+
+
+
+state 101
+
+    escribir  ->  tESCRIBIR '(' lista_escribibles . ')' ';'   (rule 53)
+    lista_escribibles  ->  lista_escribibles . ',' expresion   (rule 54)
+
+    ',' 	shift, and go to state 143
+    ')' 	shift, and go to state 144
+
+
+
+state 102
+
+    lista_escribibles  ->  expresion .   (rule 55)
+    expresion  ->  expresion . operador_relacional expresion_simple   (rule 78)
+
+    tMEI	shift, and go to state 111
+    tMAI	shift, and go to state 112
+    tNI 	shift, and go to state 113
+    '=' 	shift, and go to state 114
+    '>' 	shift, and go to state 115
+    '<' 	shift, and go to state 116
+
+    $default	reduce using rule 55 (lista_escribibles)
+
+    operador_relacional	go to state 118
+
+
+
+state 103
+
+    lista_asignables  ->  tIDENTIFICADOR .   (rule 51)
+
+    $default	reduce using rule 51 (lista_asignables)
+
+
+
+state 104
+
+    leer  ->  tLEER '(' lista_asignables . ')' ';'   (rule 50)
+    lista_asignables  ->  lista_asignables . ',' tIDENTIFICADOR   (rule 52)
+
+    ',' 	shift, and go to state 145
+    ')' 	shift, and go to state 146
+
+
+
+state 105
+
+    factor  ->  tENTACAR '(' . expresion ')'   (rule 99)
+
+    tCONSTENTERA	shift, and go to state 69
+    tCONSTCHAR	shift, and go to state 70
+    tCONSTCAD	shift, and go to state 71
+    tTRUE	shift, and go to state 72
+    tFALSE	shift, and go to state 73
+    tENTACAR	shift, and go to state 74
+    tCARAENT	shift, and go to state 75
+    tIDENTIFICADOR	shift, and go to state 76
+    tNOT	shift, and go to state 77
+    '-' 	shift, and go to state 78
+    '(' 	shift, and go to state 79
+
+    expresion	go to state 147
+    expresion_simple	go to state 81
+    termino	go to state 82
+    factor	go to state 83
+
+
+
+state 106
+
+    factor  ->  tCARAENT '(' . expresion ')'   (rule 100)
+
+    tCONSTENTERA	shift, and go to state 69
+    tCONSTCHAR	shift, and go to state 70
+    tCONSTCAD	shift, and go to state 71
+    tTRUE	shift, and go to state 72
+    tFALSE	shift, and go to state 73
+    tENTACAR	shift, and go to state 74
+    tCARAENT	shift, and go to state 75
+    tIDENTIFICADOR	shift, and go to state 76
+    tNOT	shift, and go to state 77
+    '-' 	shift, and go to state 78
+    '(' 	shift, and go to state 79
+
+    expresion	go to state 148
+    expresion_simple	go to state 81
+    termino	go to state 82
+    factor	go to state 83
+
+
+
+state 107
+
+    factor  ->  tIDENTIFICADOR '[' . expresion ']'   (rule 102)
+
+    tCONSTENTERA	shift, and go to state 69
+    tCONSTCHAR	shift, and go to state 70
+    tCONSTCAD	shift, and go to state 71
+    tTRUE	shift, and go to state 72
+    tFALSE	shift, and go to state 73
+    tENTACAR	shift, and go to state 74
+    tCARAENT	shift, and go to state 75
+    tIDENTIFICADOR	shift, and go to state 76
+    tNOT	shift, and go to state 77
+    '-' 	shift, and go to state 78
+    '(' 	shift, and go to state 79
+
+    expresion	go to state 149
+    expresion_simple	go to state 81
+    termino	go to state 82
+    factor	go to state 83
+
+
+
+state 108
+
+    factor  ->  tNOT factor .   (rule 97)
+
+    $default	reduce using rule 97 (factor)
+
+
+
+state 109
+
+    factor  ->  '-' factor .   (rule 96)
+
+    $default	reduce using rule 96 (factor)
+
+
+
+state 110
+
+    expresion  ->  expresion . operador_relacional expresion_simple   (rule 78)
+    factor  ->  '(' expresion . ')'   (rule 98)
+
+    tMEI	shift, and go to state 111
+    tMAI	shift, and go to state 112
+    tNI 	shift, and go to state 113
+    '=' 	shift, and go to state 114
+    '>' 	shift, and go to state 115
+    '<' 	shift, and go to state 116
+    ')' 	shift, and go to state 150
+
+    operador_relacional	go to state 118
+
+
+
+state 111
+
+    operador_relacional  ->  tMEI .   (rule 82)
+
+    $default	reduce using rule 82 (operador_relacional)
+
+
+
+state 112
+
+    operador_relacional  ->  tMAI .   (rule 83)
+
+    $default	reduce using rule 83 (operador_relacional)
+
+
+
+state 113
+
+    operador_relacional  ->  tNI .   (rule 84)
+
+    $default	reduce using rule 84 (operador_relacional)
+
+
+
+state 114
+
+    operador_relacional  ->  '=' .   (rule 79)
+
+    $default	reduce using rule 79 (operador_relacional)
+
+
+
+state 115
+
+    operador_relacional  ->  '>' .   (rule 81)
+
+    $default	reduce using rule 81 (operador_relacional)
+
+
+
+state 116
+
+    operador_relacional  ->  '<' .   (rule 80)
+
+    $default	reduce using rule 80 (operador_relacional)
+
+
+
+state 117
+
+    mientras_que  ->  tMQ expresion @8 . lista_instrucciones tFMQ   (rule 64)
+
+    tIDENTIFICADOR	shift, and go to state 38
+    tESCRIBIR	shift, and go to state 39
+    tLEER	shift, and go to state 40
+    tNULA	shift, and go to state 42
+    tMQ 	shift, and go to state 43
+    tSI 	shift, and go to state 44
+
+    lista_instrucciones	go to state 151
+    instruccion	go to state 46
+    nula	go to state 47
+    leer	go to state 48
+    escribir	go to state 49
+    asignacion	go to state 50
+    asignacion_vector	go to state 51
+    mientras_que	go to state 52
+    seleccion	go to state 53
+    invocacion_accion	go to state 54
+
+
+
+state 118
+
+    expresion  ->  expresion operador_relacional . expresion_simple   (rule 78)
+
+    tCONSTENTERA	shift, and go to state 69
+    tCONSTCHAR	shift, and go to state 70
+    tCONSTCAD	shift, and go to state 71
+    tTRUE	shift, and go to state 72
+    tFALSE	shift, and go to state 73
+    tENTACAR	shift, and go to state 74
+    tCARAENT	shift, and go to state 75
+    tIDENTIFICADOR	shift, and go to state 76
+    tNOT	shift, and go to state 77
+    '-' 	shift, and go to state 78
+    '(' 	shift, and go to state 79
+
+    expresion_simple	go to state 152
+    termino	go to state 82
+    factor	go to state 83
+
+
+
+state 119
+
+    operador_aditivo  ->  tOR .   (rule 89)
+
+    $default	reduce using rule 89 (operador_aditivo)
+
+
+
+state 120
+
+    operador_aditivo  ->  '+' .   (rule 87)
+
+    $default	reduce using rule 87 (operador_aditivo)
+
+
+
+state 121
+
+    operador_aditivo  ->  '-' .   (rule 88)
+
+    $default	reduce using rule 88 (operador_aditivo)
+
+
+
+state 122
+
+    expresion_simple  ->  expresion_simple operador_aditivo . termino   (rule 86)
+
+    tCONSTENTERA	shift, and go to state 69
+    tCONSTCHAR	shift, and go to state 70
+    tCONSTCAD	shift, and go to state 71
+    tTRUE	shift, and go to state 72
+    tFALSE	shift, and go to state 73
+    tENTACAR	shift, and go to state 74
+    tCARAENT	shift, and go to state 75
+    tIDENTIFICADOR	shift, and go to state 76
+    tNOT	shift, and go to state 77
+    '-' 	shift, and go to state 78
+    '(' 	shift, and go to state 79
+
+    termino	go to state 153
+    factor	go to state 83
+
+
+
+state 123
+
+    operador_multiplicativo  ->  tAND .   (rule 95)
+
+    $default	reduce using rule 95 (operador_multiplicativo)
+
+
+
+state 124
+
+    operador_multiplicativo  ->  tMOD .   (rule 94)
+
+    $default	reduce using rule 94 (operador_multiplicativo)
+
+
+
+state 125
+
+    operador_multiplicativo  ->  tDIV .   (rule 93)
+
+    $default	reduce using rule 93 (operador_multiplicativo)
+
+
+
+state 126
+
+    operador_multiplicativo  ->  '*' .   (rule 92)
+
+    $default	reduce using rule 92 (operador_multiplicativo)
+
+
+
+state 127
+
+    termino  ->  termino operador_multiplicativo . factor   (rule 91)
+
+    tCONSTENTERA	shift, and go to state 69
+    tCONSTCHAR	shift, and go to state 70
+    tCONSTCAD	shift, and go to state 71
+    tTRUE	shift, and go to state 72
+    tFALSE	shift, and go to state 73
+    tENTACAR	shift, and go to state 74
+    tCARAENT	shift, and go to state 75
+    tIDENTIFICADOR	shift, and go to state 76
+    tNOT	shift, and go to state 77
+    '-' 	shift, and go to state 78
+    '(' 	shift, and go to state 79
+
+    factor	go to state 154
+
+
+
+state 128
+
+    seleccion  ->  tSI expresion @9 . tENT lista_instrucciones resto_seleccion tFSI   (rule 66)
+
+    tENT	shift, and go to state 155
+
+
+
+state 129
+
+    declaracion_accion  ->  cabecera_accion ';' declaracion_variables declaracion_acciones2 bloque_instrucciones .   (rule 24)
+
+    $default	reduce using rule 24 (declaracion_accion)
+
+
+
+state 130
+
+    tipo_variable_vector  ->  tVECTOR '[' tCONSTENTERA '.' '.' tCONSTENTERA ']' . tDE tipo_variables   (rule 14)
+
+    tDE 	shift, and go to state 156
+
+
+
+state 131
+
+    tipo_variable_vector  ->  tVECTOR '[' tCONSTENTERA '.' '.' '-' tCONSTENTERA . ']' tDE tipo_variables   (rule 16)
+
+    ']' 	shift, and go to state 157
+
+
+
+state 132
+
+    tipo_variable_vector  ->  tVECTOR '[' '-' tCONSTENTERA '.' '.' tCONSTENTERA . ']' tDE tipo_variables   (rule 15)
+
+    ']' 	shift, and go to state 158
+
+
+
+state 133
+
+    tipo_variable_vector  ->  tVECTOR '[' '-' tCONSTENTERA '.' '.' '-' . tCONSTENTERA ']' tDE tipo_variables   (rule 17)
+
+    tCONSTENTERA	shift, and go to state 159
+
+
+
+state 134
+
+    lista_parametros  ->  lista_parametros ';' . parametros   (rule 29)
+
+    tVAL	shift, and go to state 91
+    tREF	shift, and go to state 92
+
+    parametros	go to state 160
+    clase_parametros	go to state 95
+
+
+
+state 135
+
+    parametros_formales  ->  '(' lista_parametros ')' .   (rule 28)
+
+    $default	reduce using rule 28 (parametros_formales)
+
+
+
+state 136
+
+    declaracion_parametros  ->  tipo_variables . listaIDs_parametros   (rule 32)
+
+    tIDENTIFICADOR	shift, and go to state 161
+
+    listaIDs_parametros	go to state 162
+
+
+
+state 137
+
+    parametros  ->  clase_parametros declaracion_parametros .   (rule 31)
+
+    $default	reduce using rule 31 (parametros)
+
+
+
+state 138
+
+    asignacion  ->  tIDENTIFICADOR @3 tOPAS expresion . @4 ';'   (rule 58)
+    expresion  ->  expresion . operador_relacional expresion_simple   (rule 78)
+
+    tMEI	shift, and go to state 111
+    tMAI	shift, and go to state 112
+    tNI 	shift, and go to state 113
+    '=' 	shift, and go to state 114
+    '>' 	shift, and go to state 115
+    '<' 	shift, and go to state 116
+
+    $default	reduce using rule 57 (@4)
+
+    @4  	go to state 163
+    operador_relacional	go to state 118
+
+
+
+state 139
+
+    asignacion_vector  ->  tIDENTIFICADOR @5 '[' expresion . ']' @6 tOPAS expresion @7 ';'   (rule 62)
+    expresion  ->  expresion . operador_relacional expresion_simple   (rule 78)
+
+    tMEI	shift, and go to state 111
+    tMAI	shift, and go to state 112
+    tNI 	shift, and go to state 113
+    '=' 	shift, and go to state 114
+    '>' 	shift, and go to state 115
+    '<' 	shift, and go to state 116
+    ']' 	shift, and go to state 164
+
+    operador_relacional	go to state 118
+
+
+
+state 140
+
+    argumentos  ->  '(' lista_expresiones . ')'   (rule 74)
+    lista_expresiones  ->  lista_expresiones . ',' expresion   (rule 75)
+
+    ',' 	shift, and go to state 165
+    ')' 	shift, and go to state 166
+
+
+
+state 141
+
+    lista_expresiones  ->  expresion .   (rule 76)
+    expresion  ->  expresion . operador_relacional expresion_simple   (rule 78)
+
+    tMEI	shift, and go to state 111
+    tMAI	shift, and go to state 112
+    tNI 	shift, and go to state 113
+    '=' 	shift, and go to state 114
+    '>' 	shift, and go to state 115
+    '<' 	shift, and go to state 116
+
+    $default	reduce using rule 76 (lista_expresiones)
+
+    operador_relacional	go to state 118
+
+
+
+state 142
+
+    invocacion_accion  ->  tIDENTIFICADOR @10 argumentos @11 . ';'   (rule 71)
+
+    ';' 	shift, and go to state 167
+
+
+
+state 143
+
+    lista_escribibles  ->  lista_escribibles ',' . expresion   (rule 54)
+
+    tCONSTENTERA	shift, and go to state 69
+    tCONSTCHAR	shift, and go to state 70
+    tCONSTCAD	shift, and go to state 71
+    tTRUE	shift, and go to state 72
+    tFALSE	shift, and go to state 73
+    tENTACAR	shift, and go to state 74
+    tCARAENT	shift, and go to state 75
+    tIDENTIFICADOR	shift, and go to state 76
+    tNOT	shift, and go to state 77
+    '-' 	shift, and go to state 78
+    '(' 	shift, and go to state 79
+
+    expresion	go to state 168
+    expresion_simple	go to state 81
+    termino	go to state 82
+    factor	go to state 83
+
+
+
+state 144
+
+    escribir  ->  tESCRIBIR '(' lista_escribibles ')' . ';'   (rule 53)
+
+    ';' 	shift, and go to state 169
+
+
+
+state 145
+
+    lista_asignables  ->  lista_asignables ',' . tIDENTIFICADOR   (rule 52)
+
+    tIDENTIFICADOR	shift, and go to state 170
+
+
+
+state 146
+
+    leer  ->  tLEER '(' lista_asignables ')' . ';'   (rule 50)
+
+    ';' 	shift, and go to state 171
+
+
+
+state 147
+
+    expresion  ->  expresion . operador_relacional expresion_simple   (rule 78)
+    factor  ->  tENTACAR '(' expresion . ')'   (rule 99)
+
+    tMEI	shift, and go to state 111
+    tMAI	shift, and go to state 112
+    tNI 	shift, and go to state 113
+    '=' 	shift, and go to state 114
+    '>' 	shift, and go to state 115
+    '<' 	shift, and go to state 116
+    ')' 	shift, and go to state 172
+
+    operador_relacional	go to state 118
+
+
+
+state 148
+
+    expresion  ->  expresion . operador_relacional expresion_simple   (rule 78)
+    factor  ->  tCARAENT '(' expresion . ')'   (rule 100)
+
+    tMEI	shift, and go to state 111
+    tMAI	shift, and go to state 112
+    tNI 	shift, and go to state 113
+    '=' 	shift, and go to state 114
+    '>' 	shift, and go to state 115
+    '<' 	shift, and go to state 116
+    ')' 	shift, and go to state 173
+
+    operador_relacional	go to state 118
+
+
+
+state 149
+
+    expresion  ->  expresion . operador_relacional expresion_simple   (rule 78)
+    factor  ->  tIDENTIFICADOR '[' expresion . ']'   (rule 102)
+
+    tMEI	shift, and go to state 111
+    tMAI	shift, and go to state 112
+    tNI 	shift, and go to state 113
+    '=' 	shift, and go to state 114
+    '>' 	shift, and go to state 115
+    '<' 	shift, and go to state 116
+    ']' 	shift, and go to state 174
+
+    operador_relacional	go to state 118
+
+
+
+state 150
+
+    factor  ->  '(' expresion ')' .   (rule 98)
+
+    $default	reduce using rule 98 (factor)
+
+
+
+state 151
+
+    lista_instrucciones  ->  lista_instrucciones . instruccion   (rule 40)
+    mientras_que  ->  tMQ expresion @8 lista_instrucciones . tFMQ   (rule 64)
+
+    tIDENTIFICADOR	shift, and go to state 38
+    tESCRIBIR	shift, and go to state 39
+    tLEER	shift, and go to state 40
+    tNULA	shift, and go to state 42
+    tMQ 	shift, and go to state 43
+    tFMQ	shift, and go to state 175
+    tSI 	shift, and go to state 44
+
+    instruccion	go to state 86
+    nula	go to state 47
+    leer	go to state 48
+    escribir	go to state 49
+    asignacion	go to state 50
+    asignacion_vector	go to state 51
+    mientras_que	go to state 52
+    seleccion	go to state 53
+    invocacion_accion	go to state 54
+
+
+
+state 152
+
+    expresion  ->  expresion operador_relacional expresion_simple .   (rule 78)
+    expresion_simple  ->  expresion_simple . operador_aditivo termino   (rule 86)
+
+    tOR 	shift, and go to state 119
+    '+' 	shift, and go to state 120
+    '-' 	shift, and go to state 121
+
+    $default	reduce using rule 78 (expresion)
+
+    operador_aditivo	go to state 122
+
+
+
+state 153
+
+    expresion_simple  ->  expresion_simple operador_aditivo termino .   (rule 86)
+    termino  ->  termino . operador_multiplicativo factor   (rule 91)
+
+    tAND	shift, and go to state 123
+    tMOD	shift, and go to state 124
+    tDIV	shift, and go to state 125
+    '*' 	shift, and go to state 126
+
+    $default	reduce using rule 86 (expresion_simple)
+
+    operador_multiplicativo	go to state 127
+
+
+
+state 154
+
+    termino  ->  termino operador_multiplicativo factor .   (rule 91)
+
+    $default	reduce using rule 91 (termino)
+
+
+
+state 155
+
+    seleccion  ->  tSI expresion @9 tENT . lista_instrucciones resto_seleccion tFSI   (rule 66)
+
+    tIDENTIFICADOR	shift, and go to state 38
+    tESCRIBIR	shift, and go to state 39
+    tLEER	shift, and go to state 40
+    tNULA	shift, and go to state 42
+    tMQ 	shift, and go to state 43
+    tSI 	shift, and go to state 44
+
+    lista_instrucciones	go to state 176
+    instruccion	go to state 46
+    nula	go to state 47
+    leer	go to state 48
+    escribir	go to state 49
+    asignacion	go to state 50
+    asignacion_vector	go to state 51
+    mientras_que	go to state 52
+    seleccion	go to state 53
+    invocacion_accion	go to state 54
+
+
+
+state 156
+
+    tipo_variable_vector  ->  tVECTOR '[' tCONSTENTERA '.' '.' tCONSTENTERA ']' tDE . tipo_variables   (rule 14)
+
+    tENTERO	shift, and go to state 5
+    tCARACTER	shift, and go to state 6
+    tBOOLEANO	shift, and go to state 7
+
+    tipo_variables	go to state 177
+
+
+
+state 157
+
+    tipo_variable_vector  ->  tVECTOR '[' tCONSTENTERA '.' '.' '-' tCONSTENTERA ']' . tDE tipo_variables   (rule 16)
+
+    tDE 	shift, and go to state 178
+
+
+
+state 158
+
+    tipo_variable_vector  ->  tVECTOR '[' '-' tCONSTENTERA '.' '.' tCONSTENTERA ']' . tDE tipo_variables   (rule 15)
+
+    tDE 	shift, and go to state 179
+
+
+
+state 159
+
+    tipo_variable_vector  ->  tVECTOR '[' '-' tCONSTENTERA '.' '.' '-' tCONSTENTERA . ']' tDE tipo_variables   (rule 17)
+
+    ']' 	shift, and go to state 180
+
+
+
+state 160
+
+    lista_parametros  ->  lista_parametros ';' parametros .   (rule 29)
+
+    $default	reduce using rule 29 (lista_parametros)
+
+
+
+state 161
+
+    listaIDs_parametros  ->  tIDENTIFICADOR .   (rule 33)
+
+    $default	reduce using rule 33 (listaIDs_parametros)
+
+
+
+state 162
+
+    declaracion_parametros  ->  tipo_variables listaIDs_parametros .   (rule 32)
+    listaIDs_parametros  ->  listaIDs_parametros . ',' tIDENTIFICADOR   (rule 34)
+
+    ',' 	shift, and go to state 181
+
+    $default	reduce using rule 32 (declaracion_parametros)
+
+
+
+state 163
+
+    asignacion  ->  tIDENTIFICADOR @3 tOPAS expresion @4 . ';'   (rule 58)
+
+    ';' 	shift, and go to state 182
+
+
+
+state 164
+
+    asignacion_vector  ->  tIDENTIFICADOR @5 '[' expresion ']' . @6 tOPAS expresion @7 ';'   (rule 62)
+
+    $default	reduce using rule 60 (@6)
+
+    @6  	go to state 183
+
+
+
+state 165
+
+    lista_expresiones  ->  lista_expresiones ',' . expresion   (rule 75)
+
+    tCONSTENTERA	shift, and go to state 69
+    tCONSTCHAR	shift, and go to state 70
+    tCONSTCAD	shift, and go to state 71
+    tTRUE	shift, and go to state 72
+    tFALSE	shift, and go to state 73
+    tENTACAR	shift, and go to state 74
+    tCARAENT	shift, and go to state 75
+    tIDENTIFICADOR	shift, and go to state 76
+    tNOT	shift, and go to state 77
+    '-' 	shift, and go to state 78
+    '(' 	shift, and go to state 79
+
+    expresion	go to state 184
+    expresion_simple	go to state 81
+    termino	go to state 82
+    factor	go to state 83
+
+
+
+state 166
+
+    argumentos  ->  '(' lista_expresiones ')' .   (rule 74)
+
+    $default	reduce using rule 74 (argumentos)
+
+
+
+state 167
+
+    invocacion_accion  ->  tIDENTIFICADOR @10 argumentos @11 ';' .   (rule 71)
+
+    $default	reduce using rule 71 (invocacion_accion)
+
+
+
+state 168
+
+    lista_escribibles  ->  lista_escribibles ',' expresion .   (rule 54)
+    expresion  ->  expresion . operador_relacional expresion_simple   (rule 78)
+
+    tMEI	shift, and go to state 111
+    tMAI	shift, and go to state 112
+    tNI 	shift, and go to state 113
+    '=' 	shift, and go to state 114
+    '>' 	shift, and go to state 115
+    '<' 	shift, and go to state 116
+
+    $default	reduce using rule 54 (lista_escribibles)
+
+    operador_relacional	go to state 118
+
+
+
+state 169
+
+    escribir  ->  tESCRIBIR '(' lista_escribibles ')' ';' .   (rule 53)
+
+    $default	reduce using rule 53 (escribir)
+
+
+
+state 170
+
+    lista_asignables  ->  lista_asignables ',' tIDENTIFICADOR .   (rule 52)
+
+    $default	reduce using rule 52 (lista_asignables)
+
+
+
+state 171
+
+    leer  ->  tLEER '(' lista_asignables ')' ';' .   (rule 50)
+
+    $default	reduce using rule 50 (leer)
+
+
+
+state 172
+
+    factor  ->  tENTACAR '(' expresion ')' .   (rule 99)
+
+    $default	reduce using rule 99 (factor)
+
+
+
+state 173
+
+    factor  ->  tCARAENT '(' expresion ')' .   (rule 100)
+
+    $default	reduce using rule 100 (factor)
+
+
+
+state 174
+
+    factor  ->  tIDENTIFICADOR '[' expresion ']' .   (rule 102)
+
+    $default	reduce using rule 102 (factor)
+
+
+
+state 175
+
+    mientras_que  ->  tMQ expresion @8 lista_instrucciones tFMQ .   (rule 64)
+
+    $default	reduce using rule 64 (mientras_que)
+
+
+
+state 176
+
+    lista_instrucciones  ->  lista_instrucciones . instruccion   (rule 40)
+    seleccion  ->  tSI expresion @9 tENT lista_instrucciones . resto_seleccion tFSI   (rule 66)
+
+    tIDENTIFICADOR	shift, and go to state 38
+    tESCRIBIR	shift, and go to state 39
+    tLEER	shift, and go to state 40
+    tNULA	shift, and go to state 42
+    tMQ 	shift, and go to state 43
+    tSI 	shift, and go to state 44
+    tSI_NO	shift, and go to state 185
+
+    $default	reduce using rule 67 (resto_seleccion)
+
+    instruccion	go to state 86
+    nula	go to state 47
+    leer	go to state 48
+    escribir	go to state 49
+    asignacion	go to state 50
+    asignacion_vector	go to state 51
+    mientras_que	go to state 52
+    seleccion	go to state 53
+    resto_seleccion	go to state 186
+    invocacion_accion	go to state 54
+
+
+
+state 177
+
+    tipo_variable_vector  ->  tVECTOR '[' tCONSTENTERA '.' '.' tCONSTENTERA ']' tDE tipo_variables .   (rule 14)
+
+    $default	reduce using rule 14 (tipo_variable_vector)
+
+
+
+state 178
+
+    tipo_variable_vector  ->  tVECTOR '[' tCONSTENTERA '.' '.' '-' tCONSTENTERA ']' tDE . tipo_variables   (rule 16)
+
+    tENTERO	shift, and go to state 5
+    tCARACTER	shift, and go to state 6
+    tBOOLEANO	shift, and go to state 7
+
+    tipo_variables	go to state 187
+
+
+
+state 179
+
+    tipo_variable_vector  ->  tVECTOR '[' '-' tCONSTENTERA '.' '.' tCONSTENTERA ']' tDE . tipo_variables   (rule 15)
+
+    tENTERO	shift, and go to state 5
+    tCARACTER	shift, and go to state 6
+    tBOOLEANO	shift, and go to state 7
+
+    tipo_variables	go to state 188
+
+
+
+state 180
+
+    tipo_variable_vector  ->  tVECTOR '[' '-' tCONSTENTERA '.' '.' '-' tCONSTENTERA ']' . tDE tipo_variables   (rule 17)
+
+    tDE 	shift, and go to state 189
+
+
+
+state 181
+
+    listaIDs_parametros  ->  listaIDs_parametros ',' . tIDENTIFICADOR   (rule 34)
+
+    tIDENTIFICADOR	shift, and go to state 190
+
+
+
+state 182
+
+    asignacion  ->  tIDENTIFICADOR @3 tOPAS expresion @4 ';' .   (rule 58)
+
+    $default	reduce using rule 58 (asignacion)
+
+
+
+state 183
+
+    asignacion_vector  ->  tIDENTIFICADOR @5 '[' expresion ']' @6 . tOPAS expresion @7 ';'   (rule 62)
+
+    tOPAS	shift, and go to state 191
+
+
+
+state 184
+
+    lista_expresiones  ->  lista_expresiones ',' expresion .   (rule 75)
+    expresion  ->  expresion . operador_relacional expresion_simple   (rule 78)
+
+    tMEI	shift, and go to state 111
+    tMAI	shift, and go to state 112
+    tNI 	shift, and go to state 113
+    '=' 	shift, and go to state 114
+    '>' 	shift, and go to state 115
+    '<' 	shift, and go to state 116
+
+    $default	reduce using rule 75 (lista_expresiones)
+
+    operador_relacional	go to state 118
+
+
+
+state 185
+
+    resto_seleccion  ->  tSI_NO . lista_instrucciones   (rule 68)
+
+    tIDENTIFICADOR	shift, and go to state 38
+    tESCRIBIR	shift, and go to state 39
+    tLEER	shift, and go to state 40
+    tNULA	shift, and go to state 42
+    tMQ 	shift, and go to state 43
+    tSI 	shift, and go to state 44
+
+    lista_instrucciones	go to state 192
+    instruccion	go to state 46
+    nula	go to state 47
+    leer	go to state 48
+    escribir	go to state 49
+    asignacion	go to state 50
+    asignacion_vector	go to state 51
+    mientras_que	go to state 52
+    seleccion	go to state 53
+    invocacion_accion	go to state 54
+
+
+
+state 186
+
+    seleccion  ->  tSI expresion @9 tENT lista_instrucciones resto_seleccion . tFSI   (rule 66)
+
+    tFSI	shift, and go to state 193
+
+
+
+state 187
+
+    tipo_variable_vector  ->  tVECTOR '[' tCONSTENTERA '.' '.' '-' tCONSTENTERA ']' tDE tipo_variables .   (rule 16)
+
+    $default	reduce using rule 16 (tipo_variable_vector)
+
+
+
+state 188
+
+    tipo_variable_vector  ->  tVECTOR '[' '-' tCONSTENTERA '.' '.' tCONSTENTERA ']' tDE tipo_variables .   (rule 15)
+
+    $default	reduce using rule 15 (tipo_variable_vector)
+
+
+
+state 189
+
+    tipo_variable_vector  ->  tVECTOR '[' '-' tCONSTENTERA '.' '.' '-' tCONSTENTERA ']' tDE . tipo_variables   (rule 17)
+
+    tENTERO	shift, and go to state 5
+    tCARACTER	shift, and go to state 6
+    tBOOLEANO	shift, and go to state 7
+
+    tipo_variables	go to state 194
+
+
+
+state 190
+
+    listaIDs_parametros  ->  listaIDs_parametros ',' tIDENTIFICADOR .   (rule 34)
+
+    $default	reduce using rule 34 (listaIDs_parametros)
+
+
+
+state 191
+
+    asignacion_vector  ->  tIDENTIFICADOR @5 '[' expresion ']' @6 tOPAS . expresion @7 ';'   (rule 62)
+
+    tCONSTENTERA	shift, and go to state 69
+    tCONSTCHAR	shift, and go to state 70
+    tCONSTCAD	shift, and go to state 71
+    tTRUE	shift, and go to state 72
+    tFALSE	shift, and go to state 73
+    tENTACAR	shift, and go to state 74
+    tCARAENT	shift, and go to state 75
+    tIDENTIFICADOR	shift, and go to state 76
+    tNOT	shift, and go to state 77
+    '-' 	shift, and go to state 78
+    '(' 	shift, and go to state 79
+
+    expresion	go to state 195
+    expresion_simple	go to state 81
+    termino	go to state 82
+    factor	go to state 83
+
+
+
+state 192
+
+    lista_instrucciones  ->  lista_instrucciones . instruccion   (rule 40)
+    resto_seleccion  ->  tSI_NO lista_instrucciones .   (rule 68)
+
+    tIDENTIFICADOR	shift, and go to state 38
+    tESCRIBIR	shift, and go to state 39
+    tLEER	shift, and go to state 40
+    tNULA	shift, and go to state 42
+    tMQ 	shift, and go to state 43
+    tSI 	shift, and go to state 44
+
+    $default	reduce using rule 68 (resto_seleccion)
+
+    instruccion	go to state 86
+    nula	go to state 47
+    leer	go to state 48
+    escribir	go to state 49
+    asignacion	go to state 50
+    asignacion_vector	go to state 51
+    mientras_que	go to state 52
+    seleccion	go to state 53
+    invocacion_accion	go to state 54
+
+
+
+state 193
+
+    seleccion  ->  tSI expresion @9 tENT lista_instrucciones resto_seleccion tFSI .   (rule 66)
+
+    $default	reduce using rule 66 (seleccion)
+
+
+
+state 194
+
+    tipo_variable_vector  ->  tVECTOR '[' '-' tCONSTENTERA '.' '.' '-' tCONSTENTERA ']' tDE tipo_variables .   (rule 17)
+
+    $default	reduce using rule 17 (tipo_variable_vector)
+
+
+
+state 195
+
+    asignacion_vector  ->  tIDENTIFICADOR @5 '[' expresion ']' @6 tOPAS expresion . @7 ';'   (rule 62)
+    expresion  ->  expresion . operador_relacional expresion_simple   (rule 78)
+
+    tMEI	shift, and go to state 111
+    tMAI	shift, and go to state 112
+    tNI 	shift, and go to state 113
+    '=' 	shift, and go to state 114
+    '>' 	shift, and go to state 115
+    '<' 	shift, and go to state 116
+
+    $default	reduce using rule 61 (@7)
+
+    @7  	go to state 196
+    operador_relacional	go to state 118
+
+
+
+state 196
+
+    asignacion_vector  ->  tIDENTIFICADOR @5 '[' expresion ']' @6 tOPAS expresion @7 . ';'   (rule 62)
+
+    ';' 	shift, and go to state 197
+
+
+
+state 197
+
+    asignacion_vector  ->  tIDENTIFICADOR @5 '[' expresion ']' @6 tOPAS expresion @7 ';' .   (rule 62)
+
+    $default	reduce using rule 62 (asignacion_vector)
+
+
+
+state 198
+
+    $   	go to state 199
+
+
+
+state 199
+
+    $   	go to state 200
+
+
+
+state 200
+
+    $default	accept

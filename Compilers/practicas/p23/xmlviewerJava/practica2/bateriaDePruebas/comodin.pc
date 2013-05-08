@@ -1,0 +1,51 @@
+Programa P;
+  entero i,j;
+  booleano k;
+  caracter h;
+  
+  accion p1 (REF entero b; VAL booleano a; REF caracter c);
+    entero d;
+  Principio
+    d := 4*8+3;
+    b := d;
+    a := d = 0;
+    c := entacar(d);
+  Fin
+  
+  accion p2 (VAL entero a; REF entero b; VAL booleano c,d; VAL caracter e,f);
+    entero u;
+  Principio
+    u := 8;
+  Fin
+  
+  accion p3;
+  Principio
+    escribe('holaaaaa');
+  Fin
+  
+  accion p4 (VAL entero p4);
+  Principio
+    escribe('lalala');
+  Fin
+
+Principio
+ i := j +1;
+ p1;
+ p1(8);
+ p1(i, j);
+ p1(i, 8);
+ p1(i, 8, 9);
+ p1(i, 8, j);
+ p1(i, i, i, j);
+ p1(j, j, j);
+ p1(i*2+1, i, i);
+ p1(i*2+1, 8 > 0, entacar(i));
+ p1(i*2+1, j >= 0, h);
+ p1(caraent(h), j < 0, h);
+ p2(i,i, 7 < 0, 8 <= 5, h, h);
+ p2;
+ p3;
+ p3(8,4,7);
+ p3(i,j);
+ p3(i);
+Fin

@@ -1,0 +1,39 @@
+programa prueba;
+
+  vector [-10..20] de entero v;
+  entero num;
+  vector [-1..20] de entero v2;
+  entero a;
+  caracter c;
+
+
+principio
+  v[caraent("a")] := 20;                       % warning: INDICE FUERA DE RANGO
+  v[2] := caraent(entacar(caraent(entacar(caraent("z")))));
+  v[num div 0] := 20;			       % warning: DIVISION POR CERO
+  v[num+8000+40 div 10 * 20] := 24;
+  v[-11] := 2;			   	       % warning: INDICE FUERA DE RANGO
+  v[21] := 23;				       % warning: INDICE FUERA DE RANGO
+  v[20-20+89040 div 89040 + 10 * 10 - 10 * 10 + 2] := 5;
+  num := v[21];				      % warning: INDICE FUERA DE RANGO
+  num := v[-100];			      % warning: INDICE FUERA DE RANGO
+  num := -2;
+  
+  escribir(a);
+  a := -1 div 2;			
+  v2[21] := 2;				% warning: INDICE FUERA DE RANGO		
+  v2[-2] := 4;				% warning: INDICE FUERA DE RANGO
+  v2[1 div (1 - 1)] := 4;		% warning: DIVISION POR CERO
+  v2[1*1-1+2+4 div 2-6] := 2;           % warning: INDICE FUERA DE RANGO
+  a := v2[-1];
+  a := v2[-2];                          % warning: INDICE FUERA DE RANGO
+  a := v2[20];
+  a := v2[21];                          % warning: INDICE FUERA DE RANGO
+  a := v2[2+3-2-3+4*5 div 6 - 4*5 div 6 - 20 div 2]; % warning: INDICE FUERA DE RANGO
+
+  c := entacar(caraent(entacar(caraent("a"))) + 250); % warning: CARACTER FUERA DE  RANGO
+  v2[caraent("a")] := 2;  % warning: CARACTER FUERA DE RANGO
+fin
+ 
+
+

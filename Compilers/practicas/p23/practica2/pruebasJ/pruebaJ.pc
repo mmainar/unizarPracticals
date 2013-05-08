@@ -1,0 +1,367 @@
+% Practica 2 de Compiladores II
+% Jose Javier Colomer Vieitez
+% Programa de prueba numero 2.
+%
+% L 134 -> Rango de indexacion invalido.
+% L 145 -> Asignacion a un parametro pasado por valor (PARA MI ESTO NO ES ERROR)
+% L 152 -> Los tipos de los operandos empleados no son compatibles.
+% L 159 -> Identificador no declarado. Coercion.
+% L 160 -> Identificador no declarado.
+% L 163 -> Uso inapropiado de un identificador (programa). Coercion.
+% L 164 -> Intento de definicion de cadena -> Caracteres invalidos + identificador sin declarar. Coercion.
+% L 165 -> Tipos incompatibles en la asignacion.
+% L 166 -> Tipos incompatibles en la asignacion.
+% L 167 -> Tipos incompatibles: Se esperaba un booleano en la parte izquierda de la expresion.
+% L 167 -> Tipos incompatibles: Se esperaba un booleano en la parte derecha de la expresion.
+% L 167 -> Tipos incompatibles en la asignacion.
+% L 168 -> Tipos incompatibles: Se esperaba un booleano en la parte izquierda de la expresion.
+% L 168 -> Tipos incompatibles: Se esperaba un booleano en la parte derecha de la expresion.
+% L 168 -> Tipos incompatibles en la asignacion.
+% L 169 -> Tipos incompatibles en la asignacion.
+% L 172 -> Uso inapropiado del identificador. Coercion.
+% L 173 -> Identificador no declarado. Coercion.
+% L 174 -> Coercion.
+% L 175 -> Identificador no declarado.
+% L 175 -> Identificador no declarado.
+% L 177 -> Intento de definicion de cadena -> Caracteres invalidos + identificador sin declarar. Coercion.
+% L 178 -> Tipos incompatibles: Se esperaba un booleano en la parte izquierda de la expresion.
+% L 178 -> Tipos incompatibles: Se esperaba un booleano en la parte derecha de la expresion.
+% L 178 -> Tipos incompatibles en la asignacion.
+% L 179 -> Tipos incompatibles: Se esperaba un booleano en la parte izquierda de la expresion.
+% L 179 -> Tipos incompatibles: Se esperaba un booleano en la parte derecha de la expresion.
+% L 179 -> Tipos incompatibles en la asignacion.
+% L 180 -> Tipos incompatibles en la asignacion.
+% L 181 -> Tipos incompatibles en la asignacion.
+% L 185 -> Identificador no declarado. Coercion.
+% L 187 -> Identificador no declarado.
+% L 187 -> Identificador no declarado.
+% L 190 -> Uso inapropiado de un identificador (programa). Coercion.
+% L 191 -> Tipos incompatibles: Se esperaba un entero en la parte izquierda de la expresion.
+% L 191 -> Tipos incompatibles: Se esperaba un entero en la parte derecha de la expresion.
+% L 191 -> Tipos incompatibles en la asignacion.
+% L 192 -> Tipos incompatibles en la asignacion.
+% L 193 -> El operador "<" no admite cadenas como operandos.
+% L 193 -> El operador "<" no admite booleanos como operandos.
+% L 193 -> Los tipos de los operandos empleados no son compatibles.
+% L 194 -> Tipos incompatibles: Se esperaba un booleano en la parte izquierda de la expresion.
+% L 194 -> Tipos incompatibles: Se esperaba un booleano en la parte derecha de la expresion.
+% L 195 -> Tipos incompatibles: Se esperaba un booleano en la parte izquierda de la expresion.
+% L 195 -> Tipos incompatibles: Se esperaba un booleano en la parte derecha de la expresion.
+% L 196 -> Tipos incompatibles en la asignacion.
+% L 213 -> No pueden asignarse vectores de distinto tamanyo.
+% L 214 -> No pueden asignarse vectores de distinto tamanyo.
+% L 215 -> No pueden asignarse vectores de distinto tamanyo.
+% L 216 -> No pueden asignarse vectores de distinto tamanyo.
+% L 217 -> No pueden asignarse vectores de distinto tamanyo.
+% L 218 -> No pueden asignarse vectores de distinto tamanyo.
+% L 219 -> Tipos incompatibles en la asignacion.
+% L 220 -> Tipos incompatibles en la asignacion.
+% L 221 -> Tipos incompatibles en la asignacion.
+% L 222 -> Tipos incompatibles en la asignacion.
+% L 223 -> Tipos incompatibles en la asignacion.
+% L 224 -> Tipos incompatibles en la asignacion.
+% L 231 -> No puede emplearse una expresion que no sea entera para indexar un vector.
+% L 232 -> No puede emplearse una expresion que no sea entera para indexar un vector.
+% L 233 -> No puede emplearse una expresion que no sea entera para indexar un vector.
+% L 234 -> No puede emplearse una expresion que no sea entera para indexar un vector.
+% L 236 -> No puede emplearse una expresion que no sea entera para indexar un vector.
+% L 237 -> No puede emplearse una expresion que no sea entera para indexar un vector.
+% L 238 -> Se intenta asignar un vector a una simple variable o parametro.
+% L 239 -> Se intenta asignar a un vector algo que no es un vector.
+% L 241 -> No puede indexarse un parametro dado que estos no pueden ser vectores.
+% L 242 -> Tipos incompatibles en la asignacion.
+% L 243 -> Tipos incompatibles en la asignacion.
+% L 248 -> No puede emplearse una expresion que no sea entera para indexar un vector.
+% L 249 -> No puede emplearse una expresion que no sea entera para indexar un vector.
+% L 250 -> No puede emplearse una expresion que no sea entera para indexar un vector.
+% L 251 -> No puede emplearse una expresion que no sea entera para indexar un vector.
+% L 253 -> No puede emplearse una expresion que no sea entera para indexar un vector.
+% L 254 -> No puede emplearse una expresion que no sea entera para indexar un vector.
+% L 255 -> Se intenta asignar un vector a una simple variable o parametro.
+% L 256 -> Se intenta asignar a un vector algo que no es un vector.
+% L 257 -> Tipos incompatibles en la asignacion.
+% L 258 -> No puede indexarse un parametro dado que estos no pueden ser vectores.
+% L 258 -> Tipos incompatibles en la asignacion.
+% L 260 -> Tipos incompatibles en la asignacion.
+% L 261 -> Tipos incompatibles en la asignacion.
+% L 265 -> No puede emplearse una expresion que no sea entera para indexar un vector.
+% L 266 -> No puede emplearse una expresion que no sea entera para indexar un vector.
+% L 267 -> No puede emplearse una expresion que no sea entera para indexar un vector.
+% L 268 -> No puede emplearse una expresion que no sea entera para indexar un vector.
+% L 270 -> No puede emplearse una expresion que no sea entera para indexar un vector.
+% L 271 -> No puede emplearse una expresion que no sea entera para indexar un vector.
+% L 272 -> Se intenta asignar un vector a una simple variable o parametro.
+% L 273 -> Se intenta asignar a un vector algo que no es un vector.
+% L 274 -> Tipos incompatibles en la asignacion.
+% L 275 -> No puede indexarse un parametro dado que estos no pueden ser vectores.
+% L 275 -> Tipos incompatibles en la asignacion.
+% L 276 -> Tipos incompatibles en la asignacion.
+% L 277 -> Tipos incompatibles en la asignacion.
+% L 290 -> Identificador no declarado. Coercion.
+% L 293 -> Identificador no declarado.
+% L 295 -> Identificador no declarado. Coercion.
+% L 318 -> Invocacion de una accion sin declarar.
+% L 336 -> Identificador no declarado. Coercion.
+% L 339 -> Identificador no declarado. Coercion.
+% L 343 -> Identificador no declarado. Coercion.
+% L 344 -> Invocacion de una accion sin declarar.
+% L 351 -> Se espera un argumento por referencia y se lo pasa por valor.
+% L 353 -> Se espera un argumento por referencia y se lo pasa por valor.
+% L 354 -> Se espera un argumento por referencia y se lo pasa por valor.
+% L 355 -> El tipo del argumento (booleano) es incompatible con el esperado (entero).
+% L 356 -> El tipo del argumento (char) es incompatible con el esperado (entero).
+% L 357 -> Identificador no declarado.
+% L 357 -> AVISO: Se esperaba un argumento de tipo "entero" y se ha encontrado uno de tipo "desconocido".
+% L 358 -> Identificador no declarado.
+% L 358 -> AVISO: Se esperaba un argumento de tipo "entero" y se ha encontrado uno de tipo "desconocido".
+% L 359 -> No se permite el paso de vectores como argumentos
+% L 360 -> El tipo del argumento (char) es incompatible con el esperado (entero).
+% L 360 -> No se permite el paso de vectores como argumentos
+% L 361 -> El tipo del argumento (booleano) es incompatible con el esperado (entero).
+% L 361 -> No se permite el paso de vectores como argumentos
+% L 363 -> El tipo del argumento (char) es incompatible con el esperado (entero).
+% L 364 -> El tipo del argumento (booleano) es incompatible con el esperado (ventero).
+
+%-------------------------------------------------------------------------------
+
+Programa p;
+  entero i;
+  caracter c;
+  booleano b;
+  vector [0..5] de booleano vb;
+  vector [0..5] de entero ve;
+  vector [0..5] de caracter vc;
+  vector [0..-5] de caracter vcm;
+
+   %-----------------------------------------------------------------------------
+   accion recursivo (ref entero e);
+
+     %---------------------------------------------------------------------------
+    accion recursivo (val entero e);
+
+      entero no_accesible;
+      caracter p;
+    principio
+      e:= 1 + 1;
+      c:= p;
+      recursivo(e);
+    fin
+    %---------------------------------------------------------------------------
+
+  Principio
+    Si e > c ent
+      recursivo(e - 1);
+    Si_no
+      recursivo(e + i);
+    FSi
+    
+    % Pruebas con enteros.
+    no_accesible:= 1;
+    inventadoE:= no_accesible;
+%    1:= 1 + recursivo();                ERROR SINTACTICO -> El destino de la asignacion no es un identificador.
+%    e:= 1 * recursivo(e);               ERROR SINTACTIVO -> Las acciones no devuelven ningun valor, luego no pueden emplearse para construir expresiones.
+    e:= p;
+    e:= "hello";
+    e:= 'escribe algo aqui';
+    e:= e * e = 9;
+    e:= "a" or "b";
+    e:= "a" or 5;
+    e:= b and true;
+
+    % Pruebas con caracteres.
+    c:= p;
+    car := c;
+    c:= inventadoE;
+    inventadoC:= no_accesibleC;
+    c:= "a";
+    c:= "abc";
+    c:= "a" or "b";
+    c:= "a" or 5;
+    c:= b and true;
+    c:= 5 * 5;
+%    "c":= b;                            ERROR SINTACTICO -> El destino de la asignacion no es un identificador.
+
+    % Pruebas con booleanos.
+    bool:= 1;
+    inventadoE:= no_accesibleC;
+    inventadoB:= no_accesibleB;
+%    true:= 1 + recursivo();             ERROR SINTACTICO -> El destino de la asignacion no es un identificador.
+%    true:= 1 or b;                      ERROR SINTACTICO -> El destino de la asignacion no es un identificador.
+    b:= p;
+    b:= true + true;
+    b:= 'escribe algo aqui';
+    b:= true < 'hola';
+    b:= "a" or "b";
+    b:= "a" or 5;
+    e:= b and true;
+  Fin
+  %-----------------------------------------------------------------------------
+
+  %-----------------------------------------------------------------------------
+  accion prueba_vector(val entero a);
+
+    vector[0..4] de entero ve1;
+    vector[0..4] de caracter vc1;
+    vector[0..4] de booleano vb1;
+
+    vector[0..5] de entero ve2;
+    vector[0..5] de caracter vc2;
+    vector[0..5] de booleano vb2;
+  principio
+
+    % Intentos de asignaciones de vectores.
+    ve1:= ve;
+    vc1:= vc;
+    vb1:= vb;
+    vb:= vb1;
+    vc:= vc1;
+    ve:= ve1;
+    vb:= ve;
+    vb:= vc;
+    ve:= vb;
+    ve:= vc;
+    vc:= ve;
+    vc:= vb;
+    vb:= vb2;
+    vc:= vc2;
+    ve:= ve2;
+
+    % Asignaciones componente a componente: enteros.
+%    ve[0]:= ve1['c'];                   ERROR SINTACTICO -> Se indexa el vector con una expresion que no es de tipo entero.
+    ve[0]:= ve1["c"];
+    ve[0]:= ve1[c];
+    ve[0]:= ve1[b];
+    ve[0]:= ve1[b or b];
+    ve[0]:= ve1[1 + 4];
+    ve[0]:= ve1[5 = 5];
+    ve[0]:= ve1[5 < 7];
+    ve[0]:= ve1;
+    ve:= ve1[2];
+    ve[0]:= a;
+    ve[0]:= a[1];    
+    ve[0]:= vb[0];
+    ve[0]:= vc[0];
+    ve[0]:= ve[3];
+
+    % Asignaciones componente a componente: booleanos.
+%    vb[0]:= vb1['c'];                   ERROR SINTACTICO -> Se indexa el vector con una expresion que no es de tipo entero.
+    vb[0]:= vb1["c"];
+    vb[0]:= vb1[c];
+    vb[0]:= vb1[b];
+    vb[0]:= vb1[b or b];
+    vb[0]:= vb1[1 + 4];
+    vb[0]:= vb1[5 = 5];
+    vb[0]:= vb1[5 < 7];
+    vb[0]:= vb1;
+    vb:= vb1[2];
+    vb[0]:= a;
+    vb[0]:= a[1];    
+    vb[0]:= vb[3];
+    vb[0]:= vc[0];
+    vb[0]:= ve[3];
+
+    % Asignaciones componente a componente: caracteres.
+%    vc[0]:= vc1['c'];
+    vc[0]:= vc1["c"];
+    vc[0]:= vc1[c];
+    vc[0]:= vc1[b];
+    vc[0]:= vc1[b or b];
+    vc[0]:= vc1[1 + 4];
+    vc[0]:= vc1[5 = 5];
+    vc[0]:= vc1[5 < 7];
+    vc[0]:= vc1;
+    vc:= vc1[2];
+    vc[0]:= a;
+    vc[0]:= a[1];    
+    ve[0]:= vb[0];
+    ve[0]:= vc[0];
+    ve[0]:= ve[3];
+  fin
+  %-----------------------------------------------------------------------------
+
+  %-----------------------------------------------------------------------------
+  accion prueba_coercion;
+    entero e1, e2;
+    caracter c1, c2;
+    booleano b1, b2;
+
+  principio
+    e1:= e1 + 1;    % Correcto.
+    e1:= e3 + 1;    % Identificador desconocido -> Coercion a entero.
+    e1:= e2 + e3;   % Sin error.
+    
+    b1:= e4 < e1;   % Identificador no declarado.
+    b2:= e4 > c1;   % Como e4 no declarado->tipo desconocido ->error "camuflado".
+    b3:= e4 > e1;   % Coercion.
+
+    c:= "a";
+    c1:= c;
+  fin
+  %-----------------------------------------------------------------------------
+
+  %-----------------------------------------------------------------------------
+  accion prueba_visibilidad(val entero i, ve);
+    entero e1;
+    caracter c1;
+    booleano b1;
+
+   %----------------------------------------------------------------------------
+    accion prueba_visibilidad_interna;
+      entero e1, e2;
+      caracter c1, c2;
+      booleano b1, b2;
+
+      %-------------------------------------------------------------------------
+      accion hola_mundo;
+
+      principio
+        escribe('Hola, mundo!');
+      fin
+      %-------------------------------------------------------------------------
+
+    principio
+      % No habra ningun error.
+      e1:= e2;
+      e1:= i;
+      e1:= ve;  % No hay error de asignar un vector a un entero!
+      c1:= c2;
+      c1:= c;
+      c1:= c2;
+      b1:= b;
+      b1:= b2;
+    fin
+   %----------------------------------------------------------------------------
+   
+  principio
+    e1:= e2;
+    e1:= i;
+    e1:= ve;  % No hay error de asignar un vector a un entero!
+    c1:= c2;
+    c1:= c;
+    c1:= c2;
+    b1:= b;
+    b1:= b2;
+    hola_mundo;
+  fin
+  %-----------------------------------------------------------------------------
+
+
+
+Principio          % de p
+  recursivo(5);
+  recursivo(i);
+  recursivo(i + 5);
+  recursivo(5 + 5);
+  recursivo(b);
+  recursivo(c);
+  recursivo(e);
+  recursivo(a);
+  recursivo(ve[caraent("a")]);
+  recursivo(vc);
+  recursivo(vb);
+  recursivo(ve[1]);
+  recursivo(vc[1]);
+  recursivo(vb[1]);
+Fin
+
+

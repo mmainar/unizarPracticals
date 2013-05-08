@@ -1,0 +1,21 @@
+LEEME
+-----------------------------------
+
+Utilidad de los programas de prueba realizados:
+
+  - bloques.pc: Comprueba bloques/ambitos/niveles y la visibilidad.
+
+  - acciones.pc: Comprueba diferentes declaraciones de acciones e 
+                 invocaciones erroneas de acciones. Por ejemplo,
+		 con numero de parametros incorrecto, tipo de los
+		 parametros incorrecto, clase incorrecta, etc.
+  
+  - vectores.pc: Comprueba operaciones con vectores, por ejemplo,
+                 la asignacion directa de vectores,
+  
+  - expresiones.pc: Comprueba todo tipo de expresiones, precedencia
+                    y asociatividad de los operadores, uso de expresiones.
+		    Sentencias leer y escribir.
+		    Expresiones erroneas en la seleccion y mientras que.
+  
+  - optativo.pc: 

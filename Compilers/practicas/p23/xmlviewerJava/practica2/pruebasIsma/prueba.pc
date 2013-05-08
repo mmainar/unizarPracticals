@@ -1,0 +1,73 @@
+programa prueba;
+
+ 
+   vector[1..4] de entero v2;
+   caracter a;
+   entero b;
+   
+
+   %-----------------------------------------------------
+   accion lela;
+   %-----------------------------------------------------
+      caracter lolo;
+
+      %-----------------------------------------------------
+      accion alfa;
+      %-----------------------------------------------------
+         caracter c;
+  
+         %-----------------------------------------------------
+         accion b(ref entero aaama, aaag, aaae);
+         %-----------------------------------------------------
+           caracter aaah;
+	   
+	   
+	   
+	   %-----------------------------------------------------
+	   accion hjk;
+	   %-----------------------------------------------------
+	   principio
+	     escribir('hola');
+	   fin
+	   
+	   
+	   
+         principio % de b
+           aaah := "a";
+         fin
+
+
+
+      principio %de alfa
+         b;					% ERROR: ARGUMENTOS INSUFICIENTES 
+         c := "a";
+      fin
+
+
+   
+   principio % de lela
+     lolo := "w";
+   fin
+ 
+ 
+   %-----------------------------------------------------  
+   accion merwb (ref entero mh, g, pAZ);
+   %-----------------------------------------------------
+      caracter ma;
+      
+   principio
+     ma := 2;                		        % ERROR: ASIGNACION DE TIPOS INCOMPATIBLES
+   fin
+ 
+ 
+Principio  
+  lala(hola);		 		        % 2 ERRORES: VARIABLE HOLA NO DECLARADA Y ACCION LALA NO DECLARADA
+  v2 := v4;		 		        % ERROR: VARIABLE V4 NO DECLARADA
+  a := b;		 		        % ERROR: ASIGNACION DE TIPOS INCOMPATIBLES
+  a := b + 1;                  			% ERROR: ASIGNACION DE TIPOS INCOMPATIBLES
+  a := entacar(b);
+  a := entacar(caraent(a));
+  b := 2+2*4*23-(92*91*5)*8;
+  b;			       % ERROR: SE LLAMA A ACCION NO VISIBLE
+  alfa;			       % ERROR: SE LLAMA A ACCION NO VISIBLE
+Fin

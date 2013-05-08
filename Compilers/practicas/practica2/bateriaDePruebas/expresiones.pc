@@ -1,0 +1,87 @@
+Programa P;
+  entero i, j, m;
+  booleano b;
+  caracter c, d;
+  entero x, y, z;
+  vector[4..10] de entero v1;
+  vector[8..40] de booleano v2;
+  vector[5..9] de caracter v3;
+  
+Principio
+  b := v1 >= v2; % Error, no se puede comparar vectores
+  c := entacar(257); % Warning, se truncara el argumento de entacar
+  c := entacar(-50); % Warning, se truncara el argumento de entacar
+  c := entacar(-1000 + 80*2 + 4 div 8 mod 5); % Warning, se truncara el argumento de entacar
+  x := caraent(b); % Error, argumento de caraent de tipo incorrecto
+  x := caraent(c);
+  x := caraent('hola'); % Error, argumento de caraent de tipo incorrecto
+  x := caraent("h"); 
+  x := caraent(true); % Error, argumento de caraent de tipo incorrecto
+  x := caraent(false); % Error, argumento de caraent de tipo incorrecto
+  x := caraent(v1); % Error, argumento de caraent de tipo incorrecto
+  x := caraent(x); % Error, argumento de caraent de tipo incorrecto
+  b := caraent(c); % Error, tipos incompatibles en la asignacion
+  c := entacar(x);
+  c := entacar(c); % Error, argumento de entacar de tipo incorrecto
+  c := entacar(b); % Error, argumento de entacar de tipo incorrecto
+  c := entacar(v1); % Error, argumento de entacar de tipo incorrecto
+  c := entacar('hola'); % Error, argumento de entacar de tipo incorrecto
+  
+  escribir(v1[10]);
+  escribir(v2[4]); % Warning, el indice 4 de v2 no existe y error, no se puede escribir un booleano 
+  escribir(v3[4]); % Warning, el indice 4 de v3 no existe
+  escribir(v3[5]);
+  escribir(v1); % Error, argumento de escribir de tipo incorrecto
+  escribir('El MCD es: ', m, entacar (13), entacar (10));
+  escribir(c);
+  escribir(8*4 div 4 mod 80 - 8 + 4);
+  escribir(c >= d); % Error, argumento de escribir de tipo incorrecto
+  escribir(b); % Error, no se puede escribir un booleano
+  escribir("h"); 
+  leer(b); % Error, no se puede leer un booleano
+  leer(c);
+  leer(x);
+  leer("hola"); % Avisos, quita las " y error, identificador no declarado
+  %leer(8);  Error sintactico, debe ser identificador el arg de leer
+  leer(v1); % Error, argumento de leer de tipo incorrecto
+  leer(v2); % Error, argumento de leer de tipo incorrecto
+  %leer(v1[10]);  Error sintactico, no permitido en la gramatica
+  b := not( (i > 9) and (j <> 23));
+  b := x >= y >= z; % Error, se compara bool con entero, precedencia
+  b := (x >= y) and (y >= z);
+  b := x > 9 and y <> 3; % Error, precedencia
+  b := (x > 9) and (y <> 3);
+  b := x = 5 or y <> 3; % Error, precedencia
+  b := (x = 5) or (y <> 3);
+  b := not x > 14; % Error, not tiene mas precedencia que >
+  b := not (x > 14); 
+  b := x <= 1 and y = 6 or z < 4; % Error, and tiene menos precedencia que los operadores relacionales. Se intenta hacer 1 and y 1º.
+  b := (x <= 1) and (y = 6) or (z < 4);
+  b := c >= "a" and c <= "z"; % Error, precedencia
+  b := (c >= "a") and (c <= "z");
+  b := c >= "A" and c <> "n"; % Error, precedencia
+  b := (c >= "A") and (c <> "n");
+  b := 5 and y <> 8 or 0; % Error, y no es de tipo booleano y por tanto operando 1 para <> (mayor precedencia que and y or).
+                          % es incorrecto. Ademas, operando 2 para <> tambien es incorrecto ya que los operandos para el or lo son.
+  b := 5 and (y <> 8) or 0; % Error, expresion sin sentido
+  % b := dato(i); %Error sintactico, no hay funciones en nuestro lenguaje, solo acciones
+  b := 'hola'; % Error, tipos incompatibles en la asignacion
+  %b := 'hola' + 'x'; 
+  b := 'hola' + b; % Error, operandos deben ser enteros y tipos incompatibles en la asignacion (b es booleano).
+  Si c ent % Condicion invalida
+    escribir('lala');
+  FSi
+  Si b*4 ent % Condicion invalida y b debe ser entero
+    escribir('lala');
+  Fsi
+  escribir(5+8);
+  Mq r*0 % Condicion invalida
+     escribir('mal');
+  FMq
+  Mq 0  % Condicion invalida
+    nula;
+  Fmq
+  b := not 2; % Error, argumento not incorrecto, debe ser booleano
+  i := j div 0; % Warning, division por 0
+  i := j div i; % Warning, verifique que no divide por 0
+Fin

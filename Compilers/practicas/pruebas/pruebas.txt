@@ -1,0 +1,11 @@
+gcc -c -I../pruebas/ -I- ../pruebas/prueba.adb
+prueba.adb:13:18: warning: "a" is never assigned a value
+prueba.adb:30:05: warning: value not in range of subtype of "Standard.integer" defined at line 28
+prueba.adb:30:05: warning: "constraint_error" will be raised at run time
+prueba.adb:31:06: division by zero
+prueba.adb:31:06: static expression raises "constraint_error"
+prueba.adb:32:10: warning: static value out of range of subtype of "Standard.integer" defined at line 28
+prueba.adb:32:10: warning: "constraint_error" will be raised at run time
+prueba.adb:33:08: expected type "Standard.integer"
+prueba.adb:33:08: found type universal real
+gnatmake: "../pruebas/prueba.adb" compilation error

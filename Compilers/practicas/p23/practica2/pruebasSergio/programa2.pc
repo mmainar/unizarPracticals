@@ -1,0 +1,73 @@
+%-----------------------
+programa programa2;
+%-----------------------
+
+  entero e;
+  caracter c, acc;
+  booleano b;
+  vector [1..3] de booleano vb;
+  vector [0..2] de caracter vc;
+  vector [-1..1] de entero ve;
+
+  accion acc; 	% error, variable ya declarada en el mismo nivel
+  
+  principio
+    escribir('hola');
+  fin
+  
+  accion unaAccion;
+  
+  principio
+    escribir('hola');
+  fin
+  
+  accion acc1 (val entero i, ii, iii, iv, v, vi, vii, viii, ix, x);
+  
+  principio
+    escribir (i);
+  fin
+  
+  accion acc2 (ref entero i, ii, iii);
+  
+  principio
+    leer (i);
+  fin
+  
+  accion acc3 (val booleano bool);
+  
+  principio
+    unaAccion;
+  fin
+
+principio
+  acc;			% error, no se corresponde con una accion
+  acc(e);		% error, no se corresponde con una accion
+  
+  unaAccion;	
+  unaAccion(e);		% error, demasiados parametros
+  unaAccion(10);	% error, demasiados parametros
+  
+  acc1(3);		% error, parametros insuficientes
+  acc1(3, e);		% error, parametros insuficientes
+  acc1(1,2,3,4,5,6,7,8,9,10,11); 	% error, demasiados parametros
+  acc1(1+2, 2*3, 3-2, 4+9*10, 5, 6, 7, 8, 9, ve[0]);
+  
+  acc2(1,2,3);		% error, no se pueden pasar por referencia
+  acc2(e,e,20*9);	% error, el tercer argumento no se puede pasar por referencia
+  acc2(e,e,e,1);	% error, demasiados parametros
+  acc2;			% error, faltan parametros
+  acc2(e);		% error, faltan parametros
+  acc2(b, c, b);	% error, tipos incompatibles
+  acc2(true, "a", "?"); % error, tipos incompatibles y no se puede pasar por referencia
+  
+  acc3(vb[2]);
+  acc3(vc[0]);		% error, tipos incompatibles
+  acc3(ve[0]);		% error, tipos incompatibles
+  acc3(not(true or false));
+  acc3(((7 < 8) or false));
+  acc3(true, false);	% error, demasiados parametros
+  
+  acc3();		% ERROR SINTACTICO, sin argumentos sobran parentesis
+  
+fin
+

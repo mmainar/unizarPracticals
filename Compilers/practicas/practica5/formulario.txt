@@ -1,0 +1,15 @@
+----------------------------------------------------------------------------------------
+?Que tecnica has empleado? (SEC / AST) AST
+Explica brevemente por que
+
+Valoracion positiva indicada en el guion de la practica, aprender de cara al
+examen, etc.
+----------------------------------------------------------------------------------------
+?Has hecho la parte opcional de XML? No
+----------------------------------------------------------------------------------------
+?Has hecho algo extra, no especificado directamente en el guion de la practica?
+En caso afirmativo, enumera brevemente (no mas de 20 lineas) que extra has hecho.
+
+Optimizacion: - Calcular constantes enteras al vuelo, ahorro de codigo.
+----------------------------------------------------------------------------------------
+

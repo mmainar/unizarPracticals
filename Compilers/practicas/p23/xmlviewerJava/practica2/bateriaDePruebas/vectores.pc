@@ -1,0 +1,48 @@
+Programa P;
+  entero i,j ;
+  vector[4..10] de entero v1, v2;
+  vector[8..40] de booleano v3, v4;
+  vector[5..9] de caracter v5, v6;
+  vector[50..80] de entero v7;
+  vector[4..10] de entero v8;
+  vector[0..50] de booleano v9;
+  vector[8..40] de caracter v10;
+  vector[1..50] de booleano v11;
+  entero v8;   % Error, identificador duplicado
+  caracter v7; % Error, identificador duplicado
+  
+  accion a1 (val entero v1);
+  Principio
+    leer(v1); 
+  Fin  
+  
+  
+Principio
+ i := j +1;
+ v2[8] := 4;
+ v2 := v7; % Error, vectores de diferente dimension
+ v1 := v8; 
+ v9 := v11; % Error, vectores de diferente dimension
+ v3 := v10; % Error, vectores de diferente tipo
+ v1 := v9; % Error, vectores de diferente dimension y tipo
+ v3 := v4;
+ v6 := v5;
+ v3[3] := v9[0];
+ v1[4] := v2[(i*3)+j];
+ v3[j] := v4[i];
+ v3[8] := v4[j];
+ v3[8] := 3; % Error, tipos incompatibles
+ v1[8] := true; % Error, tipos incompatibles
+ v1[8] := "a"; % Error, tipos incompatibles
+ v1[8] := 9;
+ v3[8] := "b"; % Error, tipos incompatibles
+ v3[8] := true;
+ v10[9] := "b";
+ v10[9] := true; % Error, tipos incompatibles
+ v10[9] := 8; % Error, tipos incompatibles
+ a1(v2); % Error, los vectores no se pasan como args
+ a1(v3); % Ide
+ escribir(v1); % Error, los vectores no es escriben
+ leer(v1);  % Error, los vectores no se leen
+ v1 := v1+v2;
+Fin
