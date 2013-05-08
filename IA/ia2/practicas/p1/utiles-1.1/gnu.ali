@@ -1,0 +1,11 @@
+V "GNAT Lib v4.3"
+P ZX
+R nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn
+
+U gnu%s			gnu.ads			283c7ebe NE PK IU
+
+D gnu.ads		20020301104509 283c7ebe
+D system.ads		20080908150301 e2b32c27
+X 1 gnu.ads
+12K9*GNU 14l5 14e8
+

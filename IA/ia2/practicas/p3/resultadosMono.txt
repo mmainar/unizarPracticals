@@ -1,0 +1,144 @@
+USER(2): (in-package "UCPOP")
+#<The UCPOP package>
+UCPOP(3): (load "mono")
+; Loading ./mono.lisp
+T
+UCPOP(4): (bf-control 'mono1)
+
+Initial  : ((ESTA MONO A) (ESTA PLATANOS A) (ESTA CAJA C)
+            (NOT (ABIERTA AB)) (NOT (ABIERTA BC)) (EN-SUELO))
+
+Step 1  : (ABRIR-AB-DESDE-A)     Created 7 
+           0  -> (EN-SUELO)          
+           0  -> (ESTA MONO A)       
+           0  -> (NOT (ABIERTA AB))  
+Step 2  : (IR-DE-A-A-B)          Created 6 
+           0  -> (EN-SUELO)          
+           7  -> (ABIERTA AB)        
+           0  -> (ESTA MONO A)       
+Step 3  : (ABRIR-BC-DESDE-B)     Created 8 
+           0  -> (EN-SUELO)          
+           6  -> (ESTA MONO B)       
+           0  -> (NOT (ABIERTA BC))  
+Step 4  : (IR-DE-B-A-C)          Created 5 
+           0  -> (EN-SUELO)          
+           8  -> (ABIERTA BC)        
+           6  -> (ESTA MONO B)       
+Step 5  : (IR-DE-C-A-B-CON-CAJA)   Created 4 
+           0  -> (EN-SUELO)          
+           8  -> (ABIERTA BC)        
+           0  -> (ESTA CAJA C)       
+           5  -> (ESTA MONO C)       
+Step 6  : (IR-DE-B-A-A-CON-CAJA)   Created 3 
+           0  -> (EN-SUELO)          
+           7  -> (ABIERTA AB)        
+           4  -> (ESTA CAJA B)       
+           4  -> (ESTA MONO B)       
+Step 7  : (SUBIR A)              Created 2 
+           0  -> (EN-SUELO)          
+           3  -> (ESTA CAJA A)       
+           3  -> (ESTA MONO A)       
+Step 8  : (COGER-PLATANOS A)     Created 1 
+           2  -> (SUBIDO-CAJA A)     
+           0  -> (ESTA PLATANOS A)   
+
+Goal    : (TENER-PLATANOS)
+           1  -> (TENER-PLATANOS)    
+Facts:
+Complete!
+
+UCPOP Stats: Initial terms = 6 ;   Goals = 1 ;  Success (8 steps)
+      Created 3623 plans, but explored only 1550
+      CPU time:    2.3600 sec
+      Branching factor:  2.017
+      Working Unifies: 34695
+      Bindings Added: 313 
+#plan<S=9; O=0; U=0; F=0>
+#Stats:<cpu time = 2.3600>
+
+
+UCPOP(5): (bf-control 'mono2)
+
+Initial  : ((ESTA MONO A) (ESTA PLATANOS A) (ESTA CAJA C)
+            (NOT (ABIERTA AB)) (NOT (ABIERTA BC)) (EN-SUELO))
+
+Step 1  : (ABRIR-AB-DESDE-A)     Created 7 
+           0  -> (EN-SUELO)          
+           0  -> (ESTA MONO A)       
+           0  -> (NOT (ABIERTA AB))  
+Step 2  : (IR-DE-A-A-B)          Created 6 
+           0  -> (EN-SUELO)          
+           7  -> (ABIERTA AB)        
+           0  -> (ESTA MONO A)       
+Step 3  : (ABRIR-BC-DESDE-B)     Created 8 
+           0  -> (EN-SUELO)          
+           6  -> (ESTA MONO B)       
+           0  -> (NOT (ABIERTA BC))  
+Step 4  : (IR-DE-B-A-C)          Created 5 
+           0  -> (EN-SUELO)          
+           8  -> (ABIERTA BC)        
+           6  -> (ESTA MONO B)       
+Step 5  : (IR-DE-C-A-B-CON-CAJA)   Created 4 
+           0  -> (EN-SUELO)          
+           8  -> (ABIERTA BC)        
+           0  -> (ESTA CAJA C)       
+           5  -> (ESTA MONO C)       
+Step 6  : (IR-DE-B-A-A-CON-CAJA)   Created 3 
+           0  -> (EN-SUELO)          
+           7  -> (ABIERTA AB)        
+           4  -> (ESTA CAJA B)       
+           4  -> (ESTA MONO B)       
+Step 7  : (SUBIR A)              Created 2 
+           0  -> (EN-SUELO)          
+           3  -> (ESTA CAJA A)       
+           3  -> (ESTA MONO A)       
+Step 8  : (COGER-PLATANOS A)     Created 1 
+           2  -> (SUBIDO-CAJA A)     
+           0  -> (ESTA PLATANOS A)   
+Step 9  : (BAJAR A)              Created 11
+           2  -> (SUBIDO-CAJA A)     
+Step 10 : (IR-DE-A-A-B-CON-CAJA)   Created 10
+           11 -> (EN-SUELO)          
+           7  -> (ABIERTA AB)        
+           3  -> (ESTA CAJA A)       
+           3  -> (ESTA MONO A)       
+Step 11 : (IR-DE-B-A-C-CON-CAJA)   Created 9 
+           11 -> (EN-SUELO)          
+           8  -> (ABIERTA BC)        
+           10 -> (ESTA CAJA B)       
+           10 -> (ESTA MONO B)       
+Step 12 : (IR-DE-C-A-B)          Created 13
+           11 -> (EN-SUELO)          
+           8  -> (ABIERTA BC)        
+           9  -> (ESTA MONO C)       
+Step 13 : (CERRAR-BC-DESDE-B)    Created 15
+           11 -> (EN-SUELO)          
+           13 -> (ESTA MONO B)       
+           8  -> (ABIERTA BC)        
+Step 14 : (IR-DE-B-A-A)          Created 12
+           11 -> (EN-SUELO)          
+           7  -> (ABIERTA AB)        
+           13 -> (ESTA MONO B)       
+Step 15 : (CERRAR-AB-DESDE-A)    Created 14
+           11 -> (EN-SUELO)          
+           12 -> (ESTA MONO A)       
+           7  -> (ABIERTA AB)        
+
+Goal    : (AND (TENER-PLATANOS) (ESTA CAJA C) (ESTA MONO A)
+           (NOT (ABIERTA AB)) (NOT (ABIERTA BC)))
+           15 -> (NOT (ABIERTA BC))  
+           14 -> (NOT (ABIERTA AB))  
+           12 -> (ESTA MONO A)       
+           9  -> (ESTA CAJA C)       
+           1  -> (TENER-PLATANOS)    
+Facts:
+Complete!
+
+UCPOP Stats: Initial terms = 6 ;   Goals = 6 ;  Success (15 steps)
+      Created 8872 plans, but explored only 3984
+      CPU time:    6.4400 sec
+      Branching factor:  1.824
+      Working Unifies: 87545
+      Bindings Added: 766 
+#plan<S=16; O=0; U=0; F=0>
+#Stats:<cpu time = 6.4400>

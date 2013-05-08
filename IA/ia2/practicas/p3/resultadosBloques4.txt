@@ -1,0 +1,178 @@
+UCPOP(8): (load "bloques4")
+; Loading ./bloques4.lisp
+T
+UCPOP(10): (bf-control 'sussman4)
+
+Initial  : ((SOBRE C A) (SOBREMESA A) (SOBREMESA B) (LIBRE C) (LIBRE B)
+            (MANOVACIA))
+
+Step 1  : (DESAPILAR C A)        Created 3 
+           0  -> (MANOVACIA)         
+           0  -> (LIBRE C)           
+           0  -> (SOBRE C A)         
+Step 2  : (DEJAR C)              Created 6 
+           3  -> (COGIDO C)          
+Step 3  : (COGER B)              Created 5 
+           6  -> (MANOVACIA)         
+           0  -> (LIBRE B)           
+           0  -> (SOBREMESA B)       
+Step 4  : (APILAR B C)           Created 4 
+           0  -> (LIBRE C)           
+           5  -> (COGIDO B)          
+Step 5  : (COGER A)              Created 2 
+           4  -> (MANOVACIA)         
+           3  -> (LIBRE A)           
+           0  -> (SOBREMESA A)       
+Step 6  : (APILAR A B)           Created 1 
+           0  -> (LIBRE B)           
+           2  -> (COGIDO A)          
+
+Goal    : (AND (SOBRE A B) (SOBRE B C))
+           4  -> (SOBRE B C)         
+           1  -> (SOBRE A B)         
+Facts:
+Complete!
+
+UCPOP Stats: Initial terms = 6 ;   Goals = 3 ;  Success (6 steps)
+      Created 552 plans, but explored only 296
+      CPU time:    0.2100 sec
+      Branching factor:  1.466
+      Working Unifies: 1239
+      Bindings Added: 266 
+#plan<S=7; O=0; U=0; F=0>
+#Stats:<cpu time = 0.2100>
+
+UCPOP(11): (bf-control 'facil4)
+
+Initial  : ((SOBRE C A) (SOBREMESA A) (SOBREMESA B) (LIBRE C) (LIBRE B)
+            (MANOVACIA))
+
+Step 1  : (DESAPILAR C A)        Created 3 
+           0  -> (MANOVACIA)         
+           0  -> (LIBRE C)           
+           0  -> (SOBRE C A)         
+Step 2  : (APILAR C B)           Created 4 
+           0  -> (LIBRE B)           
+           3  -> (COGIDO C)          
+Step 3  : (COGER A)              Created 2 
+           4  -> (MANOVACIA)         
+           3  -> (LIBRE A)           
+           0  -> (SOBREMESA A)       
+Step 4  : (APILAR A C)           Created 1 
+           0  -> (LIBRE C)           
+           2  -> (COGIDO A)          
+
+Goal    : (AND (SOBRE A C) (SOBRE C B))
+           4  -> (SOBRE C B)         
+           1  -> (SOBRE A C)         
+Facts:
+Complete!
+
+UCPOP Stats: Initial terms = 6 ;   Goals = 3 ;  Success (4 steps)
+      Created 71 plans, but explored only 38
+      CPU time:    0.0100 sec
+      Branching factor:  1.658
+      Working Unifies: 160 
+      Bindings Added: 49  
+#plan<S=5; O=0; U=0; F=0>
+#Stats:<cpu time = 0.0100>
+
+
+UCPOP(12): (bf-control 'insertar4)
+
+Initial  : ((SOBRE C A) (SOBREMESA A) (SOBREMESA B) (LIBRE C) (LIBRE B)
+            (MANOVACIA))
+
+Step 1  : (DESAPILAR C A)        Created 4 
+           0  -> (MANOVACIA)         
+           0  -> (LIBRE C)           
+           0  -> (SOBRE C A)         
+Step 2  : (DEJAR C)              Created 3 
+           4  -> (COGIDO C)          
+Step 3  : (COGER B)              Created 6 
+           3  -> (MANOVACIA)         
+           0  -> (LIBRE B)           
+           0  -> (SOBREMESA B)       
+Step 4  : (APILAR B A)           Created 5 
+           4  -> (LIBRE A)           
+           6  -> (COGIDO B)          
+Step 5  : (COGER C)              Created 2 
+           5  -> (MANOVACIA)         
+           0  -> (LIBRE C)           
+           3  -> (SOBREMESA C)       
+Step 6  : (APILAR C B)           Created 1 
+           0  -> (LIBRE B)           
+           2  -> (COGIDO C)          
+
+Goal    : (AND (SOBRE C B) (SOBRE B A))
+           5  -> (SOBRE B A)         
+           1  -> (SOBRE C B)         
+Facts:
+Complete!
+
+UCPOP Stats: Initial terms = 6 ;   Goals = 3 ;  Success (6 steps)
+      Created 4033 plans, but explored only 2260
+      CPU time:    1.8000 sec
+      Branching factor:  1.330
+      Working Unifies: 9596
+      Bindings Added: 1709
+#plan<S=7; O=0; U=0; F=0>
+#Stats:<cpu time = 1.8000>
+
+
+UCPOP(13): (bf-control 'imposible4)
+
+Warning: Search limit exceeded
+Initial  : ((SOBRE C A) (SOBREMESA A) (SOBREMESA B) (LIBRE C) (LIBRE B)
+            (MANOVACIA))
+
+Step 1  : (DESAPILAR C A)        Created 5 
+           0  -> (MANOVACIA)         
+           0  -> (LIBRE C)           
+           0  -> (SOBRE C A)         
+Step 2  : (APILAR C B)           Created 9 
+           0  -> (LIBRE B)           
+           5  -> (COGIDO C)          
+Step 3  : (DESAPILAR C B)        Created 8 
+           9  -> (MANOVACIA)         
+           0  -> (LIBRE C)           
+           9  -> (SOBRE C B)         
+Step 4  : (DEJAR C)              Created 10
+           8  -> (COGIDO C)          
+Step 5  : (COGER B)              Created 7 
+           10 -> (MANOVACIA)         
+           8  -> (LIBRE B)           
+           0  -> (SOBREMESA B)       
+Step 6  : (DEJAR B)              Created 6 
+           7  -> (COGIDO B)          
+Step 7  : (COGER A)              Created 4 
+           6  -> (MANOVACIA)         
+           5  -> (LIBRE A)           
+           0  -> (SOBREMESA A)       
+Step 8  : (APILAR A C)           Created 3 
+           0  -> (LIBRE C)           
+           4  -> (COGIDO A)          
+Step 9  : (DESAPILAR A C)        Created 2 
+           3  -> (MANOVACIA)         
+           5  -> (LIBRE A)           
+           3  -> (SOBRE A C)         
+Step 10 : (APILAR A B)           Created 1 
+           2  -> (COGIDO A)          
+           ?? -> (LIBRE B)           
+
+Goal    : (AND (SOBRE A B) (SOBRE B C) (SOBRE C A))
+           1  -> (SOBRE A B)         
+           ?? -> (SOBRE B C)         
+           ?? -> (SOBRE C A)         
+Facts:
+
+UCPOP Stats: Initial terms = 6 ;   Goals = 4 ;  Failure (10 steps)
+      Created 27325 plans, but explored only 15907
+      CPU time:   15.8000 sec
+      Branching factor:  1.258
+      Working Unifies: 67573
+      Bindings Added: 9783
+#plan<S=11; O=3; U=0; F=0>
+#Stats:<cpu time = 15.8000>
+
+

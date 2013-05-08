@@ -1,0 +1,11 @@
+Errores en la documentaci'on de la pr'actica 4 
+
+Seccion 4.2.1
+Las funciones de b'usqueda devuelven el nodo soluci'on,
+las estad'isticas quedan en el par'ametro *stats*
+En la funcion que tiene delante el siguiente comentario
+;; Function ?????????? returns t is pos is a winning position for player,
+;; nil otherwise.
+
+    quitar (setq player (opposite player)), 
+porque sino jugara a perder.

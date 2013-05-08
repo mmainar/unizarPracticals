@@ -1,0 +1,160 @@
+[6] UCPOP(32): (load "bloques2manos")
+;       Loading ./bloques2manos.lisp
+T
+[6] UCPOP(33): (bf-control 'sussman2manos)
+
+Initial  : ((SOBRE C A) (SOBREMESA A) (SOBREMESA B) (LIBRE C) (LIBRE B)
+            (MANOIZQVACIA) (MANODERVACIA))
+
+Step 1  : (DESAPILARDER C A)     Created 3 
+           0  -> (MANODERVACIA)      
+           0  -> (LIBRE C)           
+           0  -> (SOBRE C A)         
+Step 2  : (DEJARDER C)           Created 6 
+           3  -> (COGIDODER C)       
+Step 3  : (COGERDER B)           Created 5 
+           6  -> (MANODERVACIA)      
+           0  -> (LIBRE B)           
+           0  -> (SOBREMESA B)       
+Step 4  : (APILARDER B C)        Created 4 
+           6  -> (LIBRE C)           
+           5  -> (COGIDODER B)       
+Step 5  : (COGERIZQ A)           Created 2 
+           0  -> (MANOIZQVACIA)      
+           3  -> (LIBRE A)           
+           0  -> (SOBREMESA A)       
+Step 6  : (APILARIZQ A B)        Created 1 
+           4  -> (LIBRE B)           
+           2  -> (COGIDOIZQ A)       
+
+Goal    : (AND (SOBRE A B) (SOBRE B C))
+           4  -> (SOBRE B C)         
+           1  -> (SOBRE A B)         
+Facts:
+Complete!
+
+UCPOP Stats: Initial terms = 7 ;   Goals = 3 ;  Success (6 steps)
+      Created 2207 plans, but explored only 954
+      CPU time:    1.1700 sec
+      Branching factor:  2.008
+      Working Unifies: 7776
+      Bindings Added: 1586
+#plan<S=7; O=0; U=0; F=0>
+#Stats:<cpu time = 1.1700>
+
+[6] UCPOP(34): (bf-control 'facil2manos) 
+
+Initial  : ((SOBRE C A) (SOBREMESA A) (SOBREMESA B) (LIBRE C) (LIBRE B)
+            (MANOIZQVACIA) (MANODERVACIA))
+
+Step 1  : (DESAPILARDER C A)     Created 3 
+           0  -> (MANODERVACIA)      
+           0  -> (LIBRE C)           
+           0  -> (SOBRE C A)         
+Step 2  : (APILARDER C B)        Created 4 
+           0  -> (LIBRE B)           
+           3  -> (COGIDODER C)       
+Step 3  : (COGERIZQ A)           Created 2 
+           0  -> (MANOIZQVACIA)      
+           3  -> (LIBRE A)           
+           0  -> (SOBREMESA A)       
+Step 4  : (APILARIZQ A C)        Created 1 
+           4  -> (LIBRE C)           
+           2  -> (COGIDOIZQ A)       
+
+Goal    : (AND (SOBRE A C) (SOBRE C B))
+           4  -> (SOBRE C B)         
+           1  -> (SOBRE A C)         
+Facts:
+Complete!
+
+UCPOP Stats: Initial terms = 7 ;   Goals = 3 ;  Success (4 steps)
+      Created 341 plans, but explored only 135
+      CPU time:    0.1700 sec
+      Branching factor:  2.296
+      Working Unifies: 962 
+      Bindings Added: 269 
+#plan<S=5; O=0; U=0; F=0>
+#Stats:<cpu time = 0.1700>
+
+[6] UCPOP(35): (bf-control 'insertar2manos)
+
+Initial  : ((SOBRE C A) (SOBREMESA A) (SOBREMESA B) (LIBRE C) (LIBRE B)
+            (MANOIZQVACIA) (MANODERVACIA))
+
+Step 1  : (DESAPILARIZQ C A)     Created 2 
+           0  -> (MANOIZQVACIA)      
+           0  -> (LIBRE C)           
+           0  -> (SOBRE C A)         
+Step 2  : (COGERDER B)           Created 4 
+           0  -> (MANODERVACIA)      
+           0  -> (LIBRE B)           
+           0  -> (SOBREMESA B)       
+Step 3  : (APILARDER B A)        Created 3 
+           2  -> (LIBRE A)           
+           4  -> (COGIDODER B)       
+Step 4  : (APILARIZQ C B)        Created 1 
+           3  -> (LIBRE B)           
+           2  -> (COGIDOIZQ C)       
+
+Goal    : (AND (SOBRE C B) (SOBRE B A))
+           3  -> (SOBRE B A)         
+           1  -> (SOBRE C B)         
+Facts:
+Complete!
+
+UCPOP Stats: Initial terms = 7 ;   Goals = 3 ;  Success (4 steps)
+      Created 573 plans, but explored only 231
+      CPU time:    0.2300 sec
+      Branching factor:  2.260
+      Working Unifies: 1780
+      Bindings Added: 461 
+#plan<S=5; O=0; U=0; F=0>
+#Stats:<cpu time = 0.2300>
+
+
+[7] UCPOP(37): (bf-control 'imposible2manos)
+5151320 bytes have been tenured, next gc will be global.
+See the documentation for variable EXCL:*GLOBAL-GC-BEHAVIOR* for more information.
+
+Warning: Search limit exceeded
+Initial  : ((SOBRE C A) (SOBREMESA A) (SOBREMESA B) (LIBRE C) (LIBRE B)
+            (MANOIZQVACIA) (MANODERVACIA))
+
+Step 1  : (DESAPILARDER C A)     Created 6 
+           0  -> (SOBRE C A)         
+           ?? -> (LIBRE C)           
+           ?? -> (MANODERVACIA)      
+Step 2  : (COGERIZQ B)           Created 5 
+           0  -> (MANOIZQVACIA)      
+           0  -> (LIBRE B)           <6>
+           0  -> (SOBREMESA B)       
+Step 3  : (APILARIZQ B A)        Created 4 
+           6  -> (LIBRE A)           
+           5  -> (COGIDOIZQ B)       
+Step 4  : (DESAPILARIZQ B A)     Created 3 
+           4  -> (SOBRE B A)         
+           ?? -> (LIBRE B)           
+           ?? -> (MANOIZQVACIA)      
+Step 5  : (COGERIZQ A)           Created 2 
+           3  -> (LIBRE A)           
+           0  -> (SOBREMESA A)       
+           ?? -> (MANOIZQVACIA)      
+Step 6  : (APILARIZQ A B)        Created 1 
+           2  -> (COGIDOIZQ A)       
+           ?? -> (LIBRE B)           
+
+Goal    : (AND (SOBRE A B) (SOBRE B C) (SOBRE C A))
+           1  -> (SOBRE A B)         
+           ?? -> (SOBRE B C)         
+           ?? -> (SOBRE C A)         
+Facts:
+
+UCPOP Stats: Initial terms = 7 ;   Goals = 4 ;  Failure (6 steps)
+      Created 24192 plans, but explored only 11057
+      CPU time:   31.1000 sec
+      Branching factor:  1.809
+      Working Unifies: 102712
+      Bindings Added: 14717
+#plan<S=7; O=8; U=1; F=0>
+#Stats:<cpu time = 31.1000>

@@ -1,0 +1,148 @@
+UCPOP(3): (load "bloques")
+; Loading ./bloques.lisp
+T
+UCPOP(4): (bf-control 'sussman)
+
+Initial  : ((SOBRE C A) (SOBRE A MESA) (SOBRE B MESA) (LIBRE C)
+            (LIBRE B) (LIBRE MESA))
+
+Step 1  : (MOVER C A MESA)       Created 2 
+           0  -> (LIBRE MESA)        
+           0  -> (LIBRE C)           
+           0  -> (SOBRE C A)         
+Step 2  : (MOVER B MESA C)       Created 3 
+           0  -> (LIBRE C)           
+           0  -> (LIBRE B)           
+           0  -> (SOBRE B MESA)      
+Step 3  : (MOVER A MESA B)       Created 1 
+           0  -> (LIBRE B)           
+           2  -> (LIBRE A)           
+           0  -> (SOBRE A MESA)      
+
+Goal    : (AND (SOBRE A B) (SOBRE B C))
+           3  -> (SOBRE B C)         
+           1  -> (SOBRE A B)         
+Facts:
+Complete!
+
+UCPOP Stats: Initial terms = 6 ;   Goals = 3 ;  Success (3 steps)
+      Created 33 plans, but explored only 17
+      CPU time:    0.0100 sec
+      Branching factor:  1.706
+      Working Unifies: 205 
+      Bindings Added: 27  
+#plan<S=4; O=0; U=0; F=0>
+#Stats:<cpu time = 0.0100>
+
+
+UCPOP(5): (bf-control 'facil)
+
+Initial  : ((SOBRE C A) (SOBRE A MESA) (SOBRE B MESA) (LIBRE C)
+            (LIBRE B) (LIBRE MESA))
+
+Step 1  : (MOVER C A B)          Created 2 
+           0  -> (LIBRE B)           
+           0  -> (LIBRE C)           
+           0  -> (SOBRE C A)         
+Step 2  : (MOVER A MESA C)       Created 1 
+           0  -> (LIBRE C)           
+           2  -> (LIBRE A)           
+           0  -> (SOBRE A MESA)      
+
+Goal    : (AND (SOBRE A C) (SOBRE C B))
+           2  -> (SOBRE C B)         
+           1  -> (SOBRE A C)         
+Facts:
+Complete!
+
+UCPOP Stats: Initial terms = 6 ;   Goals = 3 ;  Success (2 steps)
+      Created 20 plans, but explored only 9
+      CPU time:    0.0000 sec
+      Branching factor:  2.111
+      Working Unifies: 106 
+      Bindings Added: 19  
+#plan<S=3; O=0; U=0; F=0>
+#Stats:<cpu time = 0.0000>
+
+
+UCPOP(6): (bf-control 'insertar)
+
+Initial  : ((SOBRE C A) (SOBRE A MESA) (SOBRE B MESA) (LIBRE C)
+            (LIBRE B) (LIBRE MESA))
+
+Step 1  : (MOVER C A MESA)       Created 2 
+           0  -> (LIBRE MESA)        
+           0  -> (LIBRE C)           
+           0  -> (SOBRE C A)         
+Step 2  : (MOVER B MESA A)       Created 3 
+           2  -> (LIBRE A)           
+           0  -> (LIBRE B)           
+           0  -> (SOBRE B MESA)      
+Step 3  : (MOVER C MESA B)       Created 1 
+           0  -> (LIBRE B)           
+           0  -> (LIBRE C)           
+           2  -> (SOBRE C MESA)      
+
+Goal    : (AND (SOBRE C B) (SOBRE B A))
+           3  -> (SOBRE B A)         
+           1  -> (SOBRE C B)         
+Facts:
+Complete!
+
+UCPOP Stats: Initial terms = 6 ;   Goals = 3 ;  Success (3 steps)
+      Created 48 plans, but explored only 26
+      CPU time:    0.0200 sec
+      Branching factor:  1.654
+      Working Unifies: 292 
+      Bindings Added: 39  
+#plan<S=4; O=0; U=0; F=0>
+#Stats:<cpu time = 0.0200>
+
+UCPOP(7): (bf-control 'imposible)
+5207208 bytes have been tenured, next gc will be global.
+See the documentation for variable EXCL:*GLOBAL-GC-BEHAVIOR* for more information.
+
+Initial  : ((SOBRE C A) (SOBRE A MESA) (SOBRE B MESA) (LIBRE C)
+            (LIBRE B) (LIBRE MESA))
+
+Step 1  : (MOVER C A MESA)       Created 6 
+           0  -> (LIBRE MESA)        
+           0  -> (LIBRE C)           
+           0  -> (SOBRE C A)         
+Step 2  : (MOVER B MESA C)       Created 5 
+           0  -> (LIBRE C)           
+           0  -> (LIBRE B)           
+           0  -> (SOBRE B MESA)      
+Step 3  : (MOVER B C A)          Created 4 
+           6  -> (LIBRE A)           
+           0  -> (LIBRE B)           
+           5  -> (SOBRE B C)         
+Step 4  : (MOVER B A C)          Created 3 
+           4  -> (LIBRE C)           
+           0  -> (LIBRE B)           
+           4  -> (SOBRE B A)         
+Step 5  : (MOVER A MESA MESA)    Created 2 
+           6  -> (LIBRE MESA)        
+           3  -> (LIBRE A)           
+           0  -> (SOBRE A MESA)      
+Step 6  : (MOVER A MESA B)       Created 1 
+           2  -> (SOBRE A MESA)      
+           ?? -> (LIBRE A)           
+           ?? -> (LIBRE B)           
+
+Goal    : (AND (SOBRE A B) (SOBRE B C) (SOBRE C A))
+           1  -> (SOBRE A B)         
+           ?? -> (SOBRE B C)         
+           ?? -> (SOBRE C A)         
+Facts:
+
+UCPOP Stats: Initial terms = 6 ;   Goals = 4 ;  Failure (6 steps)
+      Created 26436 plans, but explored only 15742
+      CPU time:   22.8700 sec
+      Branching factor:  1.271
+      Working Unifies: 237932
+      Bindings Added: 11640
+#plan<S=7; O=4; U=0; F=0>
+#Stats:<cpu time = 22.8700>
+
+

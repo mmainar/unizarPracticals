@@ -1,0 +1,160 @@
+V "GNAT Lib v3.12  "
+A -O3
+P
+R nnvvnnnvnnnvvvvvvvnnnnnnnnnvnnnnnnnnnnnn
+
+U reconocimiento%b	reconocimiento2.adb	6FFC26CB PK IL KM
+W ada%s			ada.ads			ada.ali
+W ada.integer_text_io%s	a-inteio.ads		a-inteio.ali
+W ada.text_io%s		a-textio.adb		a-textio.ali
+W geometria%s		geometria.adb		geometria.ali
+W reconocimiento%s	reconocimiento.adb	reconocimiento.ali
+W reconocimiento.funciones%s  reconocimiento-funciones.adb  reconocimiento-funciones.ali
+W segmentacion%s	segmentacion.adb	segmentacion.ali
+
+U reconocimiento%s	reconocimiento.ads	6481EB5E PK IL
+W ada%s			ada.ads			ada.ali
+W ada.exceptions%s	a-except.adb		a-except.ali
+W ada.text_io%s		a-textio.adb		a-textio.ali
+W ada.text_io.integer_aux%s  a-tiinau.adb	a-tiinau.ali
+W geometria%s		geometria.adb		geometria.ali
+W listas%s		listas.adb		listas.ali  ED
+W system%s		system.ads		system.ali
+W system.exception_table%s  s-exctab.adb	s-exctab.ali
+W system.img_int%s	s-imgint.adb		s-imgint.ali
+W system.secondary_stack%s  s-secsta.adb	s-secsta.ali
+W system.soft_links%s	s-soflin.adb		s-soflin.ali
+W system.standard_library%s  s-stalib.adb	s-stalib.ali
+W system.string_ops%s	s-strops.adb		s-strops.ali
+W system.string_ops_concat_3%s  s-sopco3.adb	s-sopco3.ali
+W vectores%s		vectores.adb		vectores.ali  ED
+
+D ada.ads		19990909173237 2359F9ED
+D a-except.ads		19990909173247 2DA50930
+D a-finali.ads		19990909173250 3F32DEEF
+D a-filico.ads		19990909173244 1DECB9AC
+D a-inteio.ads		19990909173237 767F630A
+D a-ioexce.ads		19990909173247 175CB67B
+D a-stream.ads		19990909173237 5F7C277B
+D a-tags.ads		19990909173244 45EF7E4E
+D a-textio.ads		19990909173244 2D24B708
+D a-tiinau.ads		19990909173239 77D9AFB5
+D a-tiinio.ads		19990909173244 284C234E
+D a-tiinio.adb		19990909173244 35C6AA5C
+D geometria.ads		20010406114940 7405E7F0
+D interfac.ads		19990909173240 0357E00A
+D i-cstrea.ads		19990909173248 23D83009
+D listas.ads		20010406114940 61C414D5
+D listas.adb		20010406114940 7C5E38E9
+D reconocimiento.ads	20090313103430 3F1E2342
+D reconocimiento2.adb	20090315110216 557E3194
+D reconocimiento-funciones.ads  20090311103727 1B268790
+D segmentacion.ads	20090311105056 31E4807F
+D system.ads		19990909173238 79AE32E7
+D s-exctab.ads		19990909173248 1A552981
+D s-ficobl.ads		19990909173246 0C03FD47
+D s-finimp.ads		19990909173242 1C201C0F
+D s-finroo.ads		19990909173244 166D4EDA
+D s-imgint.ads		19990909173246 21B5CB31
+D s-parame.ads		19990909173239 637E33DE
+D s-secsta.ads		19990909173249 6DF20AF1
+D s-soflin.ads		19990909173236 519F026E
+D s-stache.ads		19990909173245 42B57F2A
+D s-stalib.ads		19990909173247 7A7199A7
+D s-stoele.ads		19990909173245 131D4539
+D s-stratt.ads		19990909173246 1761725B
+D s-strops.ads		19990909173247 3DBA3DD5
+D s-sopco3.ads		19990909173248 4956B81D
+D s-unstyp.ads		19990909173248 7918B0AB
+D text_io.ads		19990909173236 7854661C
+D unchconv.ads		19990909173243 72DC4539
+D vectores.ads		20010406114941 4E5E3B39
+D vectores.adb		20010406114940 590FA1B0
+X 1 ada.ads
+18U9*Ada 19|8r57 9r6 10r57 11r6
+X 5 a-inteio.ads
+20U13*Integer_Text_IO 19|9r10 11r10
+X 9 a-textio.ads
+51U13*Text_IO 19|8r61 10r61
+169U14*New_Line 19|82r64 84r64 89r68 101r58 104r38
+245U14*Put 19|82r29 84r15 89r34 101r11 104r13
+X 13 geometria.ads
+18U9*geometria 18|8r6 9r6 19|8r6 10r6
+31f5*lon 19|20r41 21r41 38r67 39r57
+68R11*Rectas 18|25r38 19|15r62 28r87 65r75 115r38 122r13
+X 16 listas.ads
+17G9*Listas 18|8r27 21r36
+19P8*List 18|22r43
+48U13*push 19|106r13
+X 18 reconocimiento.ads
+11U9*reconocimiento 19|8r31 10r31 13b14 40r18 42r18 51r18 53r18
+13R8*par 18r42 19|15r31 28r45 74r10
+14i5*recta_observada 19|20r24 38r50 39r40 40r73 41r64 51r77 52r68
+15i5*recta_modelo 19|21r27 42r74 43r65 53r78 54r69
+18U11*Vectores_Pares 18r53 19r21
+19R11*Pares 19|28r65 65r31 75r12 121r9 18|21r43
+21U11*Listas_Soluciones 21r55 22r25
+22P11*Soluciones 19|115r57 18|25r57 19|65r94
+25U13*Reconocer 19|115b13
+25r23 Obser 19|115b23 122r20 124r24 126r17 127r25
+25r30 Modelo 19|115b30 124r31 130r32
+25p46 Resul 19|115b46 124m39 130m40
+25f69 ep 19|115b69
+X 19 reconocimiento2.adb
+15U14 restr_unarias 80r15
+15r28 p 20r22 21r25
+15f36 ep 21r51
+15r47 Obser 20r11
+15r54 Modelo 21r13
+28U14 restr_binarias 85r26
+28i29 pp 38r46 40r69 42r70 51r73 53r74
+28r42 p 39r38 41r62 43r63 52r66 54r67
+28f50 ep 38r21 39r21 55r58 56r58 57r58 58r58
+28r61 Sh 38r38 40r61 42r62 51r65 53r66
+28r72 Obser 38r27 39r27 40r50 41r51 51r54 52r55
+28r79 Modelo 42r50 43r51 53r54 54r55
+33f7 ea1 38m7 44r46
+33f12 ea2 39m7 44r52
+33f17 titaObs 40m7 44r23
+33f26 titaMod 42m7 44r32
+34e7 angulo 45m9 47m9 60r14
+34e15 distancias 55m7 60r25
+35r7 distObs 51m7 55r22 56r22 57r22 58r22
+35r16 distMod 53m7 55r38 56r38 57r38 58r38
+65U15 busca_pares 93r15 97r9 124r5 130r5
+65r27 Sh 83r26 85r52 89r19 90r22 97r21 99r13 102r36 106r18
+65i38 indiceObser 77r11 79r17 93r32 97r25
+65r60 Obser 77r26 80r36 85r56 93r47 97r40 102r21
+65r67 Modelo 78r21 80r43 85r63 93r54 97r47 102r28
+65p83 Resul 93m62 97m55 106m22
+65f106 ep 80r32 85r48 93r69 97r62
+72e7 consistente 102m48 103r14
+72e20 aceptar 81m13 82r16 85m15 86r29 88r16
+73r7 T 102m45
+74r7 p 79m11 80r29 85r45 91r27
+75r7 Sh2 90m15 91m22 93r27
+78i13 m 79r30
+83i17 pp 85r41
+121r5 Sh 124r17 130r17
+122r5 Obser2 127r7 130r24
+126i9 i 127r19 127r36
+X 20 reconocimiento-funciones.ads
+15U24*funciones 19|8r46 10r46 40r33 42r33 51r33 53r33
+17R8*intervalo 19|35r25
+18f5*min 19|55r30 55r46 56r30 57r46
+18f10*max 19|56r46 57r30 58r30 58r46
+21U12*diferencia 19|44r12
+24U12*angulo 19|40r43 42r43
+29U12*distancias 19|51r43 53r43
+33R8*Trans 19|73r10
+37U13*Localizar 19|102r11
+X 21 segmentacion.ads
+10U9*Segmentacion 19|8r17 10r17
+X 40 vectores.ads
+12G9*Vectores 18|8r17 18r33
+16R8*Vector_Limitado 18|19r36
+17i5*n 19|77r32 78r28 122r26 126r23
+18a5*elem 19|20r17 21r20 38r33 39r33 40r56 41r57 42r57 43r58 51r60 52r61
+. 53r61 54r62 127r31
+23U13*Anadir 19|91r15
+

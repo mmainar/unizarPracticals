@@ -1,0 +1,33 @@
+reconoce -2
+
+10 soluciones sin opt  - Yo: 10
+
+reconoce -4
+
+17 soluciones sin opt. - Yo: 23
+
+reconoce -6
+
+26 soluciones sin opt. - Yo: 43
+
+Aplicando ya restr unarias y binarias
+Sin cambiar los 20 elementos del vector en reconocimiento.ads
+
+
+Sin binarias, solo restricciones unarias
+
+reconoce -2
+
+ 13 soluciones sin opt. Los 2 igual
+
+reconoce -4
+  
+ 36 soluciones sin opt. Los 2 igual
+
+reconoce -6
+
+69 soluciones sin opt. Los 2 igual
+
+
+Parece que hay algun problema en las restricciones binarias.
+Con las unarias solo da igual
