@@ -1,0 +1,232 @@
+/* -------------------------------------------------------
+    EJEMPLO DE APLICACION CON ACCESO AL S.G.B.D.R. ORACLE
+   ------------------------------------------------------- */
+
+#include <stdio.h>                     /* Declaración de bibliotecas */
+#include <string.h>
+#include <ctype.h>
+
+#define LeerULong(num)   scanf("%lu", num);
+#define LeerCadena(cad,max)   scanf("%"#max"[^\n]", cad);
+#define LeerLinea while(getchar() != '\n');
+#define LeerLinCadena(cad,max) LeerCadena(cad,max); LeerLinea;
+#define LeerLinULong(num)   LeerULong(num);  LeerLinea;
+#define preguntarVARCHAR(msg,dest,max) _preguntarVARCHAR(msg,(VARCHAR *)dest, max)
+
+EXEC SQL BEGIN DECLARE SECTION;
+
+VARCHAR uid[30];                       /* nombre de usuario       */
+VARCHAR pwd[20];                       /* password                */
+
+int     NumProfesores;                 /* Variables de trabajo    */
+
+int     ClaveProfesor;
+VARCHAR CodigoProfesor[10];
+VARCHAR NombreProfesor[30];
+int     AreaProfesor;
+
+short   ind_clvProf;
+short   ind_codProf;
+short   ind_nombProf;
+short   ind_areaProf;
+char    nombre[30];
+
+EXEC SQL END DECLARE SECTION;
+
+int totChar;                                 /* Variables auxiliares    */
+
+EXEC SQL INCLUDE SQLCA;
+
+void strToVARCHAR (char *orig, VARCHAR *dest);
+int  _preguntarVARCHAR (char * msg, VARCHAR *dest, short max);
+int   preguntarSTRING  (char *msg,  char    *dest, short max);
+
+int SelecOpcionMenu (void)
+{
+  int eleccion;
+  char tecla;
+
+  do {
+    printf ("\n\n MENU PRINCIPAL:\n\n");
+    printf ("\t 1. Dar de alta a un nuevo profesor \n");
+    printf ("\t 2. Listado de profesores \n");
+    printf ("\t 3. Dar de baja a un profesor \n");
+    printf ("\t 4. Opción 4 \n");
+    printf ("\n\t 0. Salir\n");
+    printf ("\n\t Introduce opción: ");
+    tecla = getchar();
+    printf ("\n\n");
+  }while ((tecla < '0') || (tecla > '4'));
+  LeerLinea;
+  return (tecla - '0');
+}
+
+
+
+void main()
+{
+  int opcion;
+
+/* --------------------
+     Acceso a Oracle.
+   -------------------- */
+
+  preguntarVARCHAR("nombre de Usuario: ", &uid, 30);
+  preguntarVARCHAR("clave de acceso  : ", &pwd, 20);
+
+  EXEC SQL WHENEVER SQLERROR GOTO SalidaPorError;
+  EXEC SQL CONNECT :uid IDENTIFIED BY :pwd;
+
+  printf ("\n conectado como : %s", uid.arr);
+
+  /* PROGRAMA PRINCIPAL */
+
+  while ((opcion=SelecOpcionMenu()) != 0)         /* Menú principal */
+   switch (opcion) {
+    case 1:  /*   Inserción de un profesor  */
+
+     totChar = asks(" Introduce nombre del profesor: ", NombreProfesor.arr);
+     if (totChar <= 0) break;
+      NombreProfesor.len = totChar;
+      askn(" Introduce clave del profesor : ", &ClaveProfesor);
+
+     EXEC SQL WHENEVER NOT FOUND STOP;
+     EXEC SQL INSERT INTO PROFESOR(clvProf,nombProf)
+                VALUES (:ClaveProfesor, :NombreProfesor);
+
+     printf("  \n%s Añadido a la tabla PROFESOR \n", NombreProfesor.arr);
+
+     continue;
+
+    case 2:  /*   Listado de  profesores  */
+
+      EXEC SQL DECLARE ListaProfesores CURSOR FOR
+                SELECT clvProf, codProf, nombProf, clvArea
+                FROM PROFESOR
+                ORDER BY clvProf;
+
+      EXEC SQL OPEN ListaProfesores;
+      EXEC SQL WHENEVER NOT FOUND GOTO FinListado;
+
+      printf("\n\nCLAVE  CODIGO     NOMBRE                         AREA\n");
+      printf("------ ---------- ------------------------------ ------\n");
+      for (;;) {
+        EXEC SQL FETCH ListaProfesores INTO :ClaveProfesor:ind_clvProf,
+                                            :CodigoProfesor:ind_codProf,
+                                            :NombreProfesor:ind_nombProf,
+                                            :AreaProfesor:ind_areaProf;
+
+        CodigoProfesor.arr[CodigoProfesor.len]= '\0';
+        NombreProfesor.arr[NombreProfesor.len]= '\0';
+        printf("%-6d %-10s ", ClaveProfesor, CodigoProfesor.arr);
+        printf("%-30s %-6d\n", NombreProfesor.arr, AreaProfesor);
+      }
+
+    FinListado:
+      EXEC SQL CLOSE ListaProfesores;
+
+      continue;
+
+    case 3:  /*   Eliminación de un profesor por su nombre */
+
+     preguntarSTRING("Nombre del profesor: ",nombre,30);
+     if (strlen(nombre) == 0) break;
+
+     EXEC SQL WHENEVER NOT FOUND GOTO FinEliminar;
+     EXEC SQL DELETE FROM PROFESOR
+                WHERE UPPER(nombProf)=UPPER(:nombre);
+
+     printf("\n %s ELIMINADO de la tabla PROFESOR \n", nombre);
+
+     continue;
+
+    FinEliminar:
+     printf("\n %s NO ENCONTRADO en la tabla PROFESOR \n", nombre);
+     continue;
+
+    case 4: /*   Opciones por implementar  */
+
+      printf ("\t Opción no implementada \n");
+      continue;
+
+    case 0: break;
+  }
+
+/* -------------------
+     Salir de Oracle
+   ------------------- */
+
+   EXEC SQL COMMIT WORK RELEASE;
+   return;
+
+SalidaPorError:
+   errrpt();
+   EXEC SQL WHENEVER SQLERROR continue;
+   EXEC SQL ROLLBACK WORK RELEASE;
+
+  return;
+}
+
+                     /* Funciones auxiliares */
+int askn (char *text, int *variable)
+{
+   char s[20];
+   printf(text);
+   fflush(stdout);
+   if ( gets(s) == (char *)0 ) return(EOF);
+
+   *variable = atoi(s);
+   return(1);
+}
+
+int asks (char *text, char *variable)
+{
+   printf(text);
+   fflush(stdout);
+   return( gets(variable) == (char *)0 ? EOF : strlen(variable) );
+}
+
+void strToVARCHAR (char *orig, VARCHAR *dest)
+{
+  strcpy((char *) dest->arr, orig);
+  dest->len = (unsigned short) strlen(orig);
+}
+
+int _preguntarVARCHAR (char *msg, VARCHAR *dest, short max)
+{
+  int i;
+  char *pt;
+
+  printf(msg);   fflush(stdout);
+  pt = (char *) &dest->arr;
+  for(i=0; i<max; i++) {
+    if ('\n' == (*pt = getchar())) break;
+    pt++;
+  }
+  *pt = '\0';
+  dest->len = (unsigned short) strlen((char *) dest->arr);
+  return(dest->len);
+}
+
+int  preguntarSTRING  (char *msg,  char    *dest, short max)
+{
+  int i;
+
+  printf(msg);   fflush(stdout);
+  for(i=0; i<max; i++) {
+    if ('\n' == (*dest = getchar())) break;
+    dest++;
+  }
+  *dest = '\0';
+  return(i);
+}
+
+/* ----------------------------------------------------------
+   VOID errrpt()  Muestra el mensaje y código de error Oracle
+   ---------------------------------------------------------- */
+
+errrpt()
+{
+   printf("%.70s (%d)\n", sqlca.sqlerrm.sqlerrmc, -sqlca.sqlcode);
+   return(0);
+}

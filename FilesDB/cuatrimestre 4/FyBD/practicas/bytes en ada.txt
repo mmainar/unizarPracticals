@@ -1,0 +1,34 @@
+
+
+Registrado: 08 Mar 2005
+Mensajes: 148
+
+	
+MensajePublicado: Sab Abr 23, 2005 20:57    Título del mensaje: Tipos modulares y arrays de booleanos 	Responder citando
+Tienes dos opciones para manerjar datos a nivel de bits: los enteros modulares (sin signo) y los arrays de booleanos empaquetados.
+
+Código:
+type byte is mod 2**8;
+
+
+o
+
+Código:
+type byte is array (1..8) of boolean;
+
+pragma pack (byte); -- Con esto se consigue que los elementos del array ocupen lo minimo posible, para los boolean es un bit.
+
+
+y luego
+
+Código:
+package byte_io is new ada.sequential_io (byte); -- Te permite leer byte a byte un archivo.
+
+Tanto los tipos mod como los arrays de booleanos (esten empaquetado o no) tienen operaciones logicas a nivel de bits: and, or y xor.
+
+¿Cual usar en cada caso? Pues cuando te interese interpretarlo el byte como entero, los tipos mod. Cuando te interese acceder con un indice a cada bit, los arrays de booleanos.
+
+
+Amigo de Rául
+
+Declarar ficheros secuenciales de caracteres y luego hacer character'val.

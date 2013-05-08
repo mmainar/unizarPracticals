@@ -1,0 +1,1 @@
+genericSize:Positive;type Elemento is private;package defPila1 is   procedure Apilar (E: in Elemento);   procedure Desapilar (E: out Elemento);   function Pilavacia return Boolean;   Overflow, Underflow : exception;end defPila1;

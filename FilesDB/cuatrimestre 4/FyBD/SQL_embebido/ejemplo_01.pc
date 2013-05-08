@@ -1,0 +1,129 @@
+/* Este programa pregunta interactivamente un numero de pieza (clvPieza), y después consulta
+   en la tabla Pieza para obtener la información de la pieza.  Utiliza una variable indicador,
+   asociada al resultado (registro) de la consulta, para determinar si el color es NULO.
+ */
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include <sqlda.h>
+#include <sqlcpr.h>
+
+/* Definir constantes para las longitudes de los VARCHAR utilizados */
+#define     UNAME_LEN      20
+#define     PWD_LEN        40
+#define     NOMBRE_LEN     32
+
+/* Declaracion de variables.  No es necesaria la sección declare si MODE=ORACLE. */
+VARCHAR     username[UNAME_LEN];  /* VARCHAR es un estructura suministrada por Oracle */
+varchar     password[PWD_LEN];    /* varchar es válido también en minúsculas */
+
+/* Definir un registro para los valores devueltos (piezas) por la sentencia SELECT */
+struct {
+    VARCHAR   nombrePieza[NOMBRE_LEN];
+    int       clavePieza;
+    VARCHAR   colorPieza[NOMBRE_LEN];
+} regPieza;
+
+/* Definir un registro de indicadores, correspondiente al registro anterior, para detectar la
+   presencia de valores nulos.  Es necesario si pueden aparecer NULOS. */
+struct {
+    short     nombre_ind;
+    short     clave_ind;
+    short     color_ind;
+} regPieza_ind;
+
+/*  variables locales del programa */
+int         clavePieza;
+int         total_consultas;
+
+/* Incluir el área de comunicacion de SQL. Se puede utilizar #include ò EXEC SQL INCLUDE */
+#include <sqlca.h>
+
+/* Declaración del procedimiento definido para el tratamiento de errores */
+void sql_error(char *msg)
+{
+    char    err_msg[128];
+    size_t  buf_len, msg_len;
+
+    EXEC SQL WHENEVER SQLERROR CONTINUE;
+
+    printf("\n%s\n", msg);
+    buf_len = sizeof (err_msg);
+    sqlglm(err_msg, &buf_len, &msg_len);
+    printf("%.*s\n", msg_len, err_msg);
+
+    EXEC SQL ROLLBACK RELEASE;
+    exit(EXIT_FAILURE);
+}
+
+
+void main()
+{
+    char  temp_char[32];
+
+/* Preparar la conexión a ORACLE: Copiar el username en el VARCHAR, y añadir su longitud
+ */
+    strncpy((char *) username.arr, "SCOTT", UNAME_LEN);
+    username.len = (unsigned short) strlen((char *) username.arr);
+
+/* Copiar el password y añadir su longitud */
+    strncpy((char *) password.arr, "TIGER", PWD_LEN);
+    password.len = (unsigned short) strlen((char *) password.arr);
+
+/* Especificar el procedimiento sql_error() como gestor de errores */
+    EXEC SQL WHENEVER SQLERROR do sql_error("ORACLE error--\n");
+
+/* Conexion a ORACLE.  El programa llamara a sql_error() si se produce un error en la
+   conexion a la Base de Datos con los valores especificados
+ */
+    EXEC SQL CONNECT :username IDENTIFIED BY :password;
+
+    printf("\nConectado a ORACLE como usuario: %s\n", username.arr);
+
+/* Bucle para selección individual de la informacion de las Piezas */
+
+    total_consultas = 0;
+
+    for (;;) {
+        clavePieza = 0;
+        printf("\nIntroduzca la clave de la Pieza (0 --> FIN): ");
+        gets(temp_char);
+        clavePieza = atoi(temp_char);
+        if (clavePieza == 0)  break;
+
+/* Ir a noEncontrada cuando se produzca la condición de error ("No data found" = 1403)
+ */
+        EXEC SQL WHENEVER NOT FOUND GOTO noEncontrada;
+
+        EXEC SQL SELECT nombPieza, clvPieza, color
+            INTO :regPieza INDICATOR :regPieza_ind
+            FROM Pieza
+            WHERE clvPieza = :clavePieza;
+
+/* Escribir los datos de la Pieza */
+        printf("\nnombre                             clave   color\n");
+        printf("--------------------------------   -----   ----------------\n");
+
+/* añadir el terminador(nulo) a las cadenas (nombrePieza y colorPieza) */
+        regPieza.nombrePieza.arr[regPieza.nombrePieza.len] = '\0';
+        regPieza.colorPieza.arr[regPieza.colorPieza.len] = '\0';
+        printf("%s    %3d    ", regPieza.nombrePieza.arr, regPieza.clavePieza);
+
+        if (regPieza_ind.color_ind == -1)  printf("  ??\n");
+        else printf("%s\n", regPieza.colorPieza.arr);
+
+        total_consultas++;
+        continue;
+
+noEncontrada:
+        printf("\nNo es una clave valida - inténtelo otra vez.\n");
+
+    } /* end for(;;) */
+
+    printf("\n\nTotal filas consultadas %d.\n", total_consultas); 
+    printf("\nAdios.\n\n\n");
+
+/* Desconexión de ORACLE deshaciendo las transacciones pendientes (si las hubiera) */
+    EXEC SQL ROLLBACK WORK RELEASE;
+    exit(EXIT_SUCCESS);
+}

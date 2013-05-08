@@ -1,0 +1,1 @@
+gnatmake pmenu2.adb

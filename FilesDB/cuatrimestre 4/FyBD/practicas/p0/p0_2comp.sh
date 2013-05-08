@@ -1,0 +1,1 @@
+gnatmake p0_2.adb

@@ -1,0 +1,38 @@
+Colomer Vieitez, Jose Javier    550372   jj.colomer@gmail.com
+Mainar Lalmolda, Marcos         550710   marcosmainar@gmail.com
+
+Lenguaje de programacion utilizado: Ada
+
+El directorio p2 contiene los 3 programas solicitados en la practica 2:
+
+ - Ficheros correspondientes al apartado 1: Los conversores p2_1sat.adb y
+                                           p2_1tas.adb.
+
+ - Ficheros correspondientes al apartado 2: El programa que implementa los
+                   distintos metodos de ordenacion (ordenar.adb) y un fichero
+                   de ordenes para la ejecucion automatizada de todas las posibles
+                   ordenaciones respecto de todos los posibles criterios (prueba_ordenacion).
+
+
+ Se incluyen tambien los scripts de compilacion y ejecucion pedidos en la practica asi
+ como un script de limpieza llamado limpieza.sh que simplemente borra los ficheros con
+ extensiones .o y .ali y los 3 ejecutables de la practica. Por tanto conviene utilizarlo
+ una vez que se hayan creado los 3 ejecutables.
+
+
+ OBSERVACIONES: La ejecucion de p2_2run.sh puede ser bastante costosa en el tiempo (si
+                se emplea sobre ficheros de gran tamanyo) por el hecho de que realiza
+                todas las ordenaciones.
+
+                La ejecucion de los metodos de ordenacion sobre ficheros de gran tamanyo
+                en Merlin se dificulta (o llega a no ser posible) debido a los problemas
+                de quota.
+                Por ello, para las mediciones de la memoria, las hemos realizado
+                en una maquina diferente a Merlin.
+
+                El fichero de ordenes "prueba_ordenacion" trabaja con el fichero
+                "DOW_10_4Q05.dat" que se suministro para comprobar el correcto funcionamiento
+                de la practica, y, por tanto, se copia del directorio /users2/FYBD/P2005/P2
+                de la maquina Merlin antes de ejecutar el programa.
+                Ademas, para permitir la ordenacion de este fichero, se han de poseer permisos
+                de lectura y escritura del mismo.

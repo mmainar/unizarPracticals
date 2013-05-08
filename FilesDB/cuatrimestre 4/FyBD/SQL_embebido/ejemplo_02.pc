@@ -1,0 +1,133 @@
+/*  Este programa visualiza los datos (clvPieza, nombPieza y color) de las piezas existentes.
+    Para ello, se conecta al SGBD y mediante un CURSOR recorre la tabla Pieza.
+    Ilustra el modo de utilizar un CURSOR: 1) Declaración, 2) Iniciar (open), 3) Iteración con
+    sentencia FETCH .. INTO y, finalmente 4) Cerrar el cursor. Además deberá especificarse una
+    condición de terminación cuando no se encuentren más tuplas, normalmente con WHENEVER.
+    Obsérvese que, puesto que el color puede tomar el valor nulo, es necesario definir una
+    variable indicador para obtener información del atributo correspondiente (si no, la apari-
+    ción de un valor nulo provoca un error en la consulta)
+*/
+
+#include <stdio.h>
+#include <string.h>
+#include <sqlca.h>
+#include <stdlib.h>
+#include <sqlda.h>
+#include <sqlcpr.h>
+
+#define     UNAME_LEN      30
+#define     PWD_LEN        20
+
+/* Se utiliza la capacidad de definición de tipos del precompilador para crear string con
+   caracter terminador nulo (no sería necesario, pues bastaría con char *.  Se hace así sólo
+   para ilustrar dicha capacidad (en otros ejemplos se hace de manera diferente).
+*/
+typedef char asciiz[PWD_LEN];
+
+EXEC SQL type asciiz is charz(UNAME_LEN) reference;
+asciiz     username;
+asciiz     password;
+
+/* Definir un registro para los valores devueltos por la consulta a la Base de Datos */
+struct regPieza {
+    asciiz    nombrePieza;
+    int       clavePieza;
+    asciiz    colorPieza;
+};
+
+/* Definir un registro de indicadores correspondiente al registro anterior */
+struct {
+    short     nombre_ind;
+    short     clave_ind;
+    short     color_ind;
+} regPieza_ind;
+
+/* Declaración del procedimiento definido para el tratamiento de errores */
+void sql_error(char *msg)
+{
+    char    err_msg[512];
+    size_t  buf_len, msg_len;
+
+    EXEC SQL WHENEVER SQLERROR CONTINUE;
+
+    printf("\n%s\n", msg);
+
+/*  Ejecutar sqlglm() para obtener el texto completo del mensaje de error
+*/
+    buf_len = sizeof (err_msg);
+    sqlglm(err_msg, &buf_len, &msg_len);
+    printf("%.*s\n", msg_len, err_msg);
+
+    EXEC SQL ROLLBACK release;
+    exit(EXIT_FAILURE);
+}
+
+
+void main()
+{
+/*  Variables locales del programa */
+    int    total_Piezas;
+    struct regPieza *regPieza_ptr;
+
+/* Reservar memoria para el dato de tipo regPieza (es dinámico) */
+    if ((regPieza_ptr = (struct regPieza *) malloc(sizeof(struct regPieza))) == 0) {
+      fprintf(stderr, "error en la reserva de memoria.\n");
+      exit(EXIT_FAILURE);
+    }
+
+/* Preparar el nombre y password para acceder al gestor
+ */
+    strcpy(username, "SCOTT");
+    strcpy(password, "TIGER");
+
+/* Especificar el procedimiento sql_error() como gestor de errores */
+    EXEC SQL WHENEVER SQLERROR do sql_error("ORACLE error--");
+
+/* Conectar con el SGBD ORACLE
+ */
+    EXEC SQL CONNECT :username IDENTIFIED BY :password;
+    printf("\nconectado a ORACLE como usuario: %s\n", username);
+
+/* Declaración del cursor. Todos los cursores estáticos y explícitos de SQL contienen
+ * sentencias SELECT. 'listaPiezas' es un identificador SQL, no una variable C.
+ */
+    EXEC SQL declare listaPiezas CURSOR FOR
+           SELECT nombPieza, clvPieza, color
+           FROM Pieza;
+
+/* Iniciar (abrir) el cursor */
+    EXEC SQL OPEN listaPiezas;
+
+/* Mostrar la cabecera del listado */
+    printf("\n\n  listado de Piezas disponibles\n\n");
+    printf(" tipo Pieza    ref.   color Pieza\n");
+    printf("------------   ----   -----------\n");
+
+/* Construir un bucle con una sentencia FETCH con el CURSOR listaPiezas para obtener
+ * la información de las piezas. Especificar que el bucle termina (break) cuando se
+ * han recorrido todas las tuplas de la tabla Pieza (es decir, se produce el error de
+ * "tupla no encontrada" al ejecutar la sentencia FETCH)
+ */
+    EXEC SQL WHENEVER not found DO break;
+
+    total_Piezas = 0;
+    for (;;) {
+       EXEC SQL FETCH listaPiezas INTO :regPieza_ptr indicator :regPieza_ind;
+
+       printf(" %s %4d     ", regPieza_ptr->nombrePieza, regPieza_ptr->clavePieza);
+
+       if (regPieza_ind.color_ind == -1)  printf("  ??\n");
+       else  printf("%s\n", regPieza_ptr->colorPieza);
+
+       total_Piezas++;
+    }
+
+/* Cerrar el cursor */
+    EXEC SQL CLOSE listaPiezas;
+
+    printf("\n\ntotal de piezas %d.\n", total_Piezas);
+    printf("\nAdios.\n\n\n");
+
+    EXEC SQL COMMIT WORK RELEASE;
+    exit(EXIT_SUCCESS);
+}

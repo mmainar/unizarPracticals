@@ -1,0 +1,48 @@
+Colomer Vieitez, Jose Javier   550372   jj.colomer@gmail.com
+Mainar Lalmolda, Marcos        550710   marcosmainar@gmail.com
+
+Lenguaje de programacion utilizado: Ada
+
+El directorio p1 contiene los 4 programas solicitados en la practica 1:
+ - El modulo correspondiente al apartado 1: fcotizaciones.adb y fcotizaciones.ads
+ - El modulo correspondiente al apartado 2: fcotizacionespg.adb  y fcotizacionespg.ads
+ - Los programas correspondientes al apartado 3: pmenu1.adb y pmenu2.adb
+ - Los programas correspondientes al apartado 4: gestor1.adb y gestor2.adb
+
+
+Se incluyen tambien los scripts de compilacion y ejecucion pedidos en la practica asi
+como un script de limpieza llamado limpieza.sh que simplemente borra los ficheros con
+extensiones .o y .ali y los 4 ejecutables de la practica. Por lo tanto, es recomendable
+utilizar este script una vez que se han creado los 4 ejecutables.
+Se incluye tambien el fichero de prueba prueba_menu con el que se prueban pmenu1.adb
+y pmenu2.adb
+
+
+Se considera que los ficheros secuenciales de cotizaciones con los que se prueba
+la practica son correctos, es decir, que no hay errores en los datos almacenados.
+Ademas, se considera que se prueban los programas proporcionando ficheros secuenciales.
+En caso de error en el nombre del fichero captura la excepcion NAME_ERROR y se puede
+volver a introducir el nombre correcto. No se debe introducir, por ejemplo,
+el nombre de un directorio existente ya que de este modo la excepcion no detecta
+el error dado que en Unix un directorio es un fichero.
+
+
+Para las pruebas con los pmenu, se copia en el directorio en el que se prueban los menus
+el fichero de cotizaciones de nombre "DOW_10_4Q05.dat" situado en el directorio
+/users2/FYBD/P2005/P1 del computador Merlin, que coincide con el menor de los ficheros
+suministrados para comprobar el correcto funcionamiento de los programas solicitados.
+Es por ello que el fichero de ordenes se ha escrito de tal manera
+que abra este fichero y realice operaciones con el, por tanto, se presupone que se tienen
+permisos de lectura y de escritura sobre este fichero.
+
+
+Los nombres de los modulos han sido escritos con minusculas para solventar el problema que
+supone el hecho de que la version del compilador gnat de Ada usada en Merlin no reconoce
+las letras mayusculas, lo que lleva a un error en tiempo de compilacion.
+
+
+IMPORTANTE: Para permitir comprobar que el programa puede leer de un fichero, iniciarlo
+           despues en modo escritura y escribir datos en el mismo, se han incluido
+           instrucciones en el fichero prueba_menu que llevan a cabo estas acciones.
+           Se advierte que el fichero con que se prueban los programas pmenu es
+           SOBREESCRITO.
