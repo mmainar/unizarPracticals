@@ -1,0 +1,23 @@
+Implementación del TAD simuladorprograma
+
+simuladorprograma.ads    simuladorprograma.adb
+
+    * La implementación está basada en las soluciones de Santiago Marco y Jorge Mena.
+    * Utiliza el paquete ADA Interfaces.C para hacer llamadas al compilador gnatmake y ejecutar el ejecutable. Funciona en linux/unix (la adaptación a windows está comentada).
+
+    *Se pueden probar con el programa simulador.adb Ejemplos de programas p.adb y q.adb
+
+    *El procedimiento calculaSelf para una entrada cp da como resultado un programa que hace lo mismo que cp(cp) 
+
+
+Creación de un programa autoreplicante
+
+paraautoreplicar.adb    pruebamisp.adb
+
+    * Utiliza el paquete anterior.
+
+    * paraautoreplicar crea un programa autoreplicante y lo guarda en misp.adb
+
+    * misp.adb es un procedimiento misp que con cualquier entrada produce como   resultado el propio procedimiento
+
+    *pruebamisp ejecuta misp y guarda el resultado en el fichero copia.adb 

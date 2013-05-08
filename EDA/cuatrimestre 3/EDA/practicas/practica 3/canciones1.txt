@@ -1,0 +1,205 @@
+Labios compartidos
+Mana
+2 3 2000
+15000
+
+En que estrella estara
+Nena Daconte
+2 10 2004
+60000
+
+Por la boca vive el pez
+Fito y Fitipaldis
+4 12 1999
+95000
+
+Let me out
+Dover
+10 3 2006
+400000
+
+Te busque
+Nelly Furtado
+1 1 1999
+50000
+
+Dulce locura
+La oreja de Van Gogh
+10 4 2003
+500000
+
+Quien me iba a decir
+David Bisbal
+10 4 2002
+450000
+
+Los amantes
+Ana Torroja
+3 3 1997
+30000
+
+Resurreccion
+Amaral
+4 5 2002
+40200
+
+A la primera persona
+Alejandro Sanz
+25 10 2006
+345000
+
+Nothing else matters
+Lucie Silvas
+14 10 2003
+340000
+
+Malabares
+Estopa
+23 10 2006
+230000
+
+Something about you
+Jamelia
+12 10 2003
+23000
+
+Me voy
+Julieta Venegas
+30 3 2006
+400000
+
+La pared
+Shakira
+22 12 2004
+23000
+
+Tres corazones
+Antonio Orozco
+31 1 2006
+50000
+
+Jump
+Madonna
+22 11 2006
+345122
+
+Te entiendo
+Pignoise
+14 5 2005
+340000
+
+Oigo musica
+Mclan
+12 10 2002
+234000
+
+Maroon five
+She will be loved
+1 11 2002
+222500
+
+I dont want to miss a thing
+Aerosmith
+4 3 1998
+55000
+
+La bomba
+King Africa
+10 8 1997
+25000
+
+Llamando a la tierra
+Mclan
+31 7 2005
+900000
+
+One
+U2
+10 3 2002
+44000
+
+Te busque
+Juanes y Nelly Furtado
+14 4 2006
+440000
+
+Hung up
+Madonna
+30 10 2000
+78000
+
+Hurricanes and butterflies
+Muse
+14 9 1999
+123000
+
+Crazy
+Aerosmith
+10 8 2000
+33000
+
+El faro de lisboa
+Revolver
+28 6 1997
+44700
+
+Sopa fria
+Mclan
+22 10 2002
+10000
+
+Here i am
+Bryan Adams
+11 1 2000
+55000
+
+No me crees
+Efecto mariposa
+3 4 2005
+99000
+
+You are beautiful
+James Blunt
+14 10 2005
+1000000
+
+Love generation
+Bob Sinclair
+22 9 2005
+140000
+
+Stop crying your heart
+Oasis
+19 12 2004
+473000
+
+Sweetest thing
+U2
+22 4 2006
+11000
+
+Wonderwall
+Oasis
+9 12 2000
+59000
+
+Imagine
+John lenon
+14 4 1988
+978000
+
+Lady blue
+Enrique bunbury
+10 8 2001
+32000
+
+Me voy
+Julieta Venegas
+14 8 2004
+50000
+
+Aint it funny
+Jennifer lopez
+26 6 1998
+129000
+

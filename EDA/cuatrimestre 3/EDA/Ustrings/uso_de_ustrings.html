@@ -1,0 +1,381 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <meta name="Author" content="Javier Campos">
+   <meta name="GENERATOR" content="Mozilla/4.5 [es] (Win95; I) [Netscape]">
+   <title>Uso de ustrings</title>
+</head>
+<body text="#000000" bgcolor="#FFFFFF" link="#0000EE" vlink="#551A8B" alink="#FF0000">
+
+<center>
+<h2>
+Utilizaci&oacute;n del tipo "ustring"</h2></center>
+El tipo <tt><font color="#3333FF">ustring</font></tt> (<a href="ustrings.ads">ustrings.ads</a>,
+<a href="ustrings.adb">ustrings.adb</a>)
+es un enriquecimiento desarrollado por la <i>Ada Resorce Association</i>
+del tipo est&aacute;ndar
+<tt><font color="#3333FF">Unbounded_String</font></tt>
+(definido en el ap&eacute;ndice <a href="http://www.adahome.com/rm95/rm9x-A-04-05.html">A.4.5
+Unbounded-Length String Handling</a> del manual de referencia de Ada).
+Implementa el TAD "<b>cadena de caracteres de longitud variable acotada
+por <tt>Natural'Last</tt></b>" como un tipo <tt>private</tt>.
+<p>Para poder usarlo es necesario incluir:
+<p><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp; with ada.strings.unbounded,ustrings;</font></tt>
+<br><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp; use ada.strings.unbounded,ustrings;</font></tt>
+<p>antes del encabezamiento del programa o m&oacute;dulo que lo requiera.
+Desde ese momento, pueden declararse variables de tipo <tt>ustring</tt>
+(o indistintamente <tt>Unbounded_String</tt>):
+<p><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp; nombre:ustring;</font></tt>
+<p>Est&aacute; definida la siguiente constante de tipo <tt>ustring</tt>
+que representa la cadena vac&iacute;a:
+<p><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp; Null_Unbounded_String:constant
+Unbounded_String;</font></tt>
+<p>Las operaciones definidas para <tt>ustrings</tt> (o indistintamente
+<tt>Unbounded_String</tt>)
+son las siguientes.
+<p>Lectura y escritura desde/en fichero/teclado/pantalla de <tt>ustrings</tt>:
+<p><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp; procedure Get_Line(File:in
+File_Type; Item:out Unbounded_String);</font></tt>
+<br><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp; procedure Get_Line(Item:out
+Unbounded_String);</font></tt>
+<p><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp; procedure Put(File:in File_Type;
+Item:in Unbounded_String);</font></tt>
+<br><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp; procedure Put(Item:in
+Unbounded_String);</font></tt>
+<p><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp; procedure Put_Line(File:in
+File_Type; Item:in Unbounded_String);</font></tt>
+<br><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp; procedure Put_Line(Item:in
+Unbounded_String);</font></tt>
+<p>Longitud de un <tt>ustring</tt>:
+<p><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp; function Length(Source:in
+Unbounded_String) return Natural;</font></tt>
+<p>Intercambio del valor de dos variables de tipo <tt>ustring</tt>:
+<p><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp; procedure Swap(Left,Right:in
+out Unbounded_String);</font></tt>
+<p>Traducci&oacute;n entre <tt>ustring</tt> y <tt>string</tt>:
+<p><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp; function U(Source:String)
+return Unbounded_String;</font></tt>
+<p><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp; function S(Source:Unbounded_String)
+return String;</font></tt>
+<p>Saber si un <tt>ustring</tt> es vac&iacute;o:
+<p><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp; function Empty(S:Unbounded_String)
+return Boolean;</font></tt>
+<p>Para a&ntilde;adir un <tt>ustring</tt>, un <tt>string</tt> o un car&aacute;cter
+a un <tt>ustring</tt>:
+<p><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp; procedure Append(Source:in
+out Unbounded_String;</font></tt>
+<br><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+New_Item:in Unbounded_String);</font></tt>
+<p><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp; procedure Append(Source:in
+out Unbounded_String;</font></tt>
+<br><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+New_Item:in String);</font></tt>
+<p><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp; procedure Append(Source:in
+out Unbounded_String;</font></tt>
+<br><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+New_Item:in Character);</font></tt>
+<p>Concatenaci&oacute;n de <tt>ustrings</tt> con <tt>ustrings</tt>, <tt>strings</tt>
+y caracteres:
+<p><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp; function "&amp;"(Left,Right:in
+Unbounded_String)</font></tt>
+<br><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+return Unbounded_String;</font></tt>
+<p><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp; function "&amp;"(Left:in
+Unbounded_String; Right:in String)</font></tt>
+<br><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+return Unbounded_String;</font></tt>
+<p><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp; function "&amp;"(Left:in
+String; Right:in Unbounded_String)</font></tt>
+<br><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+return Unbounded_String;</font></tt>
+<p><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp; function "&amp;"(Left:in
+Unbounded_String; Right:in Character)</font></tt>
+<br><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+return Unbounded_String;</font></tt>
+<p><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp; function "&amp;"(Left:in
+Character; Right:in Unbounded_String)</font></tt>
+<br><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+return Unbounded_String;</font></tt>
+<p>Consultar el car&aacute;cter que ocupa una posici&oacute;n:
+<p><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp; function Element(Source:in
+Unbounded_String; Index:in Positive)</font></tt>
+<br><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+return Character;</font></tt>
+<p>Sustituir el car&aacute;cter que ocupa una posici&oacute;n:
+<p><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp; procedure Replace_Element(Source:in
+out Unbounded_String;</font></tt>
+<br><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Index:in Positive;</font></tt>
+<br><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+By:in Character);</font></tt>
+<p>Extraer una rebanada de un <tt>ustring</tt>:
+<p><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp; function Slice(Source:in
+Unbounded_String;</font></tt>
+<br><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Low:in Positive;</font></tt>
+<br><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+High:in Natural)</font></tt>
+<br><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+return String;</font></tt>
+<p>Comparaciones entre <tt>ustrings</tt> y <tt>strings</tt>:
+<p><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp; function "="(Left,Right:in
+Unbounded_String) return Boolean;</font></tt>
+<br><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp; function "="(Left:in Unbounded_String;
+Right:in String) return Boolean;</font></tt>
+<br><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp; function "="(Left:in String;
+Right:in Unbounded_String) return Boolean;</font></tt>
+<br><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp; function "&lt;"(Left,Right:in
+Unbounded_String) return Boolean;</font></tt>
+<br><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp; function "&lt;"(Left:in
+Unbounded_String; Right:in String) return Boolean;</font></tt>
+<br><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp; function "&lt;"(Left:in
+String; Right:in Unbounded_String) return Boolean;</font></tt>
+<br><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp; function "&lt;="(Left,Right:in
+Unbounded_String) return Boolean;</font></tt>
+<br><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp; function "&lt;="(Left:in
+Unbounded_String; Right:in String) return Boolean;</font></tt>
+<br><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp; function "&lt;="(Left:in
+String; Right:in Unbounded_String) return Boolean;</font></tt>
+<br><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp; function ">"(Left,Right:in
+Unbounded_String) return Boolean;</font></tt>
+<br><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp; function ">"(Left:in Unbounded_String;
+Right:in String) return Boolean;</font></tt>
+<br><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp; function ">"(Left:in String;
+Right:in Unbounded_String) return Boolean;</font></tt>
+<br><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp; function ">="(Left,Right:in
+Unbounded_String) return Boolean;</font></tt>
+<br><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp; function ">="(Left:in
+Unbounded_String; Right:in String) return Boolean;</font></tt>
+<br><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp; function ">="(Left:in
+String; Right:in Unbounded_String) return Boolean;</font></tt>
+<p>Y muchas m&aacute;s (cuya utilidad puede consultarse en el&nbsp; <a href="http://www.adahome.com/rm95/rm9x-A-04-05.html">Manual
+de Referencia</a>), como...
+<p>Funciones de b&uacute;squeda:
+<p><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp; function Index(Source:in
+Unbounded_String;</font></tt>
+<br><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Pattern:in String;</font></tt>
+<br><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Going:in Direction := Forward;</font></tt>
+<br><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Mapping:in Maps.Character_Mapping:=Maps.Identity)</font></tt>
+<br><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+return Natural;</font></tt>
+<p><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp; function Index(Source:in
+Unbounded_String;</font></tt>
+<br><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Pattern:in String;</font></tt>
+<br><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Going:in Direction:=Forward;</font></tt>
+<br><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Mapping:in Maps.Character_Mapping_Function)</font></tt>
+<br><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+return Natural;</font></tt>
+<p><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp; function Index(Source:in
+Unbounded_String;</font></tt>
+<br><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Set:in Maps.Character_Set;</font></tt>
+<br><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Test:in Membership:=Inside;</font></tt>
+<br><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Going:in Direction:=Forward) return Natural;</font></tt>
+<p><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp; function Index_Non_Blank(Source:in
+Unbounded_String;</font></tt>
+<br><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Going:in Direction:=Forward)</font></tt>
+<br><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+return Natural;</font></tt>
+<p><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp; function Count(Source:in
+Unbounded_String;</font></tt>
+<br><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Pattern:in String;</font></tt>
+<br><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Mapping:in Maps.Character_Mapping:=Maps.Identity)</font></tt>
+<br><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+return Natural;</font></tt>
+<p><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp; function Count(Source:in
+Unbounded_String;</font></tt>
+<br><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Pattern:in String;</font></tt>
+<br><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Mapping:in Maps.Character_Mapping_Function)</font></tt>
+<br><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+return Natural;</font></tt>
+<p><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp; function Count(Source:in
+Unbounded_String;</font></tt>
+<br><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Set:in Maps.Character_Set)</font></tt>
+<br><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+return Natural;</font></tt>
+<p><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp; procedure Find_Token(Source:in
+Unbounded_String;</font></tt>
+<br><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Set:in Maps.Character_Set;</font></tt>
+<br><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Test:in Membership;</font></tt>
+<br><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+First:out Positive;</font></tt>
+<br><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Last:out Natural);</font></tt>
+<p>Funciones de traducci&oacute;n:
+<p><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp; function Translate(Source:in
+Unbounded_String;</font></tt>
+<br><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Mapping:in Maps.Character_Mapping)</font></tt>
+<br><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+return Unbounded_String;</font></tt>
+<p><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp; procedure Translate(Source:in
+out Unbounded_String;</font></tt>
+<br><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Mapping:in Maps.Character_Mapping);</font></tt>
+<p><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp; function Translate(Source:in
+Unbounded_String;</font></tt>
+<br><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Mapping:in Maps.Character_Mapping_Function)</font></tt>
+<br><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+return Unbounded_String;</font></tt>
+<p><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp; procedure Translate(Source:in
+out Unbounded_String;</font></tt>
+<br><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Mapping:in Maps.Character_Mapping_Function);</font></tt>
+<p>Funciones de transformaci&oacute;n:
+<p><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp; function Replace_Slice(Source:in
+Unbounded_String;</font></tt>
+<br><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Low:in Positive;</font></tt>
+<br><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+High:in Natural;</font></tt>
+<br><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+By:in String)</font></tt>
+<br><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+return Unbounded_String;</font></tt>
+<p><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp; procedure Replace_Slice(Source:in
+out Unbounded_String;</font></tt>
+<br><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Low:in Positive;</font></tt>
+<br><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+High:in Natural;</font></tt>
+<br><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+By:in String);</font></tt>
+<p><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp; function Insert(Source:in
+Unbounded_String;</font></tt>
+<br><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Before:in Positive;</font></tt>
+<br><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+New_Item:in String)</font></tt>
+<br><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+return Unbounded_String;</font></tt>
+<p><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp; procedure Insert(Source:in
+out Unbounded_String;</font></tt>
+<br><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Before:in Positive;</font></tt>
+<br><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+New_Item:in String);</font></tt>
+<p><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp; function Overwrite(Source:in
+Unbounded_String;</font></tt>
+<br><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Position:in Positive;</font></tt>
+<br><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+New_Item:in String)</font></tt>
+<br><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+return Unbounded_String;</font></tt>
+<p><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp; procedure Overwrite(Source:in
+out Unbounded_String;</font></tt>
+<br><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Position:in Positive;</font></tt>
+<br><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+New_Item:in String);</font></tt>
+<p><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp; function Delete(Source:in
+Unbounded_String;</font></tt>
+<br><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+From:in Positive;</font></tt>
+<br><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Through:in Natural)</font></tt>
+<br><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+return Unbounded_String;</font></tt>
+<p><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp; procedure Delete(Source:in
+out Unbounded_String;</font></tt>
+<br><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+From:in Positive;</font></tt>
+<br><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Through:in Natural);</font></tt>
+<p><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp; function Trim(Source:in
+Unbounded_String;</font></tt>
+<br><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Side:in Trim_End)</font></tt>
+<br><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+return Unbounded_String;</font></tt>
+<p><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp; procedure Trim(Source:in
+out Unbounded_String;</font></tt>
+<br><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Side:in Trim_End);</font></tt>
+<p><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp; function Trim(Source:in
+Unbounded_String;</font></tt>
+<br><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Left:in Maps.Character_Set;</font></tt>
+<br><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Right:in Maps.Character_Set)</font></tt>
+<br><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+return Unbounded_String;</font></tt>
+<p><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp; procedure Trim(Source:in
+out Unbounded_String;</font></tt>
+<br><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Left:in Maps.Character_Set;</font></tt>
+<br><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Right:in Maps.Character_Set);</font></tt>
+<p><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp; function Head(Source:in
+Unbounded_String;</font></tt>
+<br><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Count:in Natural;</font></tt>
+<br><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Pad:in Character:=Space)</font></tt>
+<br><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+return Unbounded_String;</font></tt>
+<p><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp; procedure Head(Source:in
+out Unbounded_String;</font></tt>
+<br><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Count:in Natural;</font></tt>
+<br><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Pad:in Character:=Space);</font></tt>
+<p><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp; function Tail(Source:in
+Unbounded_String;</font></tt>
+<br><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Count:in Natural;</font></tt>
+<br><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Pad:in Character:=Space)</font></tt>
+<br><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+return Unbounded_String;</font></tt>
+<p><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp; procedure Tail(Source:in
+out Unbounded_String;</font></tt>
+<br><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Count:in Natural;</font></tt>
+<br><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Pad:in Character:=Space);</font></tt>
+<p><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp; function "*"(Left:in Natural;</font></tt>
+<br><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Right:in Character)</font></tt>
+<br><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+return Unbounded_String;</font></tt>
+<p><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp; function "*"(Left:in Natural;</font></tt>
+<br><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Right : in String)</font></tt>
+<br><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+return Unbounded_String;</font></tt>
+<p><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp; function "*"(Left:in Natural;</font></tt>
+<br><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Right:in Unbounded_String)</font></tt>
+<br><tt><font color="#3333FF">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+return Unbounded_String;</font></tt>
+<address>
+
+<hr WIDTH="100%"></address>
+
+<address>
+<font color="#000000">Javier Campos</font></address>
+
+<address>
+<font color="#000000">3 de noviembre de 1.999</font></address>
+
+</body>
+</html>

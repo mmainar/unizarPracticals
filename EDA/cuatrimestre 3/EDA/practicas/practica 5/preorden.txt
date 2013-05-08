@@ -1,0 +1,17 @@
+  procedure listado(d: in arbolDeDir; l: out lista) is
+    
+    procedure preordenBis(aux: in ptnodo; l: out lista) is
+    begin
+      if aux.sigHermano=null and aux.primogenito=null then
+        return(creaUnitaria(aux.valor,l));
+      elsif aux.sigHermano/=null and aux.primogenito=null then
+        return(concatena(creaUnitaria(aux.valor,l),preordenBis(aux.sigHermano));
+      elsif aux.sigHermano=null and aux.primogenito/=null then
+        return(concatena(creaUnitaria(aux.valor,l),preordenBis(aux.primogenito));
+      else
+        return(concatena(concatena(crearUnitaria(aux.valor,l),preorden(aux.primogenito)),preorden(aux.sighermano))
+    end preordenBis;
+
+  begin
+    return preordenBis(d.posicion);
+  end listado;
