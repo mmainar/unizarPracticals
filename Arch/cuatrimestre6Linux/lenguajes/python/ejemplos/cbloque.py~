@@ -1,0 +1,7 @@
+nombre = raw_input("Nombre del fichero: ");
+f = open(nombre,'r');
+if f.read(1) == 'f':
+    genero = 1;
+elif f.read(1) == 'm':
+    genero = 2;
+  
