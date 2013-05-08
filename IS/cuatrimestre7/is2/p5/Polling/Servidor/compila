@@ -1,0 +1,2 @@
+javac -source 1.5 -d ./CLASSES ./SRC/*.java -target 1.5
+rmic -d ./CLASSES -classpath ./CLASSES ClaseRemota

@@ -1,0 +1,2 @@
+rmiregistry $1 &
+java -Djava.rmi.server.codebase=file:Servidor/CLASSES/ -Djava.rmi.server.hostname=127.0.0.1 -cp Servidor/CLASSES Servidor $1 $2 

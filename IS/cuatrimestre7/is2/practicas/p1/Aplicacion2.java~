@@ -1,0 +1,166 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+import java.io.*;
+
+
+ public class Aplicacion extends JFrame {
+   Container frameContainer;
+   //Crear la barra de menu (JMenuBar).
+   //Crear las opciones del menu principal (JMenu).
+   //Crear los items del menu (JMenuItem) y el separador (JSeparator).
+   //Crear el campo de texto (JTextField)
+   JMenuItem opcionMenu1 = new JMenuItem("Nuevo");
+   JMenuItem opcionMenu2 = new JMenuItem("Abrir");
+   JMenuItem opcionMenu3 = new JMenuItem("Salvar");
+   JMenuItem opcionMenu4 = new JMenuItem("Salir");
+   JMenuItem opcionMenu5 = new JMenuItem("Tabla");
+   JMenuItem opcionMenu6 = new JMenuItem("Arbol");
+   JTextField cuadro = new JTextField(6);
+   final int altura = 500;
+   final int anchura = 500;
+   
+   ManejadorItemMenu manejador = new ManejadorItemMenu();
+   
+   public Aplicacion() {
+     super("Un programa!");
+     setDefaultCloseOperation(super.EXIT_ON_CLOSE);
+     crearGUI();
+     //crearManejadoresEvts();
+     //fijar tamaño de la ventana, modo de operacion y mostrarla
+//     setSize(altura,anchura);
+	pack();
+     setVisible(true);
+    
+   }
+
+
+   void crearGUI() {
+     crearMenu();
+     situarComponentes();
+   }
+
+
+   void crearMenu() {
+     //Añadir los items de menu a su opcion principal.
+     //Añadir las opciones principales a la barra de menu.
+     //Configurar la barra de menu (setJMenuBar(..)).
+     JMenuBar barraMenu = new JMenuBar();
+     JMenu menu = new JMenu("Fichero");
+     barraMenu.add(menu);
+     menu.add(opcionMenu1);
+     menu.add(opcionMenu2);     
+     menu.add(opcionMenu3);
+     menu.addSeparator();
+     menu.add(opcionMenu4);
+     menu = new JMenu("Mis Dialogos");
+     barraMenu.add(menu);
+     menu.add(opcionMenu5);
+     menu.add(opcionMenu6);
+     setJMenuBar(barraMenu);
+     opcionMenu1.addActionListener(manejador);
+     opcionMenu2.addActionListener(manejador);
+     opcionMenu3.addActionListener(manejador);
+     opcionMenu4.addActionListener(manejador);
+     opcionMenu5.addActionListener(manejador);
+     opcionMenu6.addActionListener(manejador);
+   }
+
+
+   void situarComponentes() {
+     frameContainer = getContentPane();
+     frameContainer.setLayout(new FlowLayout(FlowLayout.CENTER,altura/2,anchura/2));
+     //Dar tamaño al campo de texto y unirlo al frameContainer.
+     cuadro.addActionListener(manejador);
+     //cuadro.setEditable(false);
+     frameContainer.add(cuadro);
+   }
+
+/*
+   void crearManejadoresEvts() {
+     addWindowListener(new ManejadorVentana()); //gestiona evts. vent. ppal.
+     //Añadir manejadores a los items de menu.
+   }
+
+
+   public class ManejadorVentana extends WindowAdapter {
+     //implementar el metodo correspondiente
+     //para que la aplicacion termine correctamente.
+   }
+*/
+
+   public class ManejadorItemMenu implements ActionListener {
+    //implementar el metodo correspondiente para que Fichero/Salir
+    //termine la Aplicacion y el resto de opciones escriban
+    //en el campo de texto su nombre
+	   public void actionPerformed (ActionEvent e) {
+		   Object obj = e.getSource();
+		   if (e.getSource() == opcionMenu1) {
+		     cuadro.setText("Nuevo");}
+		   else if (obj == opcionMenu2)
+			 cuadro.setText("Abrir");
+		   else if (obj == opcionMenu3)
+			 cuadro.setText("Salvar");
+		   else if (obj == opcionMenu4)
+			 cuadro.setText("Salir");
+		   else if (obj == opcionMenu5) {
+			 cuadro.setText("Tabla");
+			 JFrame frame = new JFrame("Tabla");
+			 tabla t = new tabla();
+		         frame.setContentPane(t);
+		         frame.pack();
+		         frame.setVisible(true);
+		   }
+		   else if (obj == opcionMenu6)
+		     cuadro.setText("Arbol");
+	   }
+   }
+
+
+/*   public class arbol extends JPanel implements TreeSelectionListener {
+	   
+	   public arbol() {
+		   super(new GridLayout(1,0));
+		   DefaultMutableTreeNode raiz = DefaultMutableTreeNode("Raiz"); 
+	   }
+	   
+   }
+*/   
+   
+   public class tabla extends JPanel {
+	   
+	   public tabla() {
+	   
+		  super(new GridLayout(1,0)); 
+		   
+		   
+  	     String[] columnas = {"Nombre","Apellido","Telefono","Edad"};
+  	     
+	     Object[][] datos = {{"Juan","Garcia",976348293,20},
+		           {"Jose","Perez",976889933,44},
+		           {"Maria","Lopez",976293876,30},
+		           {"Natalia","Garces",976662801,32}};
+  	     
+	     try {
+               File f = new File("nombres.txt");  
+	       FileReader fr = new FileReader(f);
+	     }
+	     catch (FileNotFoundException e) {
+	    	 System.out.println("Fichero no encontrado");
+	     }
+
+	     final JTable tabla = new JTable(datos,columnas);
+	     tabla.setPreferredScrollableViewportSize(new Dimension(500,70));
+	     //tabla.setFillsViewportHeight(true);
+	     JScrollPane scrollPane = new JScrollPane(tabla);
+	     add(scrollPane);
+
+	   
+     }
+   }
+   public static void main (String[] args) {
+     Aplicacion miAp = new Aplicacion();
+   }
+
+
+}

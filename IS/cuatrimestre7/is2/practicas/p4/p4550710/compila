@@ -1,0 +1,1 @@
+javac -1.5 -d ./CLASSES ./SRC/*.java -target 1.5

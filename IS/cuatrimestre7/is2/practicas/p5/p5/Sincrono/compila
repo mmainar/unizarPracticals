@@ -1,0 +1,3 @@
+javac -source 1.5 -d ./Servidor/CLASSES ./Servidor/SRC/*.java -target 1.5
+rmic -d ./Servidor/CLASSES -classpath ./Servidor/CLASSES ClaseRemota
+javac -classpath ./Servidor/CLASSES -source 1.5 -d ./Cliente/CLASSES ./Cliente/SRC/*.java -target 1.5

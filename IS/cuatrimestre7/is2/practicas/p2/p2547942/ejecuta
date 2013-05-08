@@ -1,0 +1,5 @@
+if [ $# -ne 2 ]; then # Si no hay tres parametros no se hace la ejecucion
+  echo 'Error, se necesitan tres parametros'
+else
+  java -cp ./CLASSES:./classes12.jar bd/Conexion $1 $2
+fi

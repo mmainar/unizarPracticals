@@ -1,0 +1,1 @@
+java  -cp Cliente/CLASSES:Servidor/CLASSES Cliente $1 $2 $3 $4
